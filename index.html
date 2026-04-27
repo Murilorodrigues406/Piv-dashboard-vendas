@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard de Vendas</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0c10;--surface:#111318;--card:#171a21;--card2:#1c2029;
+  --border:#232733;--border2:#2d3347;
+  --accent:#4f8ef7;--accent2:#2dd4a7;--warn:#f5a623;--danger:#f25757;
+  --muted:#6b7280;--text:#e8eaf0;--text2:#9ca3b0;
+  --mono:'DM Mono',monospace;--sans:'Syne',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh}
+
+/* ── TOPBAR ── */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:200;flex-wrap:wrap;gap:10px}
+.tl{display:flex;align-items:center;gap:12px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.ttitle{font-size:14px;font-weight:800;letter-spacing:.05em}
+.tmeta{font-size:10px;color:var(--muted);font-family:var(--mono);margin-top:1px}
+.tright{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+/* upload button */
+.ubtn{display:flex;align-items:center;gap:8px;background:var(--card);border:1px dashed var(--border2);border-radius:8px;padding:7px 14px;cursor:pointer;font-size:11px;font-family:var(--mono);color:var(--text2);transition:all .2s}
+.ubtn:hover{border-color:var(--accent);color:var(--accent);background:#162030}
+.ubtn input{display:none}
+
+/* manual button */
+.mbtn{display:flex;align-items:center;gap:6px;background:var(--accent);border:none;border-radius:8px;padding:7px 14px;cursor:pointer;font-size:11px;font-family:var(--sans);font-weight:700;color:#fff;letter-spacing:.04em;transition:opacity .2s}
+.mbtn:hover{opacity:.85}
+
+/* paste button */
+.pbtn{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--accent2);border-radius:8px;padding:7px 14px;cursor:pointer;font-size:11px;font-family:var(--sans);font-weight:700;color:var(--accent2);letter-spacing:.04em;transition:all .2s}
+.pbtn:hover{background:rgba(45,212,167,.12)}
+
+/* modal paste */
+.ptextarea{width:100%;min-height:220px;background:var(--bg);border:1px solid var(--border2);color:var(--text);font-family:var(--mono);font-size:11px;border-radius:8px;padding:12px;resize:vertical;outline:none;line-height:1.6;transition:border-color .2s}
+.ptextarea:focus{border-color:var(--accent2)}
+.paste-hint{font-size:10px;color:var(--muted);font-family:var(--mono);margin-top:8px;line-height:1.7}
+.paste-hint strong{color:var(--text2)}
+.preview-table{width:100%;border-collapse:collapse;font-size:11px;font-family:var(--mono);margin-top:12px}
+.preview-table th{background:var(--surface);color:var(--muted);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;text-align:left;border-bottom:1px solid var(--border)}
+.preview-table td{padding:6px 10px;border-bottom:1px solid var(--border);color:var(--text2)}
+.preview-table tr:hover td{background:var(--card)}
+.ptabs{display:flex;gap:6px;margin-bottom:16px}
+.ptab{background:var(--card);border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:10px;font-weight:700;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.04em}
+.ptab.active{background:var(--accent2);border-color:var(--accent2);color:#0a1a14}
+.ptab-panel{display:none}.ptab-panel.active{display:block}
+.parse-status{font-size:10px;font-family:var(--mono);margin-top:6px;min-height:18px}
+.ps-ok{color:var(--accent2)}.ps-err{color:var(--danger)}.ps-warn{color:var(--warn)}
+.main{padding:24px 28px;max-width:1200px;margin:0 auto}
+
+/* ── TABS ── */
+.tab-nav{display:flex;gap:6px;margin-bottom:22px}
+.tab-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);font-family:var(--sans);font-size:11px;font-weight:700;padding:7px 16px;border-radius:7px;cursor:pointer;transition:all .2s;letter-spacing:.05em}
+.tab-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab-btn:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ── SECTION LABEL ── */
+.slabel{font-size:9px;font-weight:700;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+
+/* ── KPI GRID ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:28px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.kpi-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:7px}
+.kpi-val{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.kpi-sub{font-size:10px;color:var(--muted);margin-top:5px;font-family:var(--mono)}
+
+/* ── LOJAS ── */
+.lojas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:28px}
+.loja-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px}
+.loja-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.loja-name{font-size:15px;font-weight:700}
+.badge{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;font-family:var(--mono)}
+.badge-ok{background:rgba(45,212,167,.15);color:#2dd4a7;border:1px solid rgba(45,212,167,.25)}
+.badge-at{background:rgba(245,166,35,.15);color:#f5a623;border:1px solid rgba(245,166,35,.25)}
+.badge-cr{background:rgba(242,87,87,.15);color:#f25757;border:1px solid rgba(242,87,87,.25)}
+.loja-val{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+.loja-sub{font-size:10px;color:var(--muted);font-family:var(--mono);margin-bottom:10px}
+.pbar{background:var(--border);border-radius:3px;height:5px;overflow:hidden;margin-bottom:7px}
+.pfill{height:5px;border-radius:3px;transition:width .9s ease}
+.fill-ok{background:linear-gradient(90deg,#2dd4a7,#4f8ef7)}
+.fill-at{background:linear-gradient(90deg,#f5a623,#f59e0b)}
+.fill-cr{background:linear-gradient(90deg,#f25757,#ef4444)}
+.fill-nt{background:#444}
+.loja-ftr{display:flex;justify-content:space-between;font-size:10px;font-family:var(--mono);color:var(--muted)}
+
+/* ── RANKING ── */
+.rlist{display:flex;flex-direction:column;gap:8px;margin-bottom:28px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;transition:border-color .2s,transform .15s}
+.sc:hover{border-color:var(--border2);transform:translateX(2px)}
+.spos{width:34px;height:34px;border-radius:7px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--muted);font-family:var(--mono)}
+.spos.t1{background:rgba(245,166,35,.1);border-color:rgba(245,166,35,.3);color:#f5a623}
+.spos.t2{background:rgba(200,200,200,.08);border-color:rgba(200,200,200,.2);color:#aaa}
+.spos.t3{background:rgba(180,120,60,.1);border-color:rgba(180,120,60,.3);color:#b47828}
+.snrow{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+.sname{font-size:14px;font-weight:700}
+.sloja{font-size:9px;font-family:var(--mono);color:var(--muted)}
+.skpis{display:flex;gap:14px;flex-wrap:wrap}
+.sk{font-size:10px;font-family:var(--mono);color:var(--muted)}
+.sk span{color:var(--text2)}
+.sbar{background:var(--border);border-radius:2px;height:3px;margin-top:5px;overflow:hidden}
+.sbfill{height:3px;border-radius:2px;transition:width .9s ease}
+.sright{text-align:right;min-width:110px}
+.sval{font-size:15px;font-weight:800}
+.spct{font-size:11px;font-family:var(--mono);margin-top:1px}
+.sproj{font-size:9px;color:var(--muted);font-family:var(--mono);margin-top:1px}
+.pok{color:#2dd4a7}.pat{color:#f5a623}.pcr{color:#f25757}.pnt{color:var(--muted)}
+
+/* status badges */
+.sb{font-size:8px;font-weight:700;padding:2px 6px;border-radius:20px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.sb-bom{background:rgba(45,212,167,.15);color:#2dd4a7;border:1px solid rgba(45,212,167,.25)}
+.sb-at{background:rgba(245,166,35,.15);color:#f5a623;border:1px solid rgba(245,166,35,.25)}
+.sb-cr{background:rgba(242,87,87,.15);color:#f25757;border:1px solid rgba(242,87,87,.25)}
+.sb-fer{background:rgba(79,142,247,.15);color:#4f8ef7;border:1px solid rgba(79,142,247,.25)}
+.sb-ates{background:rgba(156,163,176,.15);color:#9ca3b0;border:1px solid rgba(156,163,176,.25)}
+.sb-agu{background:rgba(120,120,120,.1);color:#6b7280;border:1px solid rgba(120,120,120,.2)}
+
+/* total bar */
+.tbar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.ti-lbl{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ti-val{font-size:18px;font-weight:800;letter-spacing:-.01em;margin-top:2px}
+.ti-sub{font-size:9px;font-family:var(--mono);color:var(--muted);margin-top:1px}
+
+/* ── MODAL ENTRADA MANUAL ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;display:flex;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px;width:100%;max-width:780px;position:relative}
+.modal-title{font-size:16px;font-weight:800;margin-bottom:4px}
+.modal-sub{font-size:11px;color:var(--muted);font-family:var(--mono);margin-bottom:24px}
+.close-btn{position:absolute;top:20px;right:20px;background:var(--card);border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 10px;cursor:pointer;font-size:13px;transition:all .2s}
+.close-btn:hover{border-color:var(--danger);color:var(--danger)}
+
+/* form params */
+.params-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.fgroup{display:flex;flex-direction:column;gap:5px}
+.flbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.finput{background:var(--card);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:13px;border-radius:7px;padding:8px 10px;width:100%;transition:border-color .2s;outline:none}
+.finput:focus{border-color:var(--accent)}
+
+/* vendedor rows */
+.vhdr{display:grid;grid-template-columns:90px 90px 110px 110px 90px 80px 90px;gap:8px;align-items:center;margin-bottom:8px}
+.vhdr-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center}
+.vrow{display:grid;grid-template-columns:90px 90px 110px 110px 90px 80px 90px;gap:8px;align-items:center;margin-bottom:8px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px}
+.vrow .floja{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--accent);text-align:center}
+.vrow .fnome{font-size:11px;font-weight:700;text-align:center}
+.vrow .finput{font-size:12px}
+.status-sel{background:var(--card);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:11px;border-radius:7px;padding:7px 6px;width:100%;outline:none;cursor:pointer}
+.status-sel:focus{border-color:var(--accent)}
+
+/* botões modal */
+.modal-btns{display:flex;justify-content:flex-end;gap:10px;margin-top:24px;padding-top:18px;border-top:1px solid var(--border)}
+.btn-cancel{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:var(--sans);font-weight:700;font-size:12px;padding:10px 22px;border-radius:8px;cursor:pointer;transition:all .2s}
+.btn-cancel:hover{border-color:var(--danger);color:var(--danger)}
+.btn-apply{background:var(--accent2);border:none;color:#0a1a14;font-family:var(--sans);font-weight:800;font-size:12px;padding:10px 22px;border-radius:8px;cursor:pointer;transition:opacity .2s;letter-spacing:.04em}
+.btn-apply:hover{opacity:.85}
+
+/* empty state */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:55vh;gap:18px;text-align:center}
+.empty-ico{font-size:52px;opacity:.25}
+.empty-t{font-size:20px;font-weight:700;color:var(--text2)}
+.empty-s{font-size:12px;color:var(--muted);font-family:var(--mono);max-width:360px;line-height:1.8}
+.empty-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+.ts{text-align:center;font-size:9px;font-family:var(--mono);color:var(--muted);padding-bottom:36px}
+
+@media(max-width:640px){
+  .main{padding:14px}.topbar{padding:12px 14px}
+  .sc{grid-template-columns:32px 1fr}.sright{display:none}
+  .vhdr,.vrow{grid-template-columns:70px 80px 90px 90px 80px 70px 80px;font-size:10px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tl">
+    <div class="dot"></div>
+    <div>
+      <div class="ttitle">DASHBOARD DE VENDAS</div>
+      <div class="tmeta" id="meta-info">Aguardando dados…</div>
+    </div>
+  </div>
+  <div class="tright">
+    <label class="ubtn">
+      <span>↑</span><span id="utxt">Subir planilha .xlsx</span>
+      <input type="file" id="file-input" accept=".xlsx,.xls">
+    </label>
+    <button class="pbtn" onclick="openPasteModal()">⌘ Colar planilha</button>
+    <button class="mbtn" onclick="openModal()">✏ Inserir dados</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- EMPTY STATE -->
+  <div class="empty" id="empty-state">
+    <div class="empty-ico">📊</div>
+    <div class="empty-t">Nenhum dado carregado</div>
+    <div class="empty-s">Escolha como quer inserir os dados do período para visualizar o dashboard.</div>
+    <div class="empty-btns">
+      <label class="ubtn" style="padding:12px 22px;font-size:12px;border-radius:9px">
+        ↑ Subir planilha .xlsx
+        <input type="file" accept=".xlsx,.xls" onchange="handleFileInput(this)">
+      </label>
+      <button class="pbtn" style="padding:12px 22px;font-size:12px;border-radius:9px" onclick="openPasteModal()">⌘ Colar planilha</button>
+      <button class="mbtn" style="padding:12px 22px;font-size:12px;border-radius:9px" onclick="openModal()">✏ Inserir manualmente</button>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" style="display:none">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('mensal')">Visão Mensal</button>
+      <button class="tab-btn" onclick="switchTab('semanal')">Semana Atual</button>
+    </div>
+
+    <!-- TAB MENSAL -->
+    <div class="tab-panel active" id="tab-mensal">
+      <div class="slabel">Resumo geral</div>
+      <div class="kpi-grid" id="kpi-grid"></div>
+      <div class="slabel">Por loja</div>
+      <div class="lojas-grid" id="lojas-grid"></div>
+      <div class="slabel">Ranking de vendedores</div>
+      <div class="rlist" id="ranking-list"></div>
+      <div class="tbar" id="total-bar"></div>
+    </div>
+
+    <!-- TAB SEMANAL -->
+    <div class="tab-panel" id="tab-semanal">
+      <div class="rlist" id="semanal-list"></div>
+      <div id="sem-empty" style="display:none">
+        <div class="empty" style="min-height:38vh">
+          <div class="empty-ico">📅</div>
+          <div class="empty-t">Dados semanais não encontrados</div>
+          <div class="empty-s">Insira os dados manualmente usando "✏ Inserir dados" ou carregue uma planilha com a aba META SEMANAL.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ts" id="ts"></div>
+
+<!-- ══════════════════════════════════
+     MODAL ENTRADA MANUAL
+══════════════════════════════════ -->
+<div class="overlay" id="modal" style="display:none" onclick="overlayClick(event)">
+<div class="modal">
+  <button class="close-btn" onclick="closeModal()">✕</button>
+  <div class="modal-title">Inserir dados manualmente</div>
+  <div class="modal-sub">Preencha os campos abaixo. Deixe em 0 se não tiver valor.</div>
+
+  <!-- PARÂMETROS -->
+  <div class="params-row">
+    <div class="fgroup">
+      <label class="flbl">Dias corridos</label>
+      <input class="finput" id="m-dias-cor" type="number" value="20" min="1" max="31">
+    </div>
+    <div class="fgroup">
+      <label class="flbl">Dias úteis no mês</label>
+      <input class="finput" id="m-dias-mes" type="number" value="24" min="1" max="31">
+    </div>
+    <div class="fgroup">
+      <label class="flbl">Semana atual</label>
+      <input class="finput" id="m-sem-atual" type="number" value="4" min="1" max="4">
+    </div>
+    <div class="fgroup">
+      <label class="flbl">Semanas no mês</label>
+      <input class="finput" id="m-sem-total" type="number" value="4" min="1" max="5">
+    </div>
+  </div>
+
+  <!-- CABEÇALHO TABELA -->
+  <div class="vhdr">
+    <div class="vhdr-lbl">Loja</div>
+    <div class="vhdr-lbl">Vendedor</div>
+    <div class="vhdr-lbl">Valor vendido (R$)</div>
+    <div class="vhdr-lbl">Meta mensal (R$)</div>
+    <div class="vhdr-lbl">Nº vendas</div>
+    <div class="vhdr-lbl">Desconto %</div>
+    <div class="vhdr-lbl">Status</div>
+  </div>
+
+  <!-- LINHAS DOS VENDEDORES -->
+  <div id="vrows"></div>
+
+  <div class="modal-btns">
+    <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+    <button class="btn-apply" onclick="applyManual()">Aplicar ao Dashboard</button>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     MODAL COLAR PLANILHA
+══════════════════════════════════ -->
+<div class="overlay" id="paste-modal" style="display:none" onclick="overlayPasteClick(event)">
+<div class="modal" style="max-width:860px">
+  <button class="close-btn" onclick="closePasteModal()">✕</button>
+  <div class="modal-title">Colar planilha</div>
+  <div class="modal-sub">Selecione a aba que quer colar. No Excel ou Google Sheets: selecione as células → Ctrl+C → clique na área abaixo → Ctrl+V.</div>
+
+  <div class="ptabs">
+    <button class="ptab active" onclick="switchPTab('dados')">Aba DADOS (mensal)</button>
+    <button class="ptab" onclick="switchPTab('semanal')">Aba META SEMANAL</button>
+  </div>
+
+  <!-- DADOS -->
+  <div class="ptab-panel active" id="ptab-dados">
+    <textarea class="ptextarea" id="paste-dados" placeholder="Cole aqui o conteúdo copiado da aba DADOS (Ctrl+V)..." oninput="previewPaste('dados')"></textarea>
+    <div class="parse-status" id="status-dados"></div>
+    <div class="paste-hint">
+      <strong>Como copiar:</strong> Na aba DADOS da planilha, selecione da célula A4 (LOJA) até a última linha de vendedor → Ctrl+C → cole aqui.<br>
+      Colunas esperadas: <strong>LOJA · VENDEDOR · VALOR VENDIDO · Nº VENDAS · DESCONTO · META MENSAL</strong>
+    </div>
+    <div id="preview-dados-wrap" style="overflow-x:auto;margin-top:4px"></div>
+  </div>
+
+  <!-- SEMANAL -->
+  <div class="ptab-panel" id="ptab-semanal">
+    <textarea class="ptextarea" id="paste-semanal" placeholder="Cole aqui o conteúdo copiado da aba META SEMANAL (Ctrl+V)..." oninput="previewPaste('semanal')"></textarea>
+    <div class="parse-status" id="status-semanal"></div>
+    <div class="paste-hint">
+      <strong>Como copiar:</strong> Na aba META SEMANAL, selecione da linha do cabeçalho até a última vendedora → Ctrl+C → cole aqui.<br>
+      Colunas esperadas: <strong>LOJA · VENDEDOR · META MENSAL · META SEM1 · META SEM2 · META SEM3 · META SEM4 · VENDIDO SEMANA</strong>
+    </div>
+    <div id="preview-semanal-wrap" style="overflow-x:auto;margin-top:4px"></div>
+  </div>
+
+  <!-- PARÂMETROS -->
+  <div class="params-row" style="margin-top:20px;margin-bottom:0;padding-top:16px;border-top:1px solid var(--border);border-bottom:none">
+    <div class="fgroup">
+      <label class="flbl">Dias corridos</label>
+      <input class="finput" id="p-dias-cor" type="number" value="20" min="1" max="31">
+    </div>
+    <div class="fgroup">
+      <label class="flbl">Dias úteis no mês</label>
+      <input class="finput" id="p-dias-mes" type="number" value="24" min="1" max="31">
+    </div>
+    <div class="fgroup">
+      <label class="flbl">Semana atual</label>
+      <input class="finput" id="p-sem-atual" type="number" value="4" min="1" max="4">
+    </div>
+    <div class="fgroup">
+      <label class="flbl">Semanas no mês</label>
+      <input class="finput" id="p-sem-total" type="number" value="4" min="1" max="5">
+    </div>
+  </div>
+
+  <div class="modal-btns">
+    <button class="btn-cancel" onclick="closePasteModal()">Cancelar</button>
+    <button class="btn-apply" onclick="applyPaste()">Aplicar ao Dashboard</button>
+  </div>
+</div>
+</div>
+
+<script>
+// ─── CONFIG VENDEDORES ───────────────────────────────────────────────────────
+const VENDEDORES_DEFAULT = [
+  {loja:'126',nome:'JOSY',   meta:75000},
+  {loja:'126',nome:'SUY',    meta:75000},
+  {loja:'126',nome:'JULIANA',meta:0},
+  {loja:'126',nome:'IVANI',  meta:75000},
+  {loja:'160',nome:'LEDA',   meta:67500},
+  {loja:'160',nome:'ALECIA', meta:60000},
+  {loja:'244',nome:'JORGANIA',meta:58300},
+  {loja:'244',nome:'EMYLAINE',meta:21700},
+];
+
+const METAS_LOJA = {'126':300000,'160':90000,'244':80000};
+
+// ─── UTILS ───────────────────────────────────────────────────────────────────
+const R = v => (v==null||isNaN(Number(v)))?'—':'R$ '+Math.round(Number(v)).toLocaleString('pt-BR');
+const P = v => (Number(v)*100).toFixed(1)+'%';
+const N = v => Math.round(Number(v)).toLocaleString('pt-BR');
+function sc(p){ return p>=.85?'ok':p>=.6?'at':'cr'; }
+function sl(p){ return p>=.85?'BOM':p>=.6?'ATENÇÃO':'CRÍTICO'; }
+function bclass(s){
+  const m={BOM:'bom','ATENÇÃO':'at',ATENCAO:'at','CRÍTICO':'cr',CRITICO:'cr',
+    FÉRIAS:'fer',FERIAS:'fer',ATESTADO:'ates',AGUARDANDO:'agu','SEM META':'agu'};
+  return m[(s||'').toUpperCase().trim()]||'agu';
+}
+
+// ─── MODAL COLAR PLANILHA ────────────────────────────────────────────────────
+let _parsedDados = null, _parsedSemanal = null;
+
+function openPasteModal(){
+  document.getElementById('paste-modal').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closePasteModal(){
+  document.getElementById('paste-modal').style.display='none';
+  document.body.style.overflow='';
+}
+function overlayPasteClick(e){ if(e.target===document.getElementById('paste-modal'))closePasteModal(); }
+
+function switchPTab(t){
+  document.querySelectorAll('.ptab').forEach((b,i)=>b.classList.toggle('active',['dados','semanal'][i]===t));
+  document.querySelectorAll('.ptab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('ptab-'+t).classList.add('active');
+}
+
+// Parseia TSV colado (cópia do Excel/Sheets = TSV com \t entre colunas, \n entre linhas)
+function parseTSV(text){
+  return text.trim().split('\n').map(l=>l.split('\t').map(c=>c.trim()));
+}
+
+function cleanNum(v){
+  if(v==null||v==='')return 0;
+  // remove R$, espaços, pontos de milhar, troca vírgula por ponto
+  const s=String(v).replace(/R\$\s*/g,'').replace(/\./g,'').replace(',','.').replace(/[^0-9.\-]/g,'');
+  return parseFloat(s)||0;
+}
+
+function cleanPct(v){
+  if(v==null||v==='')return 0;
+  const s=String(v).replace('%','').replace(',','.').trim();
+  const n=parseFloat(s)||0;
+  return n>1?n/100:n; // se vier como "25.6" converte para 0.256
+}
+
+function previewPaste(type){
+  const text = document.getElementById('paste-'+type).value;
+  const statusEl = document.getElementById('status-'+type);
+  const previewEl = document.getElementById('preview-'+type+'-wrap');
+
+  if(!text.trim()){ statusEl.innerHTML=''; previewEl.innerHTML=''; return; }
+
+  const rows = parseTSV(text);
+  if(rows.length < 2){ statusEl.innerHTML='<span class="ps-warn">⚠ Poucas linhas detectadas. Verifique a seleção.</span>'; return; }
+
+  // detectar linha de cabeçalho
+  let hdrIdx = -1;
+  for(let i=0;i<Math.min(rows.length,5);i++){
+    const r=rows[i].join('|').toUpperCase();
+    if(r.includes('LOJA')&&r.includes('VENDEDOR')){ hdrIdx=i; break; }
+  }
+
+  if(hdrIdx<0){
+    statusEl.innerHTML='<span class="ps-warn">⚠ Cabeçalho não encontrado. Inclua a linha com LOJA e VENDEDOR.</span>';
+    previewEl.innerHTML=''; return;
+  }
+
+  const headers = rows[hdrIdx];
+  const dataRows = rows.slice(hdrIdx+1).filter(r=>r[0]&&!r[0].toUpperCase().includes('TOTAL')&&r.join('').trim()!='');
+
+  if(dataRows.length===0){
+    statusEl.innerHTML='<span class="ps-err">✕ Nenhuma linha de dado encontrada após o cabeçalho.</span>';
+    previewEl.innerHTML=''; return;
+  }
+
+  // preview table (max 5 cols para não poluir)
+  const showCols = Math.min(headers.length, 7);
+  let tbl = `<table class="preview-table"><thead><tr>${headers.slice(0,showCols).map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`;
+  dataRows.slice(0,8).forEach(r=>{ tbl+=`<tr>${r.slice(0,showCols).map(c=>`<td>${c}</td>`).join('')}</tr>`; });
+  tbl += '</tbody></table>';
+
+  statusEl.innerHTML=`<span class="ps-ok">✓ ${dataRows.length} vendedor(es) detectado(s)</span>`;
+  previewEl.innerHTML=tbl;
+
+  // salvar parsed
+  if(type==='dados') _parsedDados={headers,dataRows};
+  else _parsedSemanal={headers,dataRows};
+}
+
+function findCol(headers, ...keywords){
+  // encontra index da coluna que contém qualquer uma das keywords
+  for(const kw of keywords){
+    const idx=headers.findIndex(h=>h.toUpperCase().includes(kw.toUpperCase()));
+    if(idx>=0)return idx;
+  }
+  return -1;
+}
+
+function applyPaste(){
+  if(!_parsedDados){
+    alert('Cole os dados da aba DADOS primeiro!'); return;
+  }
+
+  const diasCor = Number(document.getElementById('p-dias-cor').value)||20;
+  const diasMes = Number(document.getElementById('p-dias-mes').value)||24;
+  const semAtual= Number(document.getElementById('p-sem-atual').value)||4;
+  const semTotal= Number(document.getElementById('p-sem-total').value)||4;
+
+  // mapear colunas da aba DADOS
+  const h=_parsedDados.headers;
+  const iLoja   = findCol(h,'LOJA');
+  const iVend   = findCol(h,'VENDEDOR','NOME');
+  const iVendido= findCol(h,'VALOR VENDIDO','VENDIDO','VENDA');
+  const iNV     = findCol(h,'Nº VENDAS','N VENDAS','NUM VENDAS','VENDAS');
+  const iDesc   = findCol(h,'DESCONTO','DESC');
+  const iMeta   = findCol(h,'META MENSAL','META');
+  const iProj   = findCol(h,'PROJEÇÃO','PROJEC');
+  const iTicket = findCol(h,'TICKET');
+
+  const vendedores = _parsedDados.dataRows.map(r=>{
+    const vendido = iVendido>=0?cleanNum(r[iVendido]):0;
+    const meta    = iMeta>=0?cleanNum(r[iMeta]):0;
+    const nVendas = iNV>=0?cleanNum(r[iNV]):0;
+    const desc    = iDesc>=0?cleanPct(r[iDesc]):0;
+    const proj    = iProj>=0?cleanNum(r[iProj]):(diasCor>0?vendido/diasCor*diasMes:0);
+    const ticket  = iTicket>=0?cleanNum(r[iTicket]):(nVendas>0?vendido/nVendas:0);
+    const pct     = meta>0?vendido/meta:null;
+    return {
+      loja: iLoja>=0?String(r[iLoja]):'?',
+      nome: iVend>=0?String(r[iVend]):'?',
+      vendido,meta,nVendas,desconto:desc,proj,ticket,pct,
+      status:pct==null?'SEM META':pct>=.85?'BOM':pct>=.6?'ATENÇÃO':'CRÍTICO'
+    };
+  });
+
+  // semanal
+  let semanalData = null;
+  if(_parsedSemanal){
+    const hs=_parsedSemanal.headers;
+    const isLoja  = findCol(hs,'LOJA');
+    const isVend  = findCol(hs,'VENDEDOR');
+    const isMetaM = findCol(hs,'META MENSAL');
+    const isS1    = findCol(hs,'SEM. 1','SEM1','SEMANA 1','SEMANA1');
+    const isS2    = findCol(hs,'SEM. 2','SEM2','SEMANA 2','SEMANA2');
+    const isS3    = findCol(hs,'SEM. 3','SEM3','SEMANA 3','SEMANA3');
+    const isS4    = findCol(hs,'SEM. 4','SEM4','SEMANA 4','SEMANA4');
+    const isVS    = findCol(hs,'VENDIDO SEMANA','VENDIDO SEM','VENDIDO');
+    const sv = _parsedSemanal.dataRows.map(r=>{
+      const metas=[isS1,isS2,isS3,isS4].map(i=>i>=0?cleanNum(r[i]):0);
+      const ms=metas[semAtual-1]||0;
+      const vs=isVS>=0?cleanNum(r[isVS]):0;
+      const ps=ms>0?vs/ms:null;
+      return {
+        loja:isLoja>=0?String(r[isLoja]):'?',
+        nome:isVend>=0?String(r[isVend]):'?',
+        metaMensal:isMetaM>=0?cleanNum(r[isMetaM]):0,
+        metas,metaSem:ms,vendidoSem:vs,pctSem:ps,
+        status:ps==null?'AGUARDANDO':ps>=.85?'BOM':ps>=.6?'ATENÇÃO':'CRÍTICO'
+      };
+    });
+    semanalData={semAtual,semTotal,vendedores:sv};
+  }
+
+  closePasteModal();
+  renderDashboard({diasCorridos:diasCor,diasMes,vendedores,semanalData});
+}
+function sbadge(s){ return `<span class="sb sb-${bclass(s)}">${s||'—'}</span>`; }
+function switchTab(t){
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['mensal','semanal'][i]===t));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+}
+
+// ─── MODAL ───────────────────────────────────────────────────────────────────
+function openModal(){
+  buildVRows();
+  document.getElementById('modal').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal').style.display='none';
+  document.body.style.overflow='';
+}
+function overlayClick(e){ if(e.target===document.getElementById('modal'))closeModal(); }
+
+function buildVRows(){
+  const cont = document.getElementById('vrows');
+  cont.innerHTML = VENDEDORES_DEFAULT.map((v,i)=>`
+    <div class="vrow">
+      <div class="floja">${v.loja}</div>
+      <div class="fnome">${v.nome}</div>
+      <input class="finput" id="mv-ven-${i}" type="number" min="0" placeholder="0" value="">
+      <input class="finput" id="mv-met-${i}" type="number" min="0" value="${v.meta}">
+      <input class="finput" id="mv-nv-${i}"  type="number" min="0" placeholder="0" value="">
+      <input class="finput" id="mv-des-${i}" type="number" min="0" max="100" step="0.1" placeholder="0">
+      <select class="status-sel" id="mv-st-${i}">
+        <option value="AUTO">Auto</option>
+        <option value="BOM">BOM</option>
+        <option value="ATENÇÃO">ATENÇÃO</option>
+        <option value="CRÍTICO">CRÍTICO</option>
+        <option value="FÉRIAS">FÉRIAS</option>
+        <option value="ATESTADO">ATESTADO</option>
+      </select>
+    </div>`).join('');
+}
+
+function applyManual(){
+  const diasCor = Number(document.getElementById('m-dias-cor').value)||20;
+  const diasMes = Number(document.getElementById('m-dias-mes').value)||24;
+  const semAtual= Number(document.getElementById('m-sem-atual').value)||4;
+  const semTotal= Number(document.getElementById('m-sem-total').value)||4;
+
+  const vendedores = VENDEDORES_DEFAULT.map((v,i)=>{
+    const vendido = Number(document.getElementById(`mv-ven-${i}`).value)||0;
+    const meta    = Number(document.getElementById(`mv-met-${i}`).value)||0;
+    const nVendas = Number(document.getElementById(`mv-nv-${i}`).value)||0;
+    const desc    = Number(document.getElementById(`mv-des-${i}`).value)||0;
+    const stSel   = document.getElementById(`mv-st-${i}`).value;
+    const proj    = diasCor>0?(vendido/diasCor)*diasMes:0;
+    const pct     = meta>0?vendido/meta:null;
+    const autoSt  = pct==null?'SEM META':pct>=.85?'BOM':pct>=.6?'ATENÇÃO':'CRÍTICO';
+    return { loja:v.loja, nome:v.nome, vendido, meta, nVendas,
+      desconto:desc, proj, pct, status:stSel==='AUTO'?autoSt:stSel,
+      ticket:nVendas>0?vendido/nVendas:0 };
+  });
+
+  // semana: assumimos meta semanal = meta/semTotal por simplicidade
+  const semVendedores = vendedores.map(v=>({
+    ...v,
+    metaSem: v.meta>0?Math.round(v.meta/semTotal):0,
+    vendidoSem: 0,
+    pctSem: null,
+  }));
+
+  closeModal();
+  renderDashboard({
+    diasCorridos:diasCor, diasMes, vendedores,
+    semanalData:{semAtual,semTotal,vendedores:semVendedores},
+    fromManual:true
+  });
+}
+
+// ─── FILE INPUT ───────────────────────────────────────────────────────────────
+document.getElementById('file-input').addEventListener('change',function(e){
+  handleFileInput(this);
+});
+function handleFileInput(input){
+  const f=input.files[0]; if(!f)return;
+  document.getElementById('utxt').textContent=f.name;
+  const r=new FileReader();
+  r.onload=ev=>processXLSX(ev.target.result);
+  r.readAsArrayBuffer(f);
+}
+document.body.addEventListener('dragover',e=>e.preventDefault());
+document.body.addEventListener('drop',e=>{
+  e.preventDefault();
+  const f=e.dataTransfer.files[0]; if(!f)return;
+  document.getElementById('utxt').textContent=f.name;
+  const r=new FileReader();
+  r.onload=ev=>processXLSX(ev.target.result);
+  r.readAsArrayBuffer(f);
+});
+
+// ─── PROCESS XLSX ─────────────────────────────────────────────────────────────
+function processXLSX(buffer){
+  const wb=XLSX.read(buffer,{type:'array'});
+  const wsD=wb.Sheets['DADOS'];
+  if(!wsD){alert('Aba "DADOS" não encontrada!');return;}
+  const dados=XLSX.utils.sheet_to_json(wsD,{header:1,defval:''});
+
+  let diasCorridos='',diasMes='';
+  for(let r=0;r<dados.length;r++){
+    if(String(dados[r][4]).toLowerCase().includes('dias corridos')){
+      diasCorridos=dados[r][5];diasMes=dados[r][7];break;
+    }
+  }
+  let hdr=-1;
+  for(let r=0;r<dados.length;r++){
+    if(String(dados[r][0]).toUpperCase()==='LOJA'){hdr=r;break;}
+  }
+  const vendedores=[];
+  for(let r=hdr+1;r<dados.length;r++){
+    const row=dados[r];
+    if(!row[0]||String(row[0]).toUpperCase().includes('TOTAL'))continue;
+    const meta=Number(row[5])||0, vendido=Number(row[2])||0;
+    const p=meta>0?vendido/meta:null;
+    vendedores.push({
+      loja:String(row[0]),nome:String(row[1]),vendido,nVendas:Number(row[3])||0,
+      desconto:row[4],meta,ticket:Number(row[6])||0,proj:Number(row[7])||0,pct:p,
+      status:p==null?'SEM META':p>=.85?'BOM':p>=.6?'ATENÇÃO':'CRÍTICO'
+    });
+  }
+
+  const wsS=wb.Sheets['META SEMANAL'];
+  let semanalData=null;
+  if(wsS){
+    const rawS=XLSX.utils.sheet_to_json(wsS,{header:1,defval:''});
+    let semAtual=1,semTotal=4;
+    for(let r=0;r<rawS.length;r++){
+      for(let c=0;c<rawS[r].length;c++){
+        if(String(rawS[r][c]).toLowerCase().includes('semana atual'))semAtual=Number(rawS[r][c+1])||1;
+        if(String(rawS[r][c]).toLowerCase().includes('semanas no mês'))semTotal=Number(rawS[r][c+1])||4;
+      }
+    }
+    let hS=-1;
+    for(let r=0;r<rawS.length;r++){if(String(rawS[r][0]).toUpperCase()==='LOJA'){hS=r;break;}}
+    const sv=[];
+    for(let r=hS+1;r<rawS.length;r++){
+      const row=rawS[r];
+      if(!row[0]||String(row[0]).toUpperCase().includes('TOTAL'))continue;
+      const metas=[Number(row[3])||0,Number(row[4])||0,Number(row[5])||0,Number(row[6])||0];
+      const ms=metas[semAtual-1]||0,vs=Number(row[7])||0,ps=ms>0?vs/ms:null;
+      sv.push({loja:String(row[0]),nome:String(row[1]),metaMensal:Number(row[2])||0,
+        metas,metaSem:ms,vendidoSem:vs,pctSem:ps,
+        status:row[9]?String(row[9]):(ps==null?'AGUARDANDO':ps>=.85?'BOM':ps>=.6?'ATENÇÃO':'CRÍTICO')});
+    }
+    semanalData={semAtual,semTotal,vendedores:sv};
+  }
+  renderDashboard({diasCorridos,diasMes,vendedores,semanalData});
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function renderDashboard(d){
+  document.getElementById('empty-state').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+
+  const tv=d.vendedores.reduce((s,v)=>s+v.vendido,0);
+  const tm=d.vendedores.reduce((s,v)=>s+v.meta,0);
+  const tp=d.vendedores.reduce((s,v)=>s+(v.proj||0),0);
+  const tn=d.vendedores.reduce((s,v)=>s+v.nVendas,0);
+  const pg=tm>0?tv/tm:0;
+  const tick=tn>0?tv/tn:0;
+
+  const now=new Date();
+  document.getElementById('meta-info').textContent=
+    `${d.diasCorridos||'—'} dias corridos · ${d.diasMes||'—'} dias úteis · ${now.toLocaleString('pt-BR')}`;
+  document.getElementById('ts').textContent=`Última atualização: ${now.toLocaleString('pt-BR')}`;
+
+  // KPIs
+  document.getElementById('kpi-grid').innerHTML=`
+    <div class="kpi"><div class="kpi-lbl">Faturamento total</div><div class="kpi-val">${R(tv)}</div><div class="kpi-sub">meta ${R(tm)}</div></div>
+    <div class="kpi"><div class="kpi-lbl">Projeção do mês</div><div class="kpi-val">${R(tp)}</div><div class="kpi-sub">${P(pg)} da meta</div></div>
+    <div class="kpi"><div class="kpi-lbl">Total de vendas</div><div class="kpi-val">${tn}</div><div class="kpi-sub">pedidos no período</div></div>
+    <div class="kpi"><div class="kpi-lbl">Ticket médio</div><div class="kpi-val">${R(tick)}</div><div class="kpi-sub">por venda</div></div>`;
+
+  // Lojas
+  const lojas={};
+  d.vendedores.forEach(v=>{
+    if(!lojas[v.loja])lojas[v.loja]={vendido:0,meta:0,proj:0};
+    lojas[v.loja].vendido+=v.vendido;
+    lojas[v.loja].meta+=v.meta;
+    lojas[v.loja].proj+=(v.proj||0);
+  });
+  let lH='';
+  for(const [loja,info] of Object.entries(lojas)){
+    const p=info.meta>0?info.vendido/info.meta:0;
+    const gap=Math.max(info.meta-info.vendido,0);
+    lH+=`<div class="loja-card">
+      <div class="loja-hdr"><div class="loja-name">Loja ${loja}</div><span class="badge badge-${sc(p)}">${sl(p)}</span></div>
+      <div class="loja-val">${R(info.vendido)}</div>
+      <div class="loja-sub">meta ${R(info.meta)} · proj. ${R(info.proj)}</div>
+      <div class="pbar"><div class="pfill fill-${sc(p)}" style="width:${Math.min(p*100,100).toFixed(1)}%"></div></div>
+      <div class="loja-ftr"><span>${P(p)} atingido</span><span>Gap ${R(gap)}</span></div>
+    </div>`;
+  }
+  document.getElementById('lojas-grid').innerHTML=lH;
+
+  // Ranking
+  const sorted=[...d.vendedores].sort((a,b)=>b.vendido-a.vendido);
+  let rH='';
+  sorted.forEach((v,i)=>{
+    const pos=i+1,pc=pos===1?'t1':pos===2?'t2':pos===3?'t3':'';
+    const s=v.pct!=null?sc(v.pct):'nt';
+    const ps=v.pct!=null?P(v.pct)+' da meta':'sem meta';
+    const bw=v.pct!=null?Math.min(v.pct*100,100).toFixed(1):'0';
+    const ds=v.desconto!=null&&v.desconto!==''
+      ?(isNaN(Number(v.desconto))?v.desconto:(Number(v.desconto)*100).toFixed(1)+'%'):'—';
+    rH+=`<div class="sc">
+      <div class="spos ${pc}">${pos}°</div>
+      <div>
+        <div class="snrow"><span class="sname">${v.nome}</span>${sbadge(v.status)}<span class="sloja">Loja ${v.loja}</span></div>
+        <div class="skpis">
+          <div class="sk">Ticket <span>${R(v.ticket)}</span></div>
+          <div class="sk">Vendas <span>${v.nVendas}</span></div>
+          <div class="sk">Desc. <span>${ds}</span></div>
+        </div>
+        <div class="sbar"><div class="sbfill fill-${s}" style="width:${bw}%"></div></div>
+      </div>
+      <div class="sright">
+        <div class="sval">${R(v.vendido)}</div>
+        <div class="spct p${s}">${ps}</div>
+        <div class="sproj">proj. ${R(v.proj||0)}</div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('ranking-list').innerHTML=rH;
+
+  // Total bar
+  document.getElementById('total-bar').innerHTML=`
+    <div class="ti-lbl">Total geral</div>
+    <div><div class="ti-val">${N(tn)} vendas</div><div class="ti-sub">no período</div></div>
+    <div><div class="ti-val">${R(tv)}</div><div class="ti-sub">faturado</div></div>
+    <div><div class="ti-val p${sc(pg)}">${P(pg)}</div><div class="ti-sub">da meta</div></div>
+    <div><div class="ti-val">${R(tp)}</div><div class="ti-sub">projeção final</div></div>`;
+
+  // Semanal
+  if(!d.semanalData){
+    document.getElementById('semanal-list').style.display='none';
+    document.getElementById('sem-empty').style.display='block';
+  } else {
+    document.getElementById('sem-empty').style.display='none';
+    document.getElementById('semanal-list').style.display='flex';
+    const sd=d.semanalData;
+    let sH=`<div class="slabel" style="margin-bottom:6px">Semana ${sd.semAtual} de ${sd.semTotal} · Desempenho individual</div>`;
+    [...sd.vendedores].sort((a,b)=>b.vendidoSem-a.vendidoSem).forEach((v,i)=>{
+      const pos=i+1,pc=pos===1?'t1':pos===2?'t2':pos===3?'t3':'';
+      const s=v.pctSem!=null?sc(v.pctSem):'nt';
+      const ps=v.pctSem!=null?P(v.pctSem)+' da meta':'sem dado';
+      const bw=v.pctSem!=null?Math.min(v.pctSem*100,100).toFixed(1):'0';
+      sH+=`<div class="sc">
+        <div class="spos ${pc}">${pos}°</div>
+        <div>
+          <div class="snrow"><span class="sname">${v.nome}</span>${sbadge(v.status)}<span class="sloja">Loja ${v.loja}</span></div>
+          <div class="skpis">
+            <div class="sk">Meta sem. <span>${R(v.metaSem)}</span></div>
+            <div class="sk">Meta mês <span>${R(v.metaMensal||v.meta||0)}</span></div>
+          </div>
+          <div class="sbar"><div class="sbfill fill-${s}" style="width:${bw}%"></div></div>
+        </div>
+        <div class="sright">
+          <div class="sval">${R(v.vendidoSem)}</div>
+          <div class="spct p${s}">${ps}</div>
+        </div>
+      </div>`;
+    });
+    document.getElementById('semanal-list').innerHTML=sH;
+  }
+}
+</script>
+</body>
+</html>

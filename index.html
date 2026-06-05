@@ -8,18 +8,43 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f1f5f9;--surface:#ffffff;--card:#ffffff;
-  --border:#eef2f7;--border2:#e2e8f0;
-  --accent:#2563eb;--accent2:#0f9d8a;--warn:#ea7a3c;--danger:#e0584f;
-  --muted:#94a3b8;--text:#0f172a;--text2:#64748b;--ink:#0b1220;
-  --sb:#ffffff;--sb-active:#2563eb;
+  /* ── Paleta MR Solutions ── */
+  --grafite:#1F2022;
+  --cinza-medio:#6B6F72;
+  --cinza-claro:#E7E8EA;
+  --branco:#FFFFFF;
+  --salvia:#7C846B;
+  --salvia-light:#c8cdb8;
+  --cinza-quente:#F2F2EF;
+  --danger:#b94040;
+  --warn:#8a6f3a;
+
+  /* ── Tokens de UI ── */
+  --bg:var(--cinza-quente);
+  --surface:var(--branco);
+  --card:var(--branco);
+  --border:var(--cinza-claro);
+  --border2:#d4d5d2;
+  --accent:var(--grafite);
+  --accent2:var(--salvia);
+  --muted:var(--cinza-medio);
+  --text:var(--grafite);
+  --text2:var(--cinza-medio);
+  --ink:var(--grafite);
+  --sb:var(--grafite);
+  --sb-active:var(--salvia);
+
+  /* ── Tipografia ── */
   --sans:'Inter',-apple-system,sans-serif;
-  --shadow-sm:0 1px 2px rgba(15,23,42,.04),0 1px 3px rgba(15,23,42,.05);
-  --shadow-md:0 2px 8px rgba(15,23,42,.05),0 6px 18px rgba(15,23,42,.06);
-  --shadow-lg:0 8px 28px rgba(15,23,42,.1);
+  --display:'Poppins','Inter',sans-serif;
+
+  /* ── Sombras (mais sutis pra paleta neutra) ── */
+  --shadow-sm:0 1px 2px rgba(31,32,34,.05),0 1px 4px rgba(31,32,34,.04);
+  --shadow-md:0 2px 8px rgba(31,32,34,.06),0 6px 20px rgba(31,32,34,.06);
+  --shadow-lg:0 8px 32px rgba(31,32,34,.12);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;-webkit-font-smoothing:antialiased;font-feature-settings:'cv01','cv02','tnum'}
@@ -31,35 +56,36 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .app{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
 
 /* ── SIDEBAR ── */
-.sidebar{background:var(--sb);border-right:1px solid var(--border2);padding:24px 16px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
-.logo{display:flex;align-items:center;gap:11px;padding:0 8px 28px;margin-bottom:8px}
-.logo-ico{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#0f9d8a,#2563eb);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sidebar{background:var(--grafite);border-right:none;padding:24px 14px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.logo{display:flex;align-items:center;gap:10px;padding:0 8px 22px;margin-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+.logo-ico{width:36px;height:36px;border-radius:8px;background:var(--salvia);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .logo-ico svg{width:18px;height:18px}
-.logo-txt{font-size:13px;font-weight:800;line-height:1.15;letter-spacing:-.01em;color:var(--ink)}
-.nav{display:flex;flex-direction:column;gap:3px;flex:1}
-.nav-item{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:10px;cursor:pointer;color:var(--text2);font-size:14px;font-weight:500;transition:all .15s;border:none;background:none;width:100%;text-align:left;font-family:var(--sans)}
-.nav-item svg{width:19px;height:19px;flex-shrink:0;stroke-width:1.8}
-.nav-item:hover{background:#f1f5f9;color:var(--text)}
-.nav-item.active{background:var(--sb-active);color:#fff;font-weight:600;box-shadow:0 4px 12px rgba(37,99,235,.3)}
-.sb-foot{display:flex;align-items:center;gap:11px;padding:12px 10px;border-top:1px solid var(--border2);margin-top:8px}
-.sb-avatar{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#0f9d8a,#2563eb);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;flex-shrink:0;letter-spacing:-.02em}
-.sb-foot-t{font-size:12px;font-weight:700;color:var(--ink)}
-.sb-foot-s{font-size:10px;color:var(--muted);letter-spacing:.04em}
-.sb-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;margin-left:auto}
+.logo-txt{font-family:var(--display);font-size:12px;font-weight:700;line-height:1.2;letter-spacing:.04em;color:var(--branco)}
+.logo-txt .logo-sub{color:var(--salvia-light);font-weight:400;font-family:var(--sans);font-size:9px;letter-spacing:.1em;display:block;margin-top:2px}
+.nav{display:flex;flex-direction:column;gap:2px;flex:1;margin-top:14px}
+.nav-item{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.45);font-size:13px;font-weight:500;transition:all .15s;border:none;background:none;width:100%;text-align:left;font-family:var(--sans);letter-spacing:.01em}
+.nav-item svg{width:17px;height:17px;flex-shrink:0;stroke-width:1.7}
+.nav-item:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.8)}
+.nav-item.active{background:var(--salvia);color:var(--branco);font-weight:600;box-shadow:0 4px 14px rgba(124,132,107,.35)}
+.sb-foot{display:flex;align-items:center;gap:10px;padding:13px 9px;border-top:1px solid rgba(255,255,255,.08);margin-top:8px}
+.sb-avatar{width:33px;height:33px;border-radius:8px;background:var(--salvia);display:flex;align-items:center;justify-content:center;color:var(--branco);font-size:11px;font-weight:800;flex-shrink:0;font-family:var(--display)}
+.sb-foot-t{font-size:11px;font-weight:700;color:var(--branco);letter-spacing:.03em;font-family:var(--display)}
+.sb-foot-s{font-size:9px;color:var(--salvia-light);letter-spacing:.08em;margin-top:1px}
+.sb-dot{width:7px;height:7px;border-radius:50%;background:#6fcf6f;margin-left:auto}
 
 /* ── MAIN ── */
 .main{padding:28px 36px;max-width:1500px}
 
 /* header de saudação */
 .head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:26px;flex-wrap:wrap;gap:16px}
-.greet h1{font-size:26px;font-weight:800;letter-spacing:-.03em;color:var(--ink);margin-bottom:4px}
+.greet h1{font-size:24px;font-weight:700;letter-spacing:-.02em;color:var(--grafite);margin-bottom:4px;font-family:var(--display)}
 .greet p{font-size:14px;color:var(--text2)}
 .head-right{display:flex;gap:12px;align-items:center}
 .period{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:10px 16px;box-shadow:var(--shadow-sm)}
-.period svg{width:18px;height:18px;color:var(--accent)}
+.period svg{width:18px;height:18px;color:var(--salvia)}
 .period-t{font-size:13px;font-weight:700;color:var(--ink)}
 .period-s{font-size:11px;color:var(--text2);margin-top:1px}
-.btn-export{display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;border-radius:12px;padding:12px 22px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:all .2s;box-shadow:0 4px 14px rgba(37,99,235,.3)}
+.btn-export{display:flex;align-items:center;gap:8px;background:var(--grafite);color:var(--branco);border:none;border-radius:10px;padding:12px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:all .2s;box-shadow:0 4px 14px rgba(31,32,34,.25)}
 .btn-export:hover{filter:brightness(1.05);transform:translateY(-1px)}
 .btn-export:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none}
 .btn-export svg{width:16px;height:16px}
@@ -68,24 +94,24 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .insert-row{display:flex;gap:10px;flex-wrap:wrap}
 .ibtn{display:flex;align-items:center;gap:7px;border-radius:10px;padding:10px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:all .2s;border:1px solid var(--border2);background:var(--card);color:var(--text2)}
 .ibtn:hover{border-color:var(--accent);color:var(--accent)}
-.ibtn.demo{background:linear-gradient(135deg,#0f9d8a,#2563eb);color:#fff;border:none}
+.ibtn.demo{background:var(--grafite);color:var(--branco);border:none}
 
 /* ── KPI ── */
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px}
 .kpi{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow-sm);transition:all .25s}
-.kpi:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.kpi:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);border-color:var(--salvia)}
 .kpi-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .kpi-ico{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .kpi-ico svg{width:20px;height:20px}
-.kpi-lbl{font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--text2);text-transform:uppercase}
-.kpi-val{font-size:31px;line-height:1;color:var(--ink);margin-bottom:10px}
+.kpi-lbl{font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--cinza-medio);text-transform:uppercase}
+.kpi-val{font-size:29px;line-height:1;color:var(--grafite);margin-bottom:10px;font-family:var(--display)}
 .kpi-foot{font-size:12px;color:var(--text2)}
 .kpi-pct{font-size:12px;font-weight:700;display:block;text-align:right;margin-bottom:6px}
-.kpi-bar{height:7px;background:#eef2f7;border-radius:4px;overflow:hidden}
+.kpi-bar{height:6px;background:var(--cinza-claro);border-radius:3px;overflow:hidden}
 .kpi-bar-fill{height:7px;border-radius:4px}
 
 /* ── SECTION TITLE ── */
-.sec-title{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--text2);text-transform:uppercase;margin-bottom:15px}
+.sec-title{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--cinza-medio);text-transform:uppercase;margin-bottom:15px}
 
 /* ── LOJAS ── */
 .lojas{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px}
@@ -97,24 +123,24 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .loja-name{font-size:16px;font-weight:700;color:var(--ink);flex:1}
 .badge{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 11px;border-radius:7px}
 .badge-ok{background:#dcfce7;color:#15803d}
-.badge-at{background:#fee9d6;color:#c2410c}
-.badge-cr{background:#fee2e2;color:#b91c1c}
-.loja-val{font-size:27px;line-height:1;color:var(--ink);margin-bottom:7px}
+.badge-at{background:#fef9c3;color:#854d0e}
+.badge-cr{background:#fee2e2;color:#991b1b}
+.loja-val{font-size:26px;line-height:1;color:var(--grafite);margin-bottom:7px;font-family:var(--display)}
 .loja-meta{font-size:12px;color:var(--text2);margin-bottom:16px}
-.loja-bar{height:8px;background:#eef2f7;border-radius:5px;overflow:hidden;margin-bottom:11px}
+.loja-bar{height:8px;background:var(--cinza-claro);border-radius:5px;overflow:hidden;margin-bottom:11px}
 .loja-bar-fill{height:8px;border-radius:5px}
 .loja-foot{display:flex;justify-content:space-between;font-size:12px}
 .loja-foot .at{font-weight:700}
 .loja-foot .gap{color:var(--text2)}
-.fill-ok{background:#0f9d8a}.fill-at{background:#ea7a3c}.fill-cr{background:#e0584f}.fill-nt{background:#cbd5e1}
-.txt-ok{color:#0f9d8a}.txt-at{color:#ea7a3c}.txt-cr{color:#e0584f}.txt-nt{color:var(--muted)}
+.fill-ok{background:#16a34a}.fill-at{background:#ca8a04}.fill-cr{background:#dc2626}.fill-nt{background:#cbd5e1}
+.txt-ok{color:#16a34a}.txt-at{color:#ca8a04}.txt-cr{color:#dc2626}.txt-nt{color:var(--muted)}
 
 /* ── BOTTOM GRID ── */
 .bottom{display:grid;grid-template-columns:1fr 1.3fr;gap:18px;margin-bottom:28px}
 .panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;box-shadow:var(--shadow-sm)}
 .panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.panel-title{font-size:13px;font-weight:700;letter-spacing:.07em;color:var(--text2);text-transform:uppercase}
-.panel-link{font-size:12px;font-weight:600;color:var(--accent);cursor:pointer}
+.panel-title{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--cinza-medio);text-transform:uppercase}
+.panel-link{font-size:12px;font-weight:600;color:var(--salvia);cursor:pointer}
 
 /* pizza */
 .pie-wrap{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
@@ -122,18 +148,18 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .pie-leg{display:flex;flex-direction:column;gap:16px;flex:1;min-width:160px}
 .pie-leg-item{display:flex;align-items:flex-start;gap:11px}
 .pie-dot{width:13px;height:13px;border-radius:4px;flex-shrink:0;margin-top:3px}
-.pie-leg-name{font-size:14px;font-weight:600;color:var(--ink)}
+.pie-leg-name{font-size:13px;font-weight:600;color:var(--grafite)}
 .pie-leg-val{font-size:12px;color:var(--text2);font-variant-numeric:tabular-nums;margin-top:1px}
 
 /* ranking com avatares */
 .rk{display:flex;flex-direction:column;gap:2px}
 .rk-row{display:grid;grid-template-columns:30px 38px 1fr auto;gap:13px;align-items:center;padding:13px 8px;border-radius:12px;transition:background .15s}
-.rk-row:hover{background:#f8fafc}
+.rk-row:hover{background:var(--cinza-quente)}
 .rk-row+.rk-row{border-top:1px solid var(--border)}
 .rk-pos{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;border:2px solid}
-.rk-pos.p1{background:#fef3c7;border-color:#f59e0b;color:#b45309}
-.rk-pos.p2{background:#f1f5f9;border-color:#cbd5e1;color:#64748b}
-.rk-pos.p3{background:#fee9d6;border-color:#ea7a3c;color:#c2410c}
+.rk-pos.p1{background:rgba(124,132,107,.15);border-color:var(--salvia);color:var(--salvia)}
+.rk-pos.p2{background:rgba(107,111,114,.1);border-color:var(--cinza-medio);color:var(--cinza-medio)}
+.rk-pos.p3{background:rgba(107,111,114,.08);border-color:#9aa0a8;color:#9aa0a8}
 .rk-pos.po{background:#f8fafc;border-color:#e2e8f0;color:#94a3b8}
 .rk-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0;letter-spacing:-.02em}
 .rk-mid{min-width:0}
@@ -142,36 +168,36 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .rk-store{font-size:11px;color:var(--text2)}
 .rk-sb{font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;letter-spacing:.04em;text-transform:uppercase}
 .rk-sb-bom{background:#dcfce7;color:#15803d}
-.rk-sb-at{background:#fee9d6;color:#c2410c}
-.rk-sb-cr{background:#fee2e2;color:#b91c1c}
-.rk-sb-fer{background:#dbeafe;color:#1d4ed8}
+.rk-sb-at{background:#fef9c3;color:#854d0e}
+.rk-sb-cr{background:#fee2e2;color:#991b1b}
+.rk-sb-fer{background:#e4e8ed;color:#3a4a5c}
 .rk-sb-ates{background:#f1f5f9;color:#475569}
 .rk-sb-agu{background:#f1f5f9;color:#64748b}
 .rk-kpis{font-size:11px;color:var(--text2);font-variant-numeric:tabular-nums}
 .rk-kpis b{color:var(--text);font-weight:600}
-.rk-prog{height:5px;background:#eef2f7;border-radius:3px;overflow:hidden;margin-top:7px}
+.rk-prog{height:5px;background:var(--cinza-claro);border-radius:3px;overflow:hidden;margin-top:7px}
 .rk-prog-fill{height:5px;border-radius:3px}
 .rk-right{text-align:right;min-width:110px}
-.rk-val{font-size:16px;color:var(--ink)}
+.rk-val{font-size:15px;color:var(--grafite);font-family:var(--display)}
 .rk-pct{font-size:12px;font-weight:600;margin-top:2px}
 
 /* total bar (escondida por padrão, usada no PDF/visão) */
-.totalbar{background:linear-gradient(135deg,var(--ink),#1e293b);border-radius:18px;padding:22px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;box-shadow:var(--shadow-lg);margin-bottom:8px}
+.totalbar{background:var(--grafite);border-radius:18px;padding:22px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;box-shadow:var(--shadow-lg);margin-bottom:8px}
 .tb-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8}
-.tb-val{font-size:21px;color:#fff;margin-top:3px}
+.tb-val{font-size:20px;color:var(--branco);margin-top:3px;font-family:var(--display)}
 .tb-sub{font-size:10px;color:#94a3b8;margin-top:2px;font-variant-numeric:tabular-nums}
 
 /* tabs semanal/mensal */
 .tabs{display:flex;gap:8px;margin-bottom:22px}
-.tab{background:var(--card);border:1px solid var(--border2);color:var(--text2);font-family:var(--sans);font-size:13px;font-weight:600;padding:9px 18px;border-radius:10px;cursor:pointer;transition:all .2s}
-.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab{background:var(--card);border:1px solid var(--cinza-claro);color:var(--cinza-medio);font-family:var(--sans);font-size:13px;font-weight:600;padding:9px 18px;border-radius:10px;cursor:pointer;transition:all .2s}
+.tab.active{background:var(--grafite);border-color:var(--grafite);color:var(--branco)}
 .tab-panel{display:none}.tab-panel.active{display:block}
 
 /* empty/demo ribbon */
-.ribbon{display:none;background:#eff4ff;border:1px solid #dbeafe;border-radius:14px;padding:13px 18px;margin-bottom:22px;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ribbon{display:none;background:var(--cinza-claro);border:1px solid var(--border2);border-radius:14px;padding:13px 18px;margin-bottom:22px;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .ribbon.show{display:flex}
 .ribbon-t{font-size:13px;color:var(--text2)}
-.ribbon-t b{color:var(--accent)}
+.ribbon-t b{color:var(--salvia)}
 .ribbon-x{background:none;border:1px solid var(--border2);color:var(--text2);border-radius:8px;padding:6px 13px;font-size:12px;cursor:pointer;font-family:var(--sans)}
 .ribbon-x:hover{border-color:var(--danger);color:var(--danger)}
 
@@ -201,7 +227,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .fgroup{display:flex;flex-direction:column;gap:5px}
 .flbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text2)}
 .finput{background:#f8fafc;border:1px solid var(--border2);color:var(--text);font-family:var(--sans);font-size:14px;border-radius:9px;padding:9px 12px;width:100%;outline:none}
-.finput:focus{border-color:var(--accent);background:#fff}
+.finput:focus{border-color:var(--salvia);background:#fff}
 .vhdr,.vrow{display:grid;grid-template-columns:84px 96px 110px 110px 80px 78px 96px;gap:8px;align-items:center;margin-bottom:8px}
 .vhdr-lbl{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);text-align:center}
 .vrow{background:#f8fafc;border:1px solid var(--border2);border-radius:10px;padding:9px}
@@ -211,21 +237,193 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .modal-btns{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--border2)}
 .btn-cancel{background:#fff;border:1px solid var(--border2);color:var(--text2);font-family:var(--sans);font-weight:600;font-size:13px;padding:11px 22px;border-radius:10px;cursor:pointer}
 .btn-cancel:hover{border-color:var(--danger);color:var(--danger)}
-.btn-apply{background:var(--accent);border:none;color:#fff;font-family:var(--sans);font-weight:700;font-size:13px;padding:11px 22px;border-radius:10px;cursor:pointer}
+.btn-apply{background:var(--grafite);border:none;color:var(--branco);font-family:var(--sans);font-weight:700;font-size:13px;padding:11px 22px;border-radius:10px;cursor:pointer}
 .btn-apply:hover{filter:brightness(1.05)}
 .ptabs{display:flex;gap:8px;margin-bottom:16px}
 .ptab{background:#f1f5f9;border:1px solid var(--border2);color:var(--text2);font-family:var(--sans);font-size:12px;font-weight:600;padding:8px 16px;border-radius:9px;cursor:pointer}
-.ptab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.ptab.active{background:var(--grafite);border-color:var(--grafite);color:var(--branco)}
 .ptab-panel{display:none}.ptab-panel.active{display:block}
 .ptextarea{width:100%;min-height:200px;background:#f8fafc;border:1px solid var(--border2);color:var(--text);font-family:'Inter',monospace;font-size:12px;border-radius:10px;padding:12px;resize:vertical;outline:none;line-height:1.6}
 .ptextarea:focus{border-color:var(--accent);background:#fff}
 .paste-hint{font-size:11px;color:var(--text2);margin-top:8px;line-height:1.7}
 .paste-hint strong{color:var(--ink)}
 .parse-status{font-size:11px;margin-top:6px;min-height:18px;font-weight:600}
-.ps-ok{color:#15803d}.ps-err{color:#b91c1c}.ps-warn{color:#c2410c}
+.ps-ok{color:#16a34a}.ps-err{color:#b91c1c}.ps-warn{color:#c2410c}
 .preview-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:12px;font-variant-numeric:tabular-nums}
 .preview-table th{background:#f1f5f9;color:var(--text2);font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;text-align:left}
 .preview-table td{padding:6px 10px;border-bottom:1px solid var(--border);color:var(--text2)}
+
+/* ── VIEWS ADICIONAIS ── */
+.view{display:none}.view.active{display:block}
+.view-title{font-size:20px;font-weight:700;letter-spacing:-.02em;color:var(--grafite);margin-bottom:6px;font-family:var(--display)}
+.view-sub{font-size:14px;color:var(--text2);margin-bottom:24px}
+
+/* Vendas */
+.metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow-sm)}
+.metric-lbl{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text2);margin-bottom:8px}
+.metric-val{font-size:26px;color:var(--grafite);margin-bottom:4px;font-family:var(--display)}
+.metric-sub{font-size:12px;color:var(--text2)}
+.chart-bar-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:var(--shadow-sm);margin-bottom:18px}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.bar-lbl{font-size:13px;font-weight:600;color:var(--ink);width:130px;flex-shrink:0}
+.bar-track{flex:1;height:26px;background:#f1f5f9;border-radius:8px;overflow:hidden;position:relative}
+.bar-fill{height:26px;border-radius:8px;display:flex;align-items:center;padding-left:10px;transition:width .9s ease}
+.bar-fill span{font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
+.bar-val{font-size:13px;font-weight:700;color:var(--ink);width:110px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
+
+/* Lojas detalhe */
+.loja-detail{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow-sm)}
+.loja-detail-head{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.loja-detail-ico{width:52px;height:52px;border-radius:14px;background:#eff4ff;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.loja-detail-info{flex:1}
+.loja-detail-name{font-size:18px;font-weight:700;letter-spacing:-.02em;color:var(--grafite);font-family:var(--display)}
+.loja-detail-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.loja-stat{background:#f8fafc;border-radius:10px;padding:12px}
+.loja-stat-l{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);margin-bottom:4px}
+.loja-stat-v{font-size:18px;color:var(--ink);font-variant-numeric:tabular-nums}
+.loja-vends{display:flex;flex-direction:column;gap:8px}
+.loja-vend-row{display:flex;align-items:center;gap:12px;padding:10px;background:#f8fafc;border-radius:10px}
+.loja-vend-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.loja-vend-name{font-size:13px;font-weight:600;color:var(--ink);flex:1}
+.loja-vend-val{font-size:13px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.loja-vend-pct{font-size:11px;font-weight:600}
+
+/* Vendedores */
+.vend-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.vend-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow-sm)}
+.vend-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.vend-av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0}
+.vend-name{font-size:16px;font-weight:700;color:var(--ink)}
+.vend-store{font-size:12px;color:var(--text2);margin-top:2px}
+.vend-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.vend-stat{background:#f8fafc;border-radius:9px;padding:10px}
+.vend-stat-l{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text2);margin-bottom:3px}
+.vend-stat-v{font-size:16px;color:var(--ink);font-variant-numeric:tabular-nums}
+.vend-prog{height:8px;background:var(--cinza-claro);border-radius:5px;overflow:hidden;margin-bottom:8px}
+.vend-prog-fill{height:8px;border-radius:5px}
+.vend-foot{display:flex;justify-content:space-between;font-size:12px}
+
+/* Metas */
+.meta-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:var(--shadow-sm)}
+.meta-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.meta-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.meta-name{font-size:14px;font-weight:700;color:var(--ink)}
+.meta-store{font-size:11px;color:var(--text2)}
+.meta-vals{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.meta-v{text-align:center}
+.meta-v-l{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);margin-bottom:3px}
+.meta-v-n{font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums}
+.meta-track{height:10px;background:var(--cinza-claro);border-radius:5px;overflow:hidden;margin-bottom:6px}
+.meta-fill{height:10px;border-radius:5px}
+.meta-foot{display:flex;justify-content:space-between;font-size:12px}
+.meta-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+.meta-sum-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;box-shadow:var(--shadow-sm)}
+.meta-sum-n{font-size:30px;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;font-family:var(--display)}
+.meta-sum-l{font-size:12px;color:var(--text2)}
+
+/* Relatórios */
+.report-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow-sm)}
+.report-title{font-size:14px;font-weight:700;color:var(--grafite);font-family:var(--display);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.report-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.report-row:last-child{border-bottom:none}
+.report-row-l{font-size:13px;color:var(--text2)}
+.report-row-v{font-size:14px;font-weight:700;color:var(--grafite);font-variant-numeric:tabular-nums}
+.export-big{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--grafite);color:#fff;border:none;border-radius:14px;padding:18px 32px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--sans);width:100%;transition:all .2s;box-shadow:0 6px 20px rgba(37,99,235,.3)}
+.export-big:hover{filter:brightness(1.05);transform:translateY(-2px)}
+.export-big svg{width:20px;height:20px}
+
+/* Config */
+.config-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow-sm)}
+.config-title{font-size:14px;font-weight:700;color:var(--grafite);font-family:var(--display);margin-bottom:18px}
+.config-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.config-info{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:14px;font-size:13px;color:var(--text2);line-height:1.6}
+.config-info b{color:var(--ink)}
+
+/* ── SETUP SCREEN ── */
+#setup{position:fixed;inset:0;z-index:1100;background:var(--cinza-quente);overflow-y:auto;display:none}
+#setup.show{display:flex;align-items:flex-start;justify-content:center;padding:40px 20px}
+.setup-wrap{background:var(--branco);border-radius:20px;width:100%;max-width:680px;box-shadow:var(--shadow-lg);overflow:hidden}
+.setup-head{background:var(--grafite);padding:28px 32px;display:flex;align-items:center;gap:14px}
+.setup-head-ico{width:42px;height:42px;border-radius:10px;background:var(--salvia);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.setup-head-ico svg{width:22px;height:22px}
+.setup-head-t{font-family:var(--display);font-size:18px;font-weight:700;color:var(--branco);letter-spacing:.02em}
+.setup-head-s{font-size:12px;color:var(--salvia-light);margin-top:2px;letter-spacing:.04em}
+.setup-body{padding:32px}
+.setup-section{margin-bottom:28px}
+.setup-section-title{font-family:var(--display);font-size:13px;font-weight:700;color:var(--grafite);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--cinza-claro)}
+.setup-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.setup-fgroup{display:flex;flex-direction:column;gap:6px}
+.setup-lbl{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--cinza-medio)}
+.setup-input{background:#f8f8f7;border:1px solid var(--cinza-claro);color:var(--grafite);font-family:var(--sans);font-size:14px;border-radius:9px;padding:11px 14px;width:100%;outline:none;transition:border-color .2s}
+.setup-input:focus{border-color:var(--salvia);background:var(--branco)}
+.setup-input::placeholder{color:var(--cinza-medio)}
+/* tabela de vendedores */
+.vend-table{width:100%;border-collapse:collapse;margin-bottom:14px}
+.vend-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza-medio);padding:8px 10px;text-align:left;border-bottom:2px solid var(--cinza-claro)}
+.vend-table td{padding:6px 6px}
+.vend-table tr:nth-child(even) td{background:#fafaf8}
+.vend-table .vi{background:var(--branco);border:1px solid var(--cinza-claro);color:var(--grafite);font-family:var(--sans);font-size:13px;border-radius:7px;padding:8px 10px;width:100%;outline:none;transition:border-color .15s}
+.vend-table .vi:focus{border-color:var(--salvia)}
+.vend-table .vi-meta{text-align:right;font-variant-numeric:tabular-nums}
+.vend-del{background:none;border:none;color:var(--cinza-medio);cursor:pointer;padding:6px;border-radius:6px;font-size:16px;transition:color .15s}
+.vend-del:hover{color:var(--danger);background:#fee2e2}
+.btn-add-vend{display:flex;align-items:center;gap:8px;background:none;border:1px dashed var(--cinza-claro);color:var(--cinza-medio);font-family:var(--sans);font-size:13px;font-weight:500;padding:10px 16px;border-radius:9px;cursor:pointer;width:100%;transition:all .2s;margin-bottom:14px}
+.btn-add-vend:hover{border-color:var(--salvia);color:var(--salvia);background:#f5f6f0}
+.setup-actions{display:flex;gap:12px;justify-content:flex-end;padding-top:20px;border-top:1px solid var(--cinza-claro)}
+.setup-btn-cancel{background:none;border:1px solid var(--cinza-claro);color:var(--cinza-medio);font-family:var(--sans);font-size:14px;font-weight:600;padding:12px 24px;border-radius:10px;cursor:pointer;transition:all .2s}
+.setup-btn-cancel:hover{border-color:var(--danger);color:var(--danger)}
+.setup-btn-save{background:var(--grafite);border:none;color:var(--branco);font-family:var(--display);font-size:14px;font-weight:700;padding:12px 28px;border-radius:10px;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+.setup-btn-save:hover{background:var(--salvia)}
+.setup-demo-link{font-size:12px;color:var(--cinza-medio);text-align:center;margin-top:16px}
+.setup-demo-link a{color:var(--salvia);cursor:pointer;font-weight:600;text-decoration:none}
+.setup-demo-link a:hover{text-decoration:underline}
+
+/* ── SETUP SCREEN ── */
+#setup{position:fixed;inset:0;z-index:2000;background:rgba(31,32,34,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px 16px;overflow-y:auto}
+#setup.show{display:flex}
+.setup-wrap{background:var(--branco);border-radius:20px;width:100%;max-width:680px;box-shadow:0 24px 60px rgba(31,32,34,.25);overflow:hidden}
+.setup-head{background:var(--grafite);padding:28px 32px;display:flex;align-items:center;gap:16px}
+.setup-head-ico{width:46px;height:46px;border-radius:12px;background:var(--salvia);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.setup-head-ico svg{width:22px;height:22px}
+.setup-head-t{font-family:var(--display);font-size:18px;font-weight:700;color:var(--branco);letter-spacing:-.01em}
+.setup-head-s{font-size:12px;color:var(--salvia-light);margin-top:3px}
+.setup-body{padding:28px 32px}
+.setup-section{margin-bottom:24px}
+.setup-section-title{font-family:var(--display);font-size:13px;font-weight:700;color:var(--grafite);letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--cinza-claro)}
+.setup-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.setup-fgroup{display:flex;flex-direction:column;gap:5px}
+.setup-lbl{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--cinza-medio)}
+.setup-input{background:var(--cinza-quente);border:1px solid var(--cinza-claro);color:var(--grafite);font-family:var(--sans);font-size:14px;border-radius:9px;padding:11px 14px;width:100%;outline:none;transition:border-color .2s}
+.setup-input:focus{border-color:var(--salvia);background:var(--branco)}
+/* tabela de vendedores */
+.vend-table{width:100%;border-collapse:collapse;margin-bottom:12px}
+.vend-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza-medio);padding:8px 10px;text-align:left;border-bottom:2px solid var(--cinza-claro)}
+.vend-table td{padding:6px 6px}
+.vi{background:var(--cinza-quente);border:1px solid var(--cinza-claro);color:var(--grafite);font-family:var(--sans);font-size:13px;border-radius:8px;padding:9px 10px;width:100%;outline:none;transition:border-color .2s}
+.vi:focus{border-color:var(--salvia);background:var(--branco)}
+.vi-meta{font-variant-numeric:tabular-nums}
+.vend-del{background:none;border:none;color:var(--cinza-medio);font-size:18px;cursor:pointer;padding:4px 8px;border-radius:6px;line-height:1;transition:all .15s}
+.vend-del:hover{background:#fee2e2;color:#b91c1c}
+.btn-add-vend{display:flex;align-items:center;gap:8px;background:none;border:1px dashed var(--salvia);color:var(--salvia);font-family:var(--sans);font-size:13px;font-weight:600;padding:9px 16px;border-radius:9px;cursor:pointer;transition:all .2s;margin-top:4px}
+.btn-add-vend:hover{background:rgba(124,132,107,.08)}
+.setup-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid var(--cinza-claro)}
+.setup-btn-cancel{background:none;border:1px solid var(--cinza-claro);color:var(--cinza-medio);font-family:var(--sans);font-weight:600;font-size:13px;padding:12px 22px;border-radius:10px;cursor:pointer;transition:all .2s}
+.setup-btn-cancel:hover{border-color:#b91c1c;color:#b91c1c}
+.setup-btn-save{background:var(--grafite);color:var(--branco);border:none;font-family:var(--display);font-weight:700;font-size:14px;padding:12px 28px;border-radius:10px;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(31,32,34,.2);letter-spacing:.01em}
+.setup-btn-save:hover{background:#2d2f31;transform:translateY(-1px)}
+.setup-demo-link{text-align:center;font-size:12px;color:var(--cinza-medio);margin-top:16px}
+.setup-demo-link a{color:var(--salvia);font-weight:600;cursor:pointer;text-decoration:underline}
+
+/* ── VIEW CONFIGURAÇÕES — botão editar empresa ── */
+.cfg-empresa-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:14px 0;border-bottom:1px solid var(--cinza-claro)}
+.cfg-empresa-name{font-size:18px;font-weight:700;color:var(--grafite);font-family:var(--display)}
+.cfg-vend-list{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.cfg-vend-item{display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--cinza-quente);border-radius:10px}
+.cfg-vend-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--branco);flex-shrink:0;font-family:var(--display)}
+.cfg-vend-name{font-size:13px;font-weight:600;color:var(--grafite);flex:1}
+.cfg-vend-loja{font-size:11px;color:var(--cinza-medio)}
+.cfg-vend-meta{font-size:13px;font-weight:600;color:var(--grafite);font-variant-numeric:tabular-nums}
 
 /* landing */
 #landing{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#eef2fb 0%,#f5f7fc 55%,#eaf3f1 100%);overflow-y:auto;display:flex;align-items:center}
@@ -271,7 +469,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .lp-bars{display:flex;flex-direction:column;gap:10px}
 .lp-bar-row{display:flex;align-items:center;gap:8px}
 .lp-bar-lbl{font-size:9px;color:#64748b;width:62px;flex-shrink:0}
-.lp-bar-track{flex:1;height:8px;background:#eef2f7;border-radius:4px;overflow:hidden}
+.lp-bar-track{flex:1;height:8px;background:var(--cinza-claro);border-radius:4px;overflow:hidden}
 .lp-bar-fill{height:8px;border-radius:4px}
 .lp-bar-val{font-size:8px;color:#475569;width:54px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
 .lp-float{position:absolute;background:#fff;border-radius:14px;box-shadow:0 18px 44px rgba(15,23,42,.15);border:1px solid #eef2f7;padding:16px 18px}
@@ -354,6 +552,60 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
   </div>
 </div>
 
+
+<!-- ══════════ SETUP SCREEN ══════════ -->
+<div id="setup">
+  <div class="setup-wrap">
+    <div class="setup-head">
+      <div class="setup-head-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div>
+        <div class="setup-head-t">Configurar Empresa</div>
+        <div class="setup-head-s">Preencha uma vez — o painel vai lembrar</div>
+      </div>
+    </div>
+    <div class="setup-body">
+      <!-- Nome da empresa -->
+      <div class="setup-section">
+        <div class="setup-section-title">Dados da Empresa</div>
+        <div class="setup-row">
+          <div class="setup-fgroup" style="grid-column:1/-1">
+            <label class="setup-lbl">Nome da empresa</label>
+            <input class="setup-input" id="cfg-empresa" placeholder="Ex: Ótica Central" maxlength="60">
+          </div>
+        </div>
+      </div>
+      <!-- Vendedores -->
+      <div class="setup-section">
+        <div class="setup-section-title">Vendedores e Metas Mensais</div>
+        <table class="vend-table">
+          <thead>
+            <tr>
+              <th style="width:28%">Nome</th>
+              <th style="width:28%">Loja / Setor</th>
+              <th style="width:28%">Meta Mensal (R$)</th>
+              <th style="width:16%"></th>
+            </tr>
+          </thead>
+          <tbody id="setup-vend-rows"></tbody>
+        </table>
+        <button class="btn-add-vend" onclick="setupAddRow()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          Adicionar vendedor
+        </button>
+      </div>
+      <div class="setup-actions">
+        <button class="setup-btn-cancel" id="setup-cancel-btn" onclick="setupCancel()" style="display:none">Cancelar</button>
+        <button class="setup-btn-save" onclick="setupSave()">Salvar e abrir painel →</button>
+      </div>
+      <div class="setup-demo-link">
+        Quer explorar antes de configurar? <a onclick="setupSkipToDemo()">Ver demonstração</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="toast-wrap" id="toast-wrap"></div>
 
 <!-- ══════════ APP ══════════ -->
@@ -362,20 +614,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
   <aside class="sidebar">
     <div class="logo">
       <div class="logo-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M3 13h4v8H3zM10 8h4v13h-4zM17 3h4v18h-4z" fill="#fff"/></svg></div>
-      <div class="logo-txt">DASHBOARD<br>DE VENDAS</div>
+      <div class="logo-txt">MR SOLUTIONS<span class="logo-sub">DADOS · AUTOMAÇÃO · VENDAS</span></div>
     </div>
     <nav class="nav">
-      <button class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>Visão Geral</button>
-      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>Vendas</button>
-      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l1-5h16l1 5M5 9v11h14V9M9 22v-6h6v6"/></svg>Lojas</button>
-      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="7" r="3"/><path d="M2 21v-2a5 5 0 015-5h4a5 5 0 015 5v2M16 7a3 3 0 010 6"/></svg>Vendedores</button>
-      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Metas</button>
-      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>Relatórios</button>
-      <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1l2-1.5-2-3.5-2.4 1a7 7 0 00-1.7-1l-.3-2.5h-4l-.3 2.5a7 7 0 00-1.7 1l-2.4-1-2 3.5 2 1.5a7 7 0 000 2l-2 1.5 2 3.5 2.4-1a7 7 0 001.7 1l.3 2.5h4l.3-2.5a7 7 0 001.7-1l2.4 1 2-3.5-2-1.5a7 7 0 00.1-1z"/></svg>Configurações</button>
+      <button class="nav-item active"    onclick="switchView('geral')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>Visão Geral</button>
+      <button class="nav-item"            onclick="switchView('vendas')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>Vendas</button>
+      <button class="nav-item"            onclick="switchView('lojas')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l1-5h16l1 5M5 9v11h14V9M9 22v-6h6v6"/></svg>Lojas</button>
+      <button class="nav-item"            onclick="switchView('vendedores')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="7" r="3"/><path d="M2 21v-2a5 5 0 015-5h4a5 5 0 015 5v2M16 7a3 3 0 010 6"/></svg>Vendedores</button>
+      <button class="nav-item"            onclick="switchView('metas')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Metas</button>
+      <button class="nav-item"            onclick="switchView('relatorios')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>Relatórios</button>
+      <button class="nav-item"            onclick="switchView('config')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1l2-1.5-2-3.5-2.4 1a7 7 0 00-1.7-1l-.3-2.5h-4l-.3 2.5a7 7 0 00-1.7 1l-2.4-1-2 3.5 2 1.5a7 7 0 000 2l-2 1.5 2 3.5 2.4-1a7 7 0 001.7 1l.3 2.5h4l.3-2.5a7 7 0 001.7-1l2.4 1 2-3.5-2-1.5a7 7 0 00.1-1z"/></svg>Configurações</button>
     </nav>
     <div class="sb-foot">
       <div class="sb-avatar">MR</div>
-      <div><div class="sb-foot-t">MR SOLUTIONS</div><div class="sb-foot-s">DADOS PARA VAREJO</div></div>
+      <div><div class="sb-foot-t">MR SOLUTIONS</div><div class="sb-foot-s">DADOS · AUTOMAÇÃO · RESULTADOS</div></div>
       <div class="sb-dot"></div>
     </div>
   </aside>
@@ -454,9 +706,78 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
           <div id="sem-empty" style="display:none"><div class="empty" style="min-height:30vh"><div class="empty-ico">📅</div><div class="empty-t">Sem dados semanais</div><div class="empty-s">Insira manualmente ou carregue planilha com a aba META SEMANAL.</div></div></div>
         </div>
       </div>
+      </div><!-- /capture-zone -->
+
+      <!-- ── VIEW: VENDAS ── -->
+      <div class="view" id="view-vendas">
+        <div class="view-title">Vendas</div>
+        <div class="view-sub">Desempenho de vendas no período</div>
+        <div class="metrics-grid" id="v-metrics"></div>
+        <div class="chart-bar-wrap"><div class="sec-title">Faturamento por loja</div><div id="v-bars"></div></div>
       </div>
-    </div>
-  </main>
+      <!-- ── VIEW: LOJAS ── -->
+      <div class="view" id="view-lojas">
+        <div class="view-title">Lojas</div>
+        <div class="view-sub">Detalhamento completo por unidade</div>
+        <div id="v-lojas-detail"></div>
+      </div>
+      <!-- ── VIEW: VENDEDORES ── -->
+      <div class="view" id="view-vendedores">
+        <div class="view-title">Vendedores</div>
+        <div class="view-sub">Desempenho individual de cada vendedor</div>
+        <div class="vend-grid" id="v-vend-grid"></div>
+      </div>
+      <!-- ── VIEW: METAS ── -->
+      <div class="view" id="view-metas">
+        <div class="view-title">Metas</div>
+        <div class="view-sub">Progresso em relação à meta mensal</div>
+        <div class="meta-summary" id="v-meta-summary"></div>
+        <div id="v-meta-list"></div>
+      </div>
+      <!-- ── VIEW: RELATÓRIOS ── -->
+      <div class="view" id="view-relatorios">
+        <div class="view-title">Relatórios</div>
+        <div class="view-sub">Resumo executivo e exportação</div>
+        <div class="report-section" id="v-report-geral"></div>
+        <div class="report-section" id="v-report-lojas"></div>
+        <div class="report-section" id="v-report-top"></div>
+        <button class="export-big" onclick="exportPDF()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Exportar Relatório Completo em PDF
+        </button>
+      </div>
+      <!-- ── VIEW: CONFIGURAÇÕES ── -->
+      <div class="view" id="view-config">
+        <div class="view-title">Configurações</div>
+        <div class="view-sub">Parâmetros do período atual</div>
+        <div class="config-section">
+          <div class="config-title">Período</div>
+          <div class="config-row">
+            <div class="fgroup"><label class="flbl">Dias corridos</label><input class="finput" id="cfg-dias-cor" type="number" min="1" max="31"></div>
+            <div class="fgroup"><label class="flbl">Dias úteis no mês</label><input class="finput" id="cfg-dias-mes" type="number" min="1" max="31"></div>
+          </div>
+          <div class="config-info" id="cfg-info">Configure os dias e clique em Atualizar para recalcular as projeções.</div>
+          <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn-apply" onclick="applyConfig()">Atualizar Dashboard</button>
+            <button class="btn-cancel" onclick="clearAll()">Limpar e reinserir dados</button>
+          </div>
+        </div>
+        <div class="config-section">
+          <div class="config-title">Empresa e Vendedores</div>
+          <div class="config-info" id="cfg-empresa-info">Carregando...</div>
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn-apply" onclick="openSetup(true)">✏ Editar empresa e vendedores</button>
+            <button class="btn-cancel" onclick="cfgExport()">⤓ Exportar configuração</button>
+            <button class="btn-cancel" onclick="cfgImport()">↑ Importar configuração</button>
+          </div>
+        </div>
+        <div class="config-section">
+          <div class="config-title">Sobre</div>
+          <div class="config-info"><b>MR Solutions · Painel Inteligente · Gestão e Vendas v2.0</b><br><br>Formas de inserir dados: planilha .xlsx, colar do Excel/Sheets, ou inserção manual.<br>Exportação: PDF com todos os indicadores e ranking.</div>
+        </div>
+      </div>
+
+    </div><!-- /dashboard -->
 </div>
 
 <!-- MODAL MANUAL -->
@@ -510,6 +831,216 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 // ═══════════════════════════════════════════════════════════════════
 
 // ─── CONFIG VENDEDORES (modelo em branco p/ entrada manual) ──────────
+
+// ═══════════════════════════════════════════════════════════════
+//  CONFIGURAÇÃO DA EMPRESA (localStorage)
+// ═══════════════════════════════════════════════════════════════
+
+const STORAGE_KEY = 'mr_solutions_config';
+
+// Carrega configuração salva
+function cfgLoad(){
+  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); }
+  catch(e){ return null; }
+}
+
+// Salva configuração
+function cfgSave(cfg){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg)); }
+  catch(e){ console.warn('localStorage indisponível'); }
+}
+
+// Limpa configuração
+// ── Exportar configuração como JSON ──────────────────────────────
+function cfgExport(){
+  const cfg = cfgLoad();
+  if(!cfg || !cfg.empresa){
+    toast('Sem configuração','Configure a empresa primeiro.','warn'); return;
+  }
+  const blob = new Blob([JSON.stringify(cfg, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `config-${(cfg.empresa||'empresa').replace(/\s+/g,'-').toLowerCase()}.json`;
+  a.click(); URL.revokeObjectURL(a.href);
+  toast('Configuração exportada', 'Arquivo JSON salvo. Guarde junto com a planilha.','ok');
+}
+
+// ── Importar configuração de JSON ────────────────────────────────
+function cfgImport(){
+  const input = document.createElement('input');
+  input.type='file'; input.accept='.json';
+  input.onchange = function(){
+    const f=this.files[0]; if(!f) return;
+    const r=new FileReader();
+    r.onload = ev => {
+      try{
+        const cfg = JSON.parse(ev.target.result);
+        if(!cfg.empresa) throw new Error('Arquivo inválido: campo empresa ausente.');
+        cfgSave(cfg);
+        applyEmpresaNome(cfg.empresa);
+        toast('Configuração restaurada', `Empresa "${cfg.empresa}" e ${(cfg.vendedores||[]).length} vendedor(es) importados.`,'ok',5000);
+        // atualiza view de config se estiver aberta
+        if(_lastData) renderConfig(_lastData);
+      }catch(e){ toast('Erro ao importar', String(e.message||e), 'err', 6000); }
+    };
+    r.readAsText(f);
+  };
+  input.click();
+}
+
+function cfgClear(){
+  try{ localStorage.removeItem(STORAGE_KEY); }
+  catch(e){}
+}
+
+// Retorna vendedores salvos (ou o default)
+function getVendedores(){
+  const cfg = cfgLoad();
+  return (cfg && cfg.vendedores && cfg.vendedores.length > 0) ? cfg.vendedores : VENDEDORES_DEFAULT;
+}
+
+// Retorna nome da empresa salvo
+function getEmpresaNome(){
+  const cfg = cfgLoad();
+  return (cfg && cfg.empresa) ? cfg.empresa : 'MR Solutions';
+}
+
+// Aplica nome da empresa na interface
+function applyEmpresaNome(nome){
+  const targets = [
+    { sel: '.greet h1',     val: `Olá, ${nome} 👋` },
+    { sel: '.sb-foot-t',    val: nome.toUpperCase() },
+    { sel: '.logo-txt',     html: `${nome.toUpperCase()}<span class="logo-sub">DADOS · AUTOMAÇÃO · VENDAS</span>` },
+  ];
+  targets.forEach(t=>{
+    const el = document.querySelector(t.sel);
+    if(!el) return;
+    if(t.html) el.innerHTML = t.html;
+    else el.textContent = t.val;
+  });
+  // title da aba
+  document.title = `Painel Inteligente · ${nome}`;
+}
+
+// ── TELA DE SETUP ─────────────────────────────────────────────
+
+let _setupEditMode = false; // true = edição, false = primeiro acesso
+
+function openSetup(editMode=false){
+  _setupEditMode = editMode;
+  const el = document.getElementById('setup');
+  el.classList.add('show');
+  // botão cancelar só aparece em modo edição
+  const cancelBtn = document.getElementById('setup-cancel-btn');
+  if(cancelBtn) cancelBtn.style.display = editMode ? 'block' : 'none';
+  // preenche com dados existentes
+  const cfg = cfgLoad();
+  const nomeInput = document.getElementById('cfg-empresa');
+  if(nomeInput) nomeInput.value = cfg ? (cfg.empresa||'') : '';
+  // preenche tabela de vendedores
+  const vends = cfg ? (cfg.vendedores||[]) : [];
+  const tbody = document.getElementById('setup-vend-rows');
+  tbody.innerHTML = '';
+  if(vends.length > 0){
+    vends.forEach(v => setupAddRow(v.nome, v.loja, v.meta));
+  } else {
+    // começa com 3 linhas vazias
+    setupAddRow(); setupAddRow(); setupAddRow();
+  }
+}
+
+function closeSetup(){
+  document.getElementById('setup').classList.remove('show');
+}
+
+function setupCancel(){
+  closeSetup();
+}
+
+function setupSkipToDemo(){
+  closeSetup();
+  document.getElementById('landing').classList.add('hidden');
+  loadDemo();
+}
+
+let _rowId = 0;
+function setupAddRow(nome='', loja='', meta=''){
+  const id = ++_rowId;
+  const tr = document.createElement('tr');
+  tr.id = `svr-${id}`;
+  tr.innerHTML = `
+    <td><input class="vi" placeholder="Ex: Ana Martins" value="${nome}" maxlength="40"></td>
+    <td><input class="vi" placeholder="Ex: Centro" value="${loja}" maxlength="30"></td>
+    <td><input class="vi vi-meta" placeholder="75000" value="${meta||''}" type="number" min="0"></td>
+    <td><button class="vend-del" onclick="setupDelRow('svr-${id}')" title="Remover">×</button></td>`;
+  document.getElementById('setup-vend-rows').appendChild(tr);
+}
+
+function setupDelRow(id){
+  const el = document.getElementById(id);
+  if(el){
+    const tbody = document.getElementById('setup-vend-rows');
+    if(tbody.rows.length <= 1){
+      toast('Mínimo 1 vendedor','Mantenha pelo menos um vendedor cadastrado.','warn');
+      return;
+    }
+    el.remove();
+  }
+}
+
+function setupSave(){
+  const empresa = (document.getElementById('cfg-empresa').value||'').trim();
+  if(!empresa){
+    toast('Nome obrigatório','Digite o nome da empresa para continuar.','warn');
+    document.getElementById('cfg-empresa').focus();
+    return;
+  }
+  // coleta vendedores
+  const rows = document.querySelectorAll('#setup-vend-rows tr');
+  const vendedores = [];
+  rows.forEach(tr=>{
+    const inputs = tr.querySelectorAll('input');
+    const nome = inputs[0].value.trim();
+    const loja = inputs[1].value.trim();
+    const meta = Number(inputs[2].value)||0;
+    if(nome) vendedores.push({nome, loja:loja||'Loja', meta});
+  });
+  if(vendedores.length === 0){
+    toast('Sem vendedores','Cadastre pelo menos um vendedor.','warn');
+    return;
+  }
+  // salva
+  cfgSave({empresa, vendedores});
+  applyEmpresaNome(empresa);
+  closeSetup();
+  // se for edição, apenas atualiza — se for primeiro acesso, fecha a landing
+  if(!_setupEditMode){
+    document.getElementById('landing').classList.add('hidden');
+  }
+  toast('Configuração salva', `${vendedores.length} vendedor(es) cadastrado(s). Insira os dados para visualizar o painel.`, 'ok', 5000);
+}
+
+// ── INICIALIZAÇÃO ─────────────────────────────────────────────
+
+function initApp(){
+  const cfg = cfgLoad();
+  if(cfg && cfg.empresa){
+    // já configurado — aplica nome e vai pra landing normal
+    applyEmpresaNome(cfg.empresa);
+  }
+  // landing sempre aparece primeiro (usuário escolhe demo ou começar)
+}
+
+// Sobrescreve enterBlank para abrir setup se não configurado
+function enterBlank(){
+  closeLanding();
+  const cfg = cfgLoad();
+  if(!cfg || !cfg.empresa){
+    openSetup(false);
+  }
+  // se já configurado, vai pro empty-state direto
+}
+
 const VENDEDORES_DEFAULT = [
   {loja:'Centro',  nome:'Ana',     meta:75000},
   {loja:'Centro',  nome:'Bruno',   meta:75000},
@@ -598,17 +1129,23 @@ function toast(title, msg, type='ok', ms=4000){
   setTimeout(()=>{ el.style.animation='slideOut .25s ease forwards'; setTimeout(()=>el.remove(),250); }, ms);
 }
 
+// ─── INIT ────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function(){ initApp(); });
+
 // ─── LANDING → DASHBOARD ─────────────────────────────────────────────
 function closeLanding(){
   const l=document.getElementById('landing');
   if(l) l.classList.add('hidden');
 }
 function enterDemo(){ closeLanding(); loadDemo(); }
-function enterBlank(){ closeLanding(); /* mostra o empty-state para escolher como inserir */ }
+// enterBlank definida acima no bloco de setup
 
 // ─── CARREGAR DEMO ───────────────────────────────────────────────────
 function loadDemo(){
   IS_DEMO=true;
+  // aplica nome da empresa salvo (se tiver)
+  const cfg = cfgLoad();
+  if(cfg && cfg.empresa) applyEmpresaNome(cfg.empresa);
   const vendedores=DEMO.vendedores.map(v=>{
     const proj=DEMO.diasCorridos>0?(v.vendido/DEMO.diasCorridos)*DEMO.diasMes:0;
     const pct=v.meta>0?v.vendido/v.meta:null;
@@ -637,6 +1174,268 @@ function clearAll(){
   document.getElementById('pdf-btn').disabled=true;
   const pt=document.getElementById('period-t'); if(pt) pt.textContent='— dias corridos';
   const ps=document.getElementById('period-s'); if(ps) ps.textContent='aguardando dados';
+}
+
+// ─── ARMAZENA ÚLTIMO DADO CARREGADO ──────────────────────────────────
+let _lastData = null;
+
+// ─── SWITCH VIEW (menu lateral) ──────────────────────────────────────
+const VIEW_LABELS = {
+  geral:'Visão Geral', vendas:'Vendas', lojas:'Lojas',
+  vendedores:'Vendedores', metas:'Metas', relatorios:'Relatórios', config:'Configurações'
+};
+function switchView(v){
+  // atualiza botões do menu
+  document.querySelectorAll('.nav-item').forEach(btn=>{
+    const lbl = btn.textContent.trim();
+    btn.classList.toggle('active', lbl === VIEW_LABELS[v]);
+  });
+  // header title
+  const h1 = document.querySelector('.greet h1');
+  if(h1) h1.textContent = v==='geral' ? 'Olá, MR Solutions 👋' : VIEW_LABELS[v];
+  const sub = document.querySelector('.greet p');
+  if(sub){
+    const subs = {
+      geral:'Aqui está o resumo das suas vendas',
+      vendas:'Análise de vendas no período',
+      lojas:'Desempenho detalhado por unidade',
+      vendedores:'Ficha individual de cada vendedor',
+      metas:'Progresso em relação às metas mensais',
+      relatorios:'Resumo executivo e exportação',
+      config:'Parâmetros e configurações'
+    };
+    sub.textContent = subs[v]||'';
+  }
+  // esconde tabs mensal/semanal (só mostram em geral)
+  const tabs = document.querySelector('.tabs');
+  if(tabs) tabs.style.display = v==='geral'?'flex':'none';
+  // mostra/esconde capture-zone (visão geral)
+  const cz = document.getElementById('capture-zone');
+  if(cz) cz.style.display = v==='geral'?'block':'none';
+  // esconde todas as views extras
+  document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
+  // mostra a view certa
+  if(v!=='geral'){
+    const el = document.getElementById('view-'+v);
+    if(el) el.classList.add('active');
+  }
+  // ribbon demo só em visão geral
+  const rib = document.getElementById('demo-ribbon');
+  if(rib) rib.classList.toggle('show', v==='geral' && IS_DEMO);
+  // popula a view se tiver dados
+  if(_lastData){
+    if(v==='vendas')     renderVendas(_lastData);
+    if(v==='lojas')      renderLojas(_lastData);
+    if(v==='vendedores') renderVendedores(_lastData);
+    if(v==='metas')      renderMetas(_lastData);
+    if(v==='relatorios') renderRelatorios(_lastData);
+    if(v==='config')     renderConfig(_lastData);
+  }
+  window.scrollTo(0,0);
+}
+
+// ─── VIEW: VENDAS ────────────────────────────────────────────────────
+function renderVendas(d){
+  const tv=d.vendedores.reduce((s,v)=>s+v.vendido,0);
+  const tm=d.vendedores.reduce((s,v)=>s+v.meta,0);
+  const tn=d.vendedores.reduce((s,v)=>s+v.nVendas,0);
+  const tp=d.vendedores.reduce((s,v)=>s+(v.proj||0),0);
+  const tick=tn>0?tv/tn:0;
+  const pg=tm>0?tv/tm:0;
+  // métricas
+  const m = document.getElementById('v-metrics');
+  if(m) m.innerHTML=`
+    <div class="metric-card"><div class="metric-lbl">Faturamento</div><div class="metric-val num">${R(tv)}</div><div class="metric-sub">Meta ${R(tm)}</div></div>
+    <div class="metric-card"><div class="metric-lbl">Total de Vendas</div><div class="metric-val num">${N(tn)}</div><div class="metric-sub">Pedidos no período</div></div>
+    <div class="metric-card"><div class="metric-lbl">Ticket Médio</div><div class="metric-val num">${R(tick)}</div><div class="metric-sub">Por venda</div></div>
+    <div class="metric-card"><div class="metric-lbl">Projeção</div><div class="metric-val num">${R(tp)}</div><div class="metric-sub txt-ok">${P(pg)} da meta</div></div>
+    <div class="metric-card"><div class="metric-lbl">% da Meta</div><div class="metric-val num txt-${sc(pg)}">${P(pg)}</div><div class="metric-sub">Atingido até hoje</div></div>
+    <div class="metric-card"><div class="metric-lbl">Gap para Meta</div><div class="metric-val num">${R(Math.max(tm-tv,0))}</div><div class="metric-sub">Falta para bater</div></div>`;
+  // barras por loja
+  const lojas={};
+  d.vendedores.forEach(v=>{ if(!lojas[v.loja])lojas[v.loja]={vendido:0,meta:0}; lojas[v.loja].vendido+=v.vendido; lojas[v.loja].meta+=v.meta; });
+  const maxV = Math.max(...Object.values(lojas).map(l=>l.vendido),1);
+  const palette=['#1F2022','#7C846B','#6B6F72','#a0a894','#2d2f31','#9aaa90'];
+  const bars = document.getElementById('v-bars');
+  if(bars) bars.innerHTML = Object.entries(lojas).sort((a,b)=>b[1].vendido-a[1].vendido).map(([loja,info],i)=>{
+    const w=(info.vendido/maxV*100).toFixed(1);
+    return `<div class="bar-row">
+      <span class="bar-lbl">Loja ${loja}</span>
+      <span class="bar-track"><span class="bar-fill" style="width:${w}%;background:${palette[i%palette.length]}"><span>${P(info.meta>0?info.vendido/info.meta:0)}</span></span></span>
+      <span class="bar-val">${R(info.vendido)}</span>
+    </div>`;
+  }).join('');
+}
+
+// ─── VIEW: LOJAS ─────────────────────────────────────────────────────
+function renderLojas(d){
+  const lojas={};
+  d.vendedores.forEach(v=>{ if(!lojas[v.loja])lojas[v.loja]={vendido:0,meta:0,proj:0,nVendas:0,vends:[]};
+    lojas[v.loja].vendido+=v.vendido; lojas[v.loja].meta+=v.meta; lojas[v.loja].proj+=(v.proj||0); lojas[v.loja].nVendas+=v.nVendas; lojas[v.loja].vends.push(v); });
+  const palette=['#2563eb','#0f9d8a','#ea7a3c','#7c3aed'];
+  const el = document.getElementById('v-lojas-detail');
+  if(!el) return;
+  el.innerHTML = Object.entries(lojas).map(([loja,info],li)=>{
+    const p=info.meta>0?info.vendido/info.meta:0;
+    const tick=info.nVendas>0?info.vendido/info.nVendas:0;
+    const vendsHTML = info.vends.sort((a,b)=>b.vendido-a.vendido).map(v=>{
+      const vp=v.pct!=null?sc(v.pct):'nt';
+      return `<div class="loja-vend-row">
+        <span class="loja-vend-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span>
+        <span class="loja-vend-name">${v.nome}</span>
+        <span class="rk-sb rk-sb-${bclass(v.status)}">${v.status}</span>
+        <span class="loja-vend-val">${R(v.vendido)}</span>
+        <span class="loja-vend-pct txt-${vp}">${v.pct!=null?P(v.pct):'-'}</span>
+      </div>`;
+    }).join('');
+    return `<div class="loja-detail">
+      <div class="loja-detail-head">
+        <div class="loja-detail-ico">🏪</div>
+        <div class="loja-detail-info"><div class="loja-detail-name">Loja ${loja}</div></div>
+        <span class="badge badge-${sc(p)}">${sl(p)}</span>
+      </div>
+      <div class="loja-detail-stats">
+        <div class="loja-stat"><div class="loja-stat-l">Faturado</div><div class="loja-stat-v num">${R(info.vendido)}</div></div>
+        <div class="loja-stat"><div class="loja-stat-l">Meta</div><div class="loja-stat-v num">${R(info.meta)}</div></div>
+        <div class="loja-stat"><div class="loja-stat-l">Projeção</div><div class="loja-stat-v num">${R(info.proj)}</div></div>
+        <div class="loja-stat"><div class="loja-stat-l">Ticket</div><div class="loja-stat-v num">${R(tick)}</div></div>
+      </div>
+      <div class="loja-bar" style="margin-bottom:14px"><div class="loja-bar-fill fill-${sc(p)}" style="width:${Math.min(p*100,100).toFixed(1)}%"></div></div>
+      <div class="sec-title" style="margin-bottom:8px">Vendedores desta loja</div>
+      <div class="loja-vends">${vendsHTML}</div>
+    </div>`;
+  }).join('');
+}
+
+// ─── VIEW: VENDEDORES ────────────────────────────────────────────────
+function renderVendedores(d){
+  const el = document.getElementById('v-vend-grid');
+  if(!el) return;
+  const sorted=[...d.vendedores].sort((a,b)=>b.vendido-a.vendido);
+  el.innerHTML = sorted.map(v=>{
+    const s=v.pct!=null?sc(v.pct):'nt';
+    const bw=v.pct!=null?Math.min(v.pct*100,100).toFixed(1):'0';
+    const ds=v.desconto!=null&&v.desconto!==''?(isNaN(Number(v.desconto))?v.desconto:(Number(v.desconto)*100).toFixed(1).replace('.',',')+'%'):'—';
+    return `<div class="vend-card">
+      <div class="vend-head">
+        <span class="vend-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span>
+        <div><div class="vend-name">${v.nome}</div><div class="vend-store">Loja ${v.loja}</div></div>
+        <span class="rk-sb rk-sb-${bclass(v.status)}" style="margin-left:auto">${v.status}</span>
+      </div>
+      <div class="vend-stats">
+        <div class="vend-stat"><div class="vend-stat-l">Vendido</div><div class="vend-stat-v num">${R(v.vendido)}</div></div>
+        <div class="vend-stat"><div class="vend-stat-l">Meta</div><div class="vend-stat-v num">${R(v.meta)}</div></div>
+        <div class="vend-stat"><div class="vend-stat-l">Ticket</div><div class="vend-stat-v num">${R(v.ticket)}</div></div>
+        <div class="vend-stat"><div class="vend-stat-l">Projeção</div><div class="vend-stat-v num">${R(v.proj||0)}</div></div>
+        <div class="vend-stat"><div class="vend-stat-l">Nº Vendas</div><div class="vend-stat-v num">${v.nVendas}</div></div>
+        <div class="vend-stat"><div class="vend-stat-l">Desconto</div><div class="vend-stat-v num">${ds}</div></div>
+      </div>
+      <div class="vend-prog"><div class="vend-prog-fill fill-${s}" style="width:${bw}%"></div></div>
+      <div class="vend-foot"><span class="txt-${s}" style="font-weight:600">${v.pct!=null?P(v.pct)+' da meta':'sem meta'}</span><span style="color:var(--text2)">Gap ${R(Math.max((v.meta||0)-v.vendido,0))}</span></div>
+    </div>`;
+  }).join('');
+}
+
+// ─── VIEW: METAS ─────────────────────────────────────────────────────
+function renderMetas(d){
+  const bom=d.vendedores.filter(v=>v.pct!=null&&v.pct>=.85).length;
+  const at=d.vendedores.filter(v=>v.pct!=null&&v.pct>=.6&&v.pct<.85).length;
+  const cr=d.vendedores.filter(v=>v.pct!=null&&v.pct<.6).length;
+  const sm=document.getElementById('v-meta-summary');
+  if(sm) sm.innerHTML=`
+    <div class="meta-sum-card"><div class="meta-sum-n txt-ok">${bom}</div><div class="meta-sum-l">✅ BOM (≥85%)</div></div>
+    <div class="meta-sum-card"><div class="meta-sum-n txt-at">${at}</div><div class="meta-sum-l">⚠️ ATENÇÃO (60–84%)</div></div>
+    <div class="meta-sum-card"><div class="meta-sum-n txt-cr">${cr}</div><div class="meta-sum-l">🔴 CRÍTICO (&lt;60%)</div></div>`;
+  const ml=document.getElementById('v-meta-list');
+  if(!ml) return;
+  const sorted=[...d.vendedores].sort((a,b)=>(b.pct||0)-(a.pct||0));
+  ml.innerHTML = sorted.map(v=>{
+    const s=v.pct!=null?sc(v.pct):'nt';
+    const bw=v.pct!=null?Math.min(v.pct*100,100).toFixed(1):'0';
+    const falta=Math.max((v.meta||0)-v.vendido,0);
+    const diasR=d.diasCorridos&&d.diasMes?(d.diasMes-d.diasCorridos):0;
+    const ritmoDia=d.diasCorridos>0?v.vendido/d.diasCorridos:0;
+    const projetado=ritmoDia*(d.diasMes||d.diasCorridos||1);
+    return `<div class="meta-card">
+      <div class="meta-head">
+        <span class="meta-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span>
+        <div><div class="meta-name">${v.nome}</div><div class="meta-store">Loja ${v.loja}</div></div>
+        <span class="rk-sb rk-sb-${bclass(v.status)}" style="margin-left:auto">${v.status}</span>
+      </div>
+      <div class="meta-vals">
+        <div class="meta-v"><div class="meta-v-l">Vendido</div><div class="meta-v-n num">${R(v.vendido)}</div></div>
+        <div class="meta-v"><div class="meta-v-l">Meta</div><div class="meta-v-n num">${R(v.meta)}</div></div>
+        <div class="meta-v"><div class="meta-v-l">Falta</div><div class="meta-v-n num txt-${s}">${R(falta)}</div></div>
+        <div class="meta-v"><div class="meta-v-l">Projeção</div><div class="meta-v-n num">${R(projetado)}</div></div>
+      </div>
+      <div class="meta-track"><div class="meta-fill fill-${s}" style="width:${bw}%"></div></div>
+      <div class="meta-foot"><span class="txt-${s}" style="font-weight:700">${v.pct!=null?P(v.pct)+' atingido':'sem meta'}</span>${diasR>0?`<span style="color:var(--text2)">${diasR} dias úteis restantes</span>`:''}</div>
+    </div>`;
+  }).join('');
+}
+
+// ─── VIEW: RELATÓRIOS ────────────────────────────────────────────────
+function renderRelatorios(d){
+  const tv=d.vendedores.reduce((s,v)=>s+v.vendido,0);
+  const tm=d.vendedores.reduce((s,v)=>s+v.meta,0);
+  const tp=d.vendedores.reduce((s,v)=>s+(v.proj||0),0);
+  const tn=d.vendedores.reduce((s,v)=>s+v.nVendas,0);
+  const tick=tn>0?tv/tn:0;
+  const pg=tm>0?tv/tm:0;
+  const now=new Date();
+  const g=document.getElementById('v-report-geral');
+  if(g) g.innerHTML=`<div class="report-title">📊 Resumo Geral — ${now.toLocaleDateString('pt-BR')}</div>
+    ${[['Faturamento Total',R(tv)],['Meta Mensal',R(tm)],['% Atingido',P(pg)],['Projeção do Mês',R(tp)],['Total de Vendas',N(tn)+' pedidos'],['Ticket Médio',R(tick)],['Período',`${d.diasCorridos||'—'} de ${d.diasMes||'—'} dias úteis`]]
+    .map(([l,v])=>`<div class="report-row"><span class="report-row-l">${l}</span><span class="report-row-v">${v}</span></div>`).join('')}`;
+  const lojas={};
+  d.vendedores.forEach(v=>{ if(!lojas[v.loja])lojas[v.loja]={vendido:0,meta:0}; lojas[v.loja].vendido+=v.vendido; lojas[v.loja].meta+=v.meta; });
+  const rl=document.getElementById('v-report-lojas');
+  if(rl) rl.innerHTML=`<div class="report-title">🏪 Desempenho por Loja</div>`+
+    Object.entries(lojas).map(([l,i])=>`<div class="report-row"><span class="report-row-l">Loja ${l}</span><span class="report-row-v">${R(i.vendido)} <span class="txt-${sc(i.meta>0?i.vendido/i.meta:0)}" style="font-size:12px;margin-left:8px">${P(i.meta>0?i.vendido/i.meta:0)}</span></span></div>`).join('');
+  const sorted=[...d.vendedores].sort((a,b)=>b.vendido-a.vendido);
+  const rt=document.getElementById('v-report-top');
+  if(rt) rt.innerHTML=`<div class="report-title">🏆 Top Vendedores</div>`+
+    sorted.slice(0,5).map((v,i)=>`<div class="report-row"><span class="report-row-l">${i+1}° ${v.nome} · Loja ${v.loja}</span><span class="report-row-v">${R(v.vendido)} <span class="txt-${sc(v.pct||0)}" style="font-size:12px;margin-left:8px">${v.pct!=null?P(v.pct):'-'}</span></span></div>`).join('');
+}
+
+// ─── VIEW: CONFIGURAÇÕES ─────────────────────────────────────────────
+function renderConfig(d){
+  const dc=document.getElementById('cfg-dias-cor'); if(dc) dc.value=d.diasCorridos||20;
+  const dm=document.getElementById('cfg-dias-mes'); if(dm) dm.value=d.diasMes||24;
+  const inf=document.getElementById('cfg-info');
+  if(inf) inf.innerHTML=`Período atual: <b>${d.diasCorridos||'—'} dias corridos</b> de <b>${d.diasMes||'—'} dias úteis</b>. Atualizado em ${new Date().toLocaleDateString('pt-BR')}.`;
+  // exibe empresa e lista de vendedores visualmente
+  const cfg = cfgLoad();
+  const ei = document.getElementById('cfg-empresa-info');
+  if(ei){
+    if(cfg && cfg.empresa){
+      const vends = (cfg.vendedores||[]);
+      const vendsHTML = vends.map(v=>`
+        <div class="cfg-vend-item">
+          <span class="cfg-vend-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span>
+          <div style="flex:1"><div class="cfg-vend-name">${v.nome}</div><div class="cfg-vend-loja">Loja ${v.loja||'—'}</div></div>
+          <div class="cfg-vend-meta">${R(v.meta)}/mês</div>
+        </div>`).join('');
+      ei.innerHTML=`
+        <div class="cfg-empresa-row">
+          <div class="cfg-empresa-name">${cfg.empresa}</div>
+          <span style="font-size:12px;color:var(--cinza-medio)">${vends.length} vendedor(es)</span>
+        </div>
+        <div class="cfg-vend-list">${vendsHTML}</div>`;
+    } else {
+      ei.innerHTML=`<div style="color:var(--cinza-medio);font-size:13px">Nenhuma empresa configurada. Clique em "Configurar empresa" para começar.</div>`;
+    }
+  }
+}
+function applyConfig(){
+  if(!_lastData){ toast('Sem dados','Carregue os dados primeiro.','warn'); return; }
+  const dc=Number(document.getElementById('cfg-dias-cor').value)||_lastData.diasCorridos;
+  const dm=Number(document.getElementById('cfg-dias-mes').value)||_lastData.diasMes;
+  _lastData.diasCorridos=dc; _lastData.diasMes=dm;
+  _lastData.vendedores=_lastData.vendedores.map(v=>({...v, proj:dc>0?(v.vendido/dc)*dm:0}));
+  renderDashboard(_lastData);
+  toast('Atualizado','Projeções recalculadas com os novos parâmetros.','ok');
+  switchView('geral');
 }
 
 // ─── EXPORTAR PDF ────────────────────────────────────────────────────
@@ -808,7 +1607,7 @@ function closeModal(){ document.getElementById('modal').style.display='none'; do
 function overlayClick(e){ if(e.target===document.getElementById('modal'))closeModal(); }
 function buildVRows(){
   const cont=document.getElementById('vrows');
-  cont.innerHTML=VENDEDORES_DEFAULT.map((v,i)=>`
+  cont.innerHTML=getVendedores().map((v,i)=>`
     <div class="vrow">
       <div class="floja">${v.loja}</div>
       <div class="fnome">${v.nome}</div>
@@ -829,7 +1628,7 @@ function applyManual(){
   const semAtual=Number(document.getElementById('m-sem-atual').value)||4;
   const semTotal=Number(document.getElementById('m-sem-total').value)||4;
   let totalVendido=0;
-  const vendedores=VENDEDORES_DEFAULT.map((v,i)=>{
+  const vendedores=getVendedores().map((v,i)=>{
     const vendido=Number(document.getElementById(`mv-ven-${i}`).value)||0;
     const meta=Number(document.getElementById(`mv-met-${i}`).value)||0;
     const nVendas=Number(document.getElementById(`mv-nv-${i}`).value)||0;
@@ -924,6 +1723,29 @@ function processXLSX(buffer){
       }
       semanalData={semAtual,semTotal,vendedores:sv};
     }
+    // ── Lê aba CONFIGURACAO (restaura empresa e vendedores) ──
+    const wsC = wb.Sheets['CONFIGURACAO'];
+    if(wsC){
+      try{
+        const rawC = XLSX.utils.sheet_to_json(wsC,{header:1,defval:''});
+        // empresa: linha 2 (índice 1), coluna B (índice 1)
+        const empresa = String(rawC[1]?.[1]||'').trim();
+        // vendedores: a partir da linha 6 (índice 5), cols A/B/C = nome/loja/meta
+        const vendsC = [];
+        for(let r=5; r<rawC.length; r++){
+          const n=String(rawC[r][0]||'').trim();
+          const l=String(rawC[r][1]||'').trim();
+          const m=Number(rawC[r][2])||0;
+          if(n) vendsC.push({nome:n, loja:l||'Loja', meta:m});
+        }
+        if(empresa || vendsC.length>0){
+          const cfgAtual = cfgLoad()||{};
+          cfgSave({...cfgAtual, empresa:empresa||cfgAtual.empresa, vendedores:vendsC.length>0?vendsC:(cfgAtual.vendedores||[])});
+          if(empresa) applyEmpresaNome(empresa);
+          toast('Configuração restaurada', `Empresa e ${vendsC.length} vendedor(es) carregados da planilha.`, 'ok', 4000);
+        }
+      }catch(e){ console.warn('Erro ao ler aba CONFIGURACAO:', e); }
+    }
     IS_DEMO=false;
     renderDashboard({diasCorridos,diasMes,vendedores,semanalData});
     toast('Planilha carregada',`${vendedores.length} vendedor(es) importado(s).`,'ok');
@@ -946,7 +1768,7 @@ function initials(nome){
   if(p.length===1) return p[0].slice(0,2).toUpperCase();
   return (p[0][0]+p[p.length-1][0]).toUpperCase();
 }
-const AV_COLORS = ['#2563eb','#0f9d8a','#ea7a3c','#7c3aed','#db2777','#0891b2','#65a30d','#dc2626'];
+const AV_COLORS = ['#1F2022','#7C846B','#6B6F72','#3d4040','#8a9080','#4a4c3a','#5c5e50','#2a2b22'];
 function avColor(nome){
   let h=0; for(const c of String(nome)) h=(h*31+c.charCodeAt(0))>>>0;
   return AV_COLORS[h%AV_COLORS.length];
@@ -956,7 +1778,7 @@ function avColor(nome){
 function renderPie(lojas, total){
   const wrap=document.getElementById('pie-wrap');
   if(!wrap)return;
-  const palette=['#2563eb','#0f9d8a','#ea7a3c','#7c3aed','#db2777','#0891b2'];
+  const palette=['#1F2022','#7C846B','#6B6F72','#a0a894','#2d2f31','#9aaa90'];
   const entries=Object.entries(lojas).filter(([,i])=>i.vendido>0).sort((a,b)=>b[1].vendido-a[1].vendido);
   if(entries.length===0||total<=0){ wrap.innerHTML=''; return; }
   const size=210, cx=size/2, cy=size/2, r=94, inner=68;
@@ -993,9 +1815,15 @@ function rkSb(s){
 
 // ─── RENDER PRINCIPAL ─────────────────────────────────────
 function renderDashboard(d){
+  _lastData = d; // salva para as views usarem
   document.getElementById('empty-state').style.display='none';
   document.getElementById('dashboard').style.display='block';
   document.getElementById('pdf-btn').disabled=false;
+  // garante que a view geral fica ativa
+  document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
+  const cz=document.getElementById('capture-zone'); if(cz) cz.style.display='block';
+  const tabs=document.querySelector('.tabs'); if(tabs) tabs.style.display='flex';
+  document.querySelectorAll('.nav-item').forEach(btn=>btn.classList.toggle('active',btn.textContent.trim()==='Visão Geral'));
   const rib=document.getElementById('demo-ribbon');
   if(rib) rib.classList.toggle('show', !!IS_DEMO);
 
@@ -1016,15 +1844,15 @@ function renderDashboard(d){
   const icoVend='<svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg>';
   const icoTick='<svg viewBox="0 0 24 24" fill="none" stroke="#ea7a3c" stroke-width="2"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12a2 2 0 002 2h14v-4"/><path d="M18 12a2 2 0 000 4h4v-4z"/></svg>';
   document.getElementById('kpis').innerHTML=`
-    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#eff4ff">${icoFat}</div><div class="kpi-lbl">Faturamento Total</div></div>
+    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#e8ebe2">${icoFat}</div><div class="kpi-lbl">Faturamento Total</div></div>
       <div class="kpi-val num">${R(tv)}</div><div class="kpi-foot">Meta: ${R(tm)}</div>
       <span class="kpi-pct txt-${sc(pg)}">${P(pg)} da meta</span>
       <div class="kpi-bar"><div class="kpi-bar-fill fill-${sc(pg)}" style="width:${Math.min(pg*100,100).toFixed(1)}%"></div></div></div>
-    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#e7f7f4">${icoProj}</div><div class="kpi-lbl">Projeção do Mês</div></div>
+    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#eaeae7">${icoProj}</div><div class="kpi-lbl">Projeção do Mês</div></div>
       <div class="kpi-val num">${R(tp)}</div><div class="kpi-foot txt-ok">${P(pg)} da meta</div></div>
-    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#f3eeff">${icoVend}</div><div class="kpi-lbl">Total de Vendas</div></div>
+    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#e9e9e6">${icoVend}</div><div class="kpi-lbl">Total de Vendas</div></div>
       <div class="kpi-val num">${N(tn)}</div><div class="kpi-foot">Pedidos no período</div></div>
-    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#fdf0e6">${icoTick}</div><div class="kpi-lbl">Ticket Médio</div></div>
+    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#ebe9e3">${icoTick}</div><div class="kpi-lbl">Ticket Médio</div></div>
       <div class="kpi-val num">${R(tick)}</div><div class="kpi-foot">Por venda</div></div>`;
 
   // ── LOJAS ──
@@ -1076,7 +1904,7 @@ function renderDashboard(d){
     <div><div class="tb-lbl">Total Geral</div></div>
     <div><div class="tb-val num">${N(tn)} vendas</div><div class="tb-sub">no período</div></div>
     <div><div class="tb-val num">${R(tv)}</div><div class="tb-sub">faturado</div></div>
-    <div><div class="tb-val num" style="color:${pg>=.85?'#34d399':pg>=.6?'#fb923c':'#f87171'}">${P(pg)}</div><div class="tb-sub">da meta</div></div>
+    <div><div class="tb-val num" style="color:${pg>=.85?'#16a34a':pg>=.6?'#ca8a04':'#dc2626'}">${P(pg)}</div><div class="tb-sub">da meta</div></div>
     <div><div class="tb-val num">${R(tp)}</div><div class="tb-sub">projeção final</div></div>`;
 
   // ── SEMANAL ──

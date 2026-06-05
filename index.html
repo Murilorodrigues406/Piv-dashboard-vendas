@@ -97,6 +97,72 @@ body{background:var(--bg);background-image:radial-gradient(circle at 15% 0%,rgba
 .leg-pct{font-size:16px;font-weight:800;margin-left:auto;font-family:var(--mono)}
 @media(max-width:560px){.chart-wrap{justify-content:center}}
 
+/* ── LANDING (tela de abertura) ── */
+#landing{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#eef2fb 0%,#f5f7fc 55%,#eaf3f1 100%);overflow-y:auto;display:flex;align-items:center}
+#landing.hidden{display:none}
+.lp-wrap{max-width:1200px;margin:0 auto;padding:40px 40px;display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center;width:100%}
+.lp-brand{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.7);border:1px solid rgba(203,213,225,.7);border-radius:30px;padding:8px 18px;margin-bottom:32px}
+.lp-brand .bdot{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#1d4ed8,#0f766e)}
+.lp-brand span{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;color:#475569}
+.lp-h1{font-family:var(--sans);font-size:62px;font-weight:800;line-height:1.02;letter-spacing:-.03em;color:#0b1220;margin-bottom:24px}
+.lp-h1 .grad{background:linear-gradient(100deg,#1d4ed8,#0f766e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lp-sub{font-size:21px;line-height:1.5;color:#475569;margin-bottom:30px;max-width:520px}
+.lp-tag{display:flex;align-items:center;gap:14px;margin-bottom:38px}
+.lp-tag-ico{width:48px;height:48px;border-radius:14px;background:rgba(29,78,216,.1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.lp-tag-txt{font-size:17px;color:#475569}
+.lp-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:44px}
+.lp-btn-primary{background:#1d4ed8;color:#fff;border:none;border-radius:14px;padding:18px 34px;font-family:var(--sans);font-size:17px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;transition:transform .15s,box-shadow .25s;box-shadow:0 8px 24px rgba(29,78,216,.3)}
+.lp-btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(29,78,216,.42)}
+.lp-btn-ghost{background:#fff;color:#0f766e;border:1px solid #e2e8f0;border-radius:14px;padding:18px 34px;font-family:var(--sans);font-size:17px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;transition:transform .15s,box-shadow .25s;box-shadow:var(--shadow-sm)}
+.lp-btn-ghost:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.lp-feats{display:flex;gap:24px;flex-wrap:wrap}
+.lp-feat{display:flex;align-items:center;gap:11px}
+.lp-feat-ico{width:38px;height:38px;border-radius:11px;background:rgba(15,118,110,.1);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.lp-feat-t{font-size:13px;font-weight:700;color:#0b1220}
+.lp-feat-s{font-size:11px;color:#94a3b8}
+/* mockup à direita */
+.lp-visual{position:relative}
+.lp-mock{background:#fff;border-radius:20px;box-shadow:0 30px 70px rgba(15,23,42,.16);border:1px solid #eef2f7;overflow:hidden}
+.lp-mock-top{background:#0b1220;padding:10px 16px;display:flex;align-items:center;gap:7px}
+.lp-mock-top i{width:11px;height:11px;border-radius:50%;display:block}
+.lp-mock-body{padding:22px}
+.lp-mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.lp-mh-t{font-size:15px;font-weight:800;color:#0b1220;letter-spacing:.03em}
+.lp-mh-s{font-size:8px;font-family:var(--mono);color:#0f766e;letter-spacing:.1em;margin-top:2px}
+.lp-mh-pill{font-size:10px;font-family:var(--mono);color:#64748b;background:#f1f5f9;border-radius:8px;padding:6px 12px}
+.lp-mkpi{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.lp-mkpi-c{background:#f8fafc;border:1px solid #eef2f7;border-radius:11px;padding:12px}
+.lp-mkpi-l{font-size:8px;font-weight:700;letter-spacing:.08em;color:#94a3b8;text-transform:uppercase;margin-bottom:5px}
+.lp-mkpi-v{font-size:17px;font-weight:800;color:#0b1220;letter-spacing:-.02em}
+.lp-mkpi-d{font-size:8px;color:#0f766e;margin-top:3px;font-family:var(--mono)}
+.lp-mcols{display:grid;grid-template-columns:1.4fr 1fr;gap:12px}
+.lp-mcard{background:#f8fafc;border:1px solid #eef2f7;border-radius:11px;padding:14px}
+.lp-mcard-t{font-size:11px;font-weight:700;color:#475569;margin-bottom:12px}
+.lp-spark{height:90px;display:flex;align-items:flex-end}
+.lp-bars{display:flex;flex-direction:column;gap:10px}
+.lp-bar-row{display:flex;align-items:center;gap:8px}
+.lp-bar-lbl{font-size:9px;color:#64748b;width:62px;flex-shrink:0}
+.lp-bar-track{flex:1;height:8px;background:#eef2f7;border-radius:4px;overflow:hidden}
+.lp-bar-fill{height:8px;border-radius:4px}
+.lp-bar-val{font-size:8px;font-family:var(--mono);color:#475569;width:54px;text-align:right;flex-shrink:0}
+/* cards flutuantes */
+.lp-float{position:absolute;background:#fff;border-radius:14px;box-shadow:0 18px 44px rgba(15,23,42,.15);border:1px solid #eef2f7;padding:16px 18px}
+.lp-float-proj{bottom:-26px;left:-26px;width:190px}
+.lp-float-rank{bottom:-50px;right:-20px;width:230px}
+.lp-fl-t{font-size:11px;color:#64748b;margin-bottom:6px}
+.lp-fl-v{font-size:22px;font-weight:800;color:#1d4ed8;letter-spacing:-.02em}
+.lp-fl-d{font-size:10px;color:#0f766e;font-family:var(--mono);margin-top:3px}
+.lp-rk-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+.lp-rk-pos{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+.lp-rk-name{font-size:12px;font-weight:600;color:#0b1220;flex:1}
+.lp-rk-val{font-size:11px;font-family:var(--mono);color:#475569;font-weight:500}
+@media(max-width:980px){
+  .lp-wrap{grid-template-columns:1fr;gap:60px;padding:32px 24px}
+  .lp-h1{font-size:44px}.lp-sub{font-size:18px}
+  .lp-visual{margin-bottom:40px}
+  .lp-float-rank{right:-10px}
+}
+
 /* ── TABS ── */
 .tab-nav{display:flex;gap:6px;margin-bottom:22px}
 .tab-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);font-family:var(--sans);font-size:11px;font-weight:700;padding:7px 16px;border-radius:7px;cursor:pointer;transition:all .2s;letter-spacing:.05em}
@@ -231,6 +297,82 @@ body{background:var(--bg);background-image:radial-gradient(circle at 15% 0%,rgba
 </style>
 </head>
 <body>
+
+<!-- ══════════ LANDING (tela de abertura) ══════════ -->
+<div id="landing">
+  <div class="lp-wrap">
+    <!-- coluna esquerda: texto -->
+    <div class="lp-left">
+      <div class="lp-brand"><span class="bdot"></span><span>MR SOLUTIONS · DADOS PARA VAREJO</span></div>
+      <h1 class="lp-h1">Dashboard de<br>Vendas <span class="grad">Inteligente</span></h1>
+      <p class="lp-sub">Visualize faturamento, metas, projeções e desempenho da equipe em um só lugar.</p>
+      <div class="lp-tag">
+        <div class="lp-tag-ico">🏪</div>
+        <div class="lp-tag-txt">Ideal para varejo, lojas e operações comerciais.</div>
+      </div>
+      <div class="lp-btns">
+        <button class="lp-btn-primary" onclick="enterDemo()">▶ Ver exemplo</button>
+        <button class="lp-btn-ghost" onclick="enterBlank()">Começar agora →</button>
+      </div>
+      <div class="lp-feats">
+        <div class="lp-feat"><div class="lp-feat-ico">📊</div><div><div class="lp-feat-t">Dados em tempo real</div><div class="lp-feat-s">Atualizações automáticas</div></div></div>
+        <div class="lp-feat"><div class="lp-feat-ico">🔒</div><div><div class="lp-feat-t">Confiável e seguro</div><div class="lp-feat-s">Seus dados protegidos</div></div></div>
+        <div class="lp-feat"><div class="lp-feat-ico">⚡</div><div><div class="lp-feat-t">Fácil de usar</div><div class="lp-feat-s">Intuitivo e completo</div></div></div>
+      </div>
+    </div>
+    <!-- coluna direita: mockup -->
+    <div class="lp-visual">
+      <div class="lp-mock">
+        <div class="lp-mock-top"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+        <div class="lp-mock-body">
+          <div class="lp-mh">
+            <div><div class="lp-mh-t">DASHBOARD DE VENDAS</div><div class="lp-mh-s">MR SOLUTIONS · DADOS PARA VAREJO</div></div>
+            <div class="lp-mh-pill">Maio de 2024 ▾</div>
+          </div>
+          <div class="lp-mkpi">
+            <div class="lp-mkpi-c"><div class="lp-mkpi-l">Faturamento</div><div class="lp-mkpi-v">R$ 1.250.000</div><div class="lp-mkpi-d">+12,5% vs Abril</div></div>
+            <div class="lp-mkpi-c"><div class="lp-mkpi-l">Meta do Mês</div><div class="lp-mkpi-v">85%</div><div class="lp-mkpi-d">1.250.000 / 1.470.000</div></div>
+            <div class="lp-mkpi-c"><div class="lp-mkpi-l">Ticket Médio</div><div class="lp-mkpi-v">R$ 245,80</div><div class="lp-mkpi-d">+8,3% vs Abril</div></div>
+            <div class="lp-mkpi-c"><div class="lp-mkpi-l">Pedidos</div><div class="lp-mkpi-v">5.842</div><div class="lp-mkpi-d">+15,2% vs Abril</div></div>
+          </div>
+          <div class="lp-mcols">
+            <div class="lp-mcard">
+              <div class="lp-mcard-t">Faturamento ao longo do tempo</div>
+              <div class="lp-spark">
+                <svg width="100%" height="90" viewBox="0 0 320 90" preserveAspectRatio="none">
+                  <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d4ed8" stop-opacity=".25"/><stop offset="1" stop-color="#1d4ed8" stop-opacity="0"/></linearGradient></defs>
+                  <path d="M0,72 L24,60 L48,66 L72,48 L96,54 L120,38 L144,44 L168,30 L192,36 L216,22 L240,28 L264,16 L288,20 L320,10 L320,90 L0,90 Z" fill="url(#sg)"/>
+                  <path d="M0,72 L24,60 L48,66 L72,48 L96,54 L120,38 L144,44 L168,30 L192,36 L216,22 L240,28 L264,16 L288,20 L320,10" fill="none" stroke="#0f766e" stroke-width="2.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="lp-mcard">
+              <div class="lp-mcard-t">Desempenho por Loja</div>
+              <div class="lp-bars">
+                <div class="lp-bar-row"><span class="lp-bar-lbl">Loja Centro</span><span class="lp-bar-track"><span class="lp-bar-fill" style="width:100%;background:#1d4ed8"></span></span><span class="lp-bar-val">R$ 620 mil</span></div>
+                <div class="lp-bar-row"><span class="lp-bar-lbl">Loja Shopping</span><span class="lp-bar-track"><span class="lp-bar-fill" style="width:58%;background:#0f766e"></span></span><span class="lp-bar-val">R$ 360 mil</span></div>
+                <div class="lp-bar-row"><span class="lp-bar-lbl">Loja Norte</span><span class="lp-bar-track"><span class="lp-bar-fill" style="width:29%;background:#c2410c"></span></span><span class="lp-bar-val">R$ 180 mil</span></div>
+                <div class="lp-bar-row"><span class="lp-bar-lbl">Loja Sul</span><span class="lp-bar-track"><span class="lp-bar-fill" style="width:15%;background:#db2777"></span></span><span class="lp-bar-val">R$ 90 mil</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- cards flutuantes -->
+      <div class="lp-float lp-float-proj">
+        <div class="lp-fl-t">Projeção do Mês</div>
+        <div class="lp-fl-v">R$ 1.580.000</div>
+        <div class="lp-fl-d">+18,7% vs meta</div>
+      </div>
+      <div class="lp-float lp-float-rank">
+        <div class="lp-fl-t">Ranking de Vendedores</div>
+        <div class="lp-rk-row"><span class="lp-rk-pos" style="background:#f59e0b">1</span><span class="lp-rk-name">Ana Souza</span><span class="lp-rk-val">R$ 245.000</span></div>
+        <div class="lp-rk-row"><span class="lp-rk-pos" style="background:#0f766e">2</span><span class="lp-rk-name">João Lima</span><span class="lp-rk-val">R$ 198.000</span></div>
+        <div class="lp-rk-row"><span class="lp-rk-pos" style="background:#c2410c">3</span><span class="lp-rk-name">Carla Mendes</span><span class="lp-rk-val">R$ 176.000</span></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- TOPBAR -->
 <div class="topbar">
@@ -475,6 +617,14 @@ function toast(title, msg, type='ok', ms=4000){
   w.appendChild(el);
   setTimeout(()=>{ el.style.animation='slideOut .25s ease forwards'; setTimeout(()=>el.remove(),250); }, ms);
 }
+
+// ─── LANDING → DASHBOARD ─────────────────────────────────────────────
+function closeLanding(){
+  const l=document.getElementById('landing');
+  if(l) l.classList.add('hidden');
+}
+function enterDemo(){ closeLanding(); loadDemo(); }
+function enterBlank(){ closeLanding(); /* mostra o empty-state para escolher como inserir */ }
 
 // ─── CARREGAR DEMO ───────────────────────────────────────────────────
 function loadDemo(){

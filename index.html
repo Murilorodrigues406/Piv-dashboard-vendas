@@ -11,7 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* ── Paleta MR Solutions ── */
   --grafite:#1F2022;
   --cinza-medio:#6B6F72;
   --cinza-claro:#E7E8EA;
@@ -21,8 +20,6 @@
   --cinza-quente:#F2F2EF;
   --danger:#b94040;
   --warn:#8a6f3a;
-
-  /* ── Tokens de UI ── */
   --bg:var(--cinza-quente);
   --surface:var(--branco);
   --card:var(--branco);
@@ -36,26 +33,16 @@
   --ink:var(--grafite);
   --sb:var(--grafite);
   --sb-active:var(--salvia);
-
-  /* ── Tipografia ── */
   --sans:'Inter',-apple-system,sans-serif;
   --display:'Poppins','Inter',sans-serif;
-
-  /* ── Sombras (mais sutis pra paleta neutra) ── */
   --shadow-sm:0 1px 2px rgba(31,32,34,.05),0 1px 4px rgba(31,32,34,.04);
   --shadow-md:0 2px 8px rgba(31,32,34,.06),0 6px 20px rgba(31,32,34,.06);
   --shadow-lg:0 8px 32px rgba(31,32,34,.12);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;-webkit-font-smoothing:antialiased;font-feature-settings:'cv01','cv02','tnum'}
-
-/* números: peso 800 e espaçamento negativo */
 .num{font-weight:800;letter-spacing:-0.03em;font-variant-numeric:tabular-nums}
-
-/* ── LAYOUT ── */
 .app{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
-
-/* ── SIDEBAR ── */
 .sidebar{background:var(--grafite);border-right:none;padding:24px 14px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
 .logo{display:flex;align-items:center;gap:10px;padding:0 8px 22px;margin-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
 .logo-ico{width:36px;height:36px;border-radius:8px;background:var(--salvia);display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -72,11 +59,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .sb-foot-t{font-size:11px;font-weight:700;color:var(--branco);letter-spacing:.03em;font-family:var(--display)}
 .sb-foot-s{font-size:9px;color:var(--salvia-light);letter-spacing:.08em;margin-top:1px}
 .sb-dot{width:7px;height:7px;border-radius:50%;background:#6fcf6f;margin-left:auto}
-
-/* ── MAIN ── */
 .main{padding:28px 36px;max-width:1500px}
-
-/* header de saudação */
 .head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:26px;flex-wrap:wrap;gap:16px}
 .greet h1{font-size:24px;font-weight:700;letter-spacing:-.02em;color:var(--grafite);margin-bottom:4px;font-family:var(--display)}
 .greet p{font-size:14px;color:var(--text2)}
@@ -89,15 +72,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .btn-export:hover{filter:brightness(1.05);transform:translateY(-1px)}
 .btn-export:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none}
 .btn-export svg{width:16px;height:16px}
-
-/* botões de inserção (aparecem só no empty/demo) */
 .insert-row{display:flex;gap:10px;flex-wrap:wrap}
 .ibtn{display:flex;align-items:center;gap:7px;border-radius:10px;padding:10px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:all .2s;border:1px solid var(--border2);background:var(--card);color:var(--text2)}
 .ibtn:hover{border-color:var(--accent);color:var(--accent)}
 .ibtn.demo{background:var(--grafite);color:var(--branco);border:none}
-
-/* ── KPI ── */
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-bottom:28px}
+.kpi-ritmo-txt{font-size:11px;margin-top:8px;font-weight:600;line-height:1.4}
 .kpi{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow-sm);transition:all .25s}
 .kpi:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);border-color:var(--salvia)}
 .kpi-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
@@ -109,11 +89,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .kpi-pct{font-size:12px;font-weight:700;display:block;text-align:right;margin-bottom:6px}
 .kpi-bar{height:6px;background:var(--cinza-claro);border-radius:3px;overflow:hidden}
 .kpi-bar-fill{height:7px;border-radius:4px}
-
-/* ── SECTION TITLE ── */
 .sec-title{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--cinza-medio);text-transform:uppercase;margin-bottom:15px}
-
-/* ── LOJAS ── */
 .lojas{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px}
 .loja{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow-sm);transition:all .25s}
 .loja:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
@@ -134,15 +110,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .loja-foot .gap{color:var(--text2)}
 .fill-ok{background:#16a34a}.fill-at{background:#ca8a04}.fill-cr{background:#dc2626}.fill-nt{background:#cbd5e1}
 .txt-ok{color:#16a34a}.txt-at{color:#ca8a04}.txt-cr{color:#dc2626}.txt-nt{color:var(--muted)}
-
-/* ── BOTTOM GRID ── */
 .bottom{display:grid;grid-template-columns:1fr 1.3fr;gap:18px;margin-bottom:28px}
 .panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;box-shadow:var(--shadow-sm)}
 .panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
 .panel-title{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--cinza-medio);text-transform:uppercase}
 .panel-link{font-size:12px;font-weight:600;color:var(--salvia);cursor:pointer}
-
-/* pizza */
 .pie-wrap{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
 .pie-svg{flex-shrink:0;filter:drop-shadow(0 6px 16px rgba(15,23,42,.1))}
 .pie-leg{display:flex;flex-direction:column;gap:16px;flex:1;min-width:160px}
@@ -150,8 +122,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .pie-dot{width:13px;height:13px;border-radius:4px;flex-shrink:0;margin-top:3px}
 .pie-leg-name{font-size:13px;font-weight:600;color:var(--grafite)}
 .pie-leg-val{font-size:12px;color:var(--text2);font-variant-numeric:tabular-nums;margin-top:1px}
-
-/* ranking com avatares */
 .rk{display:flex;flex-direction:column;gap:2px}
 .rk-row{display:grid;grid-template-columns:30px 38px 1fr auto;gap:13px;align-items:center;padding:13px 8px;border-radius:12px;transition:background .15s}
 .rk-row:hover{background:var(--cinza-quente)}
@@ -180,28 +150,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .rk-right{text-align:right;min-width:110px}
 .rk-val{font-size:15px;color:var(--grafite);font-family:var(--display)}
 .rk-pct{font-size:12px;font-weight:600;margin-top:2px}
-
-/* total bar (escondida por padrão, usada no PDF/visão) */
 .totalbar{background:var(--grafite);border-radius:18px;padding:22px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;box-shadow:var(--shadow-lg);margin-bottom:8px}
 .tb-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8}
 .tb-val{font-size:20px;color:var(--branco);margin-top:3px;font-family:var(--display)}
 .tb-sub{font-size:10px;color:#94a3b8;margin-top:2px;font-variant-numeric:tabular-nums}
-
-/* tabs semanal/mensal */
 .tabs{display:flex;gap:8px;margin-bottom:22px}
 .tab{background:var(--card);border:1px solid var(--cinza-claro);color:var(--cinza-medio);font-family:var(--sans);font-size:13px;font-weight:600;padding:9px 18px;border-radius:10px;cursor:pointer;transition:all .2s}
 .tab.active{background:var(--grafite);border-color:var(--grafite);color:var(--branco)}
 .tab-panel{display:none}.tab-panel.active{display:block}
-
-/* empty/demo ribbon */
 .ribbon{display:none;background:var(--cinza-claro);border:1px solid var(--border2);border-radius:14px;padding:13px 18px;margin-bottom:22px;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .ribbon.show{display:flex}
 .ribbon-t{font-size:13px;color:var(--text2)}
 .ribbon-t b{color:var(--salvia)}
 .ribbon-x{background:none;border:1px solid var(--border2);color:var(--text2);border-radius:8px;padding:6px 13px;font-size:12px;cursor:pointer;font-family:var(--sans)}
 .ribbon-x:hover{border-color:var(--danger);color:var(--danger)}
-
-/* toast */
 .toast-wrap{position:fixed;top:24px;right:24px;z-index:600;display:flex;flex-direction:column;gap:10px}
 .toast{background:var(--surface);border:1px solid var(--border2);border-left:3px solid var(--accent);border-radius:12px;padding:14px 18px;min-width:240px;max-width:340px;box-shadow:var(--shadow-lg);animation:slideIn .25s ease}
 .toast.err{border-left-color:var(--danger)}.toast.ok{border-left-color:var(--accent2)}.toast.warn{border-left-color:var(--warn)}
@@ -209,14 +171,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .toast-m{font-size:12px;color:var(--text2);line-height:1.5}
 @keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
 @keyframes slideOut{to{transform:translateX(120%);opacity:0}}
-
-/* empty state */
 .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;gap:16px;text-align:center}
 .empty-ico{font-size:48px;opacity:.3}
 .empty-t{font-size:20px;font-weight:700;color:var(--text2)}
 .empty-s{font-size:13px;color:var(--muted);max-width:380px;line-height:1.7}
-
-/* modal */
 .overlay{position:fixed;inset:0;background:rgba(11,18,32,.6);z-index:400;display:flex;align-items:flex-start;justify-content:center;padding:28px 16px;overflow-y:auto}
 .modal{background:var(--surface);border-radius:18px;padding:28px;width:100%;max-width:800px;position:relative;box-shadow:var(--shadow-lg)}
 .modal-title{font-size:17px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px;color:var(--ink)}
@@ -252,13 +210,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .preview-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:12px;font-variant-numeric:tabular-nums}
 .preview-table th{background:#f1f5f9;color:var(--text2);font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;text-align:left}
 .preview-table td{padding:6px 10px;border-bottom:1px solid var(--border);color:var(--text2)}
-
-/* ── VIEWS ADICIONAIS ── */
 .view{display:none}.view.active{display:block}
 .view-title{font-size:20px;font-weight:700;letter-spacing:-.02em;color:var(--grafite);margin-bottom:6px;font-family:var(--display)}
 .view-sub{font-size:14px;color:var(--text2);margin-bottom:24px}
-
-/* Vendas */
 .metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
 .metric-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow-sm)}
 .metric-lbl{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text2);margin-bottom:8px}
@@ -271,8 +225,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .bar-fill{height:26px;border-radius:8px;display:flex;align-items:center;padding-left:10px;transition:width .9s ease}
 .bar-fill span{font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
 .bar-val{font-size:13px;font-weight:700;color:var(--ink);width:110px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
-
-/* Lojas detalhe */
 .loja-detail{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow-sm)}
 .loja-detail-head{display:flex;align-items:center;gap:16px;margin-bottom:20px}
 .loja-detail-ico{width:52px;height:52px;border-radius:14px;background:#eff4ff;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
@@ -288,8 +240,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .loja-vend-name{font-size:13px;font-weight:600;color:var(--ink);flex:1}
 .loja-vend-val{font-size:13px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
 .loja-vend-pct{font-size:11px;font-weight:600}
-
-/* Vendedores */
 .vend-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .vend-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow-sm)}
 .vend-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
@@ -303,8 +253,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .vend-prog{height:8px;background:var(--cinza-claro);border-radius:5px;overflow:hidden;margin-bottom:8px}
 .vend-prog-fill{height:8px;border-radius:5px}
 .vend-foot{display:flex;justify-content:space-between;font-size:12px}
-
-/* Metas */
 .meta-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:var(--shadow-sm)}
 .meta-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .meta-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
@@ -321,65 +269,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .meta-sum-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;box-shadow:var(--shadow-sm)}
 .meta-sum-n{font-size:30px;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;font-family:var(--display)}
 .meta-sum-l{font-size:12px;color:var(--text2)}
-
-/* Relatórios */
 .report-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow-sm)}
 .report-title{font-size:14px;font-weight:700;color:var(--grafite);font-family:var(--display);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
 .report-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
 .report-row:last-child{border-bottom:none}
 .report-row-l{font-size:13px;color:var(--text2)}
 .report-row-v{font-size:14px;font-weight:700;color:var(--grafite);font-variant-numeric:tabular-nums}
-.export-big{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--grafite);color:#fff;border:none;border-radius:14px;padding:18px 32px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--sans);width:100%;transition:all .2s;box-shadow:0 6px 20px rgba(37,99,235,.3)}
+.export-big{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--grafite);color:#fff;border:none;border-radius:14px;padding:18px 32px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--sans);width:100%;transition:all .2s;box-shadow:0 6px 20px rgba(31,32,34,.25)}
 .export-big:hover{filter:brightness(1.05);transform:translateY(-2px)}
 .export-big svg{width:20px;height:20px}
-
-/* Config */
 .config-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:18px;box-shadow:var(--shadow-sm)}
 .config-title{font-size:14px;font-weight:700;color:var(--grafite);font-family:var(--display);margin-bottom:18px}
 .config-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
 .config-info{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:14px;font-size:13px;color:var(--text2);line-height:1.6}
 .config-info b{color:var(--ink)}
-
-/* ── SETUP SCREEN ── */
-#setup{position:fixed;inset:0;z-index:1100;background:var(--cinza-quente);overflow-y:auto;display:none}
-#setup.show{display:flex;align-items:flex-start;justify-content:center;padding:40px 20px}
-.setup-wrap{background:var(--branco);border-radius:20px;width:100%;max-width:680px;box-shadow:var(--shadow-lg);overflow:hidden}
-.setup-head{background:var(--grafite);padding:28px 32px;display:flex;align-items:center;gap:14px}
-.setup-head-ico{width:42px;height:42px;border-radius:10px;background:var(--salvia);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.setup-head-ico svg{width:22px;height:22px}
-.setup-head-t{font-family:var(--display);font-size:18px;font-weight:700;color:var(--branco);letter-spacing:.02em}
-.setup-head-s{font-size:12px;color:var(--salvia-light);margin-top:2px;letter-spacing:.04em}
-.setup-body{padding:32px}
-.setup-section{margin-bottom:28px}
-.setup-section-title{font-family:var(--display);font-size:13px;font-weight:700;color:var(--grafite);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--cinza-claro)}
-.setup-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.setup-fgroup{display:flex;flex-direction:column;gap:6px}
-.setup-lbl{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--cinza-medio)}
-.setup-input{background:#f8f8f7;border:1px solid var(--cinza-claro);color:var(--grafite);font-family:var(--sans);font-size:14px;border-radius:9px;padding:11px 14px;width:100%;outline:none;transition:border-color .2s}
-.setup-input:focus{border-color:var(--salvia);background:var(--branco)}
-.setup-input::placeholder{color:var(--cinza-medio)}
-/* tabela de vendedores */
-.vend-table{width:100%;border-collapse:collapse;margin-bottom:14px}
-.vend-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza-medio);padding:8px 10px;text-align:left;border-bottom:2px solid var(--cinza-claro)}
-.vend-table td{padding:6px 6px}
-.vend-table tr:nth-child(even) td{background:#fafaf8}
-.vend-table .vi{background:var(--branco);border:1px solid var(--cinza-claro);color:var(--grafite);font-family:var(--sans);font-size:13px;border-radius:7px;padding:8px 10px;width:100%;outline:none;transition:border-color .15s}
-.vend-table .vi:focus{border-color:var(--salvia)}
-.vend-table .vi-meta{text-align:right;font-variant-numeric:tabular-nums}
-.vend-del{background:none;border:none;color:var(--cinza-medio);cursor:pointer;padding:6px;border-radius:6px;font-size:16px;transition:color .15s}
-.vend-del:hover{color:var(--danger);background:#fee2e2}
-.btn-add-vend{display:flex;align-items:center;gap:8px;background:none;border:1px dashed var(--cinza-claro);color:var(--cinza-medio);font-family:var(--sans);font-size:13px;font-weight:500;padding:10px 16px;border-radius:9px;cursor:pointer;width:100%;transition:all .2s;margin-bottom:14px}
-.btn-add-vend:hover{border-color:var(--salvia);color:var(--salvia);background:#f5f6f0}
-.setup-actions{display:flex;gap:12px;justify-content:flex-end;padding-top:20px;border-top:1px solid var(--cinza-claro)}
-.setup-btn-cancel{background:none;border:1px solid var(--cinza-claro);color:var(--cinza-medio);font-family:var(--sans);font-size:14px;font-weight:600;padding:12px 24px;border-radius:10px;cursor:pointer;transition:all .2s}
-.setup-btn-cancel:hover{border-color:var(--danger);color:var(--danger)}
-.setup-btn-save{background:var(--grafite);border:none;color:var(--branco);font-family:var(--display);font-size:14px;font-weight:700;padding:12px 28px;border-radius:10px;cursor:pointer;transition:all .2s;letter-spacing:.02em}
-.setup-btn-save:hover{background:var(--salvia)}
-.setup-demo-link{font-size:12px;color:var(--cinza-medio);text-align:center;margin-top:16px}
-.setup-demo-link a{color:var(--salvia);cursor:pointer;font-weight:600;text-decoration:none}
-.setup-demo-link a:hover{text-decoration:underline}
-
-/* ── SETUP SCREEN ── */
 #setup{position:fixed;inset:0;z-index:2000;background:rgba(31,32,34,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px 16px;overflow-y:auto}
 #setup.show{display:flex}
 .setup-wrap{background:var(--branco);border-radius:20px;width:100%;max-width:680px;box-shadow:0 24px 60px rgba(31,32,34,.25);overflow:hidden}
@@ -389,6 +292,25 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .setup-head-t{font-family:var(--display);font-size:18px;font-weight:700;color:var(--branco);letter-spacing:-.01em}
 .setup-head-s{font-size:12px;color:var(--salvia-light);margin-top:3px}
 .setup-body{padding:28px 32px}
+/* ── WIZARD STEPS ── */
+.wz-steps{display:flex;align-items:center;gap:0;margin-bottom:26px}
+.wz-step{display:flex;align-items:center;gap:9px;flex:1}
+.wz-step-num{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;font-family:var(--display);background:var(--cinza-claro);color:var(--cinza-medio);transition:all .25s;border:2px solid transparent}
+.wz-step.active .wz-step-num{background:var(--salvia);color:#fff;box-shadow:0 4px 12px rgba(124,132,107,.35)}
+.wz-step.done .wz-step-num{background:var(--grafite);color:#fff}
+.wz-step-lbl{font-size:11px;font-weight:600;color:var(--cinza-medio);letter-spacing:.02em;white-space:nowrap}
+.wz-step.active .wz-step-lbl{color:var(--grafite)}
+.wz-step-line{flex:1;height:2px;background:var(--cinza-claro);margin:0 8px;min-width:14px}
+.wz-step.done+.wz-step .wz-step-line,.wz-step.done .wz-step-line{background:var(--salvia)}
+.wz-panel{display:none}.wz-panel.active{display:block;animation:wzfade .25s ease}
+@keyframes wzfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wz-intro{font-size:13px;color:var(--cinza-medio);line-height:1.6;margin-bottom:18px}
+.wz-data-opts{display:flex;flex-direction:column;gap:10px}
+.wz-data-opt{display:flex;align-items:center;gap:13px;padding:15px 16px;border:1px solid var(--cinza-claro);border-radius:12px;cursor:pointer;transition:all .18s;background:var(--cinza-quente);text-align:left;width:100%;font-family:var(--sans)}
+.wz-data-opt:hover{border-color:var(--salvia);background:#fff;transform:translateY(-1px)}
+.wz-data-opt-ico{width:40px;height:40px;border-radius:10px;background:var(--salvia);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.wz-data-opt-t{font-size:14px;font-weight:700;color:var(--grafite)}
+.wz-data-opt-s{font-size:12px;color:var(--cinza-medio);margin-top:2px}
 .setup-section{margin-bottom:24px}
 .setup-section-title{font-family:var(--display);font-size:13px;font-weight:700;color:var(--grafite);letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--cinza-claro)}
 .setup-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -396,7 +318,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .setup-lbl{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--cinza-medio)}
 .setup-input{background:var(--cinza-quente);border:1px solid var(--cinza-claro);color:var(--grafite);font-family:var(--sans);font-size:14px;border-radius:9px;padding:11px 14px;width:100%;outline:none;transition:border-color .2s}
 .setup-input:focus{border-color:var(--salvia);background:var(--branco)}
-/* tabela de vendedores */
 .vend-table{width:100%;border-collapse:collapse;margin-bottom:12px}
 .vend-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza-medio);padding:8px 10px;text-align:left;border-bottom:2px solid var(--cinza-claro)}
 .vend-table td{padding:6px 6px}
@@ -414,8 +335,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .setup-btn-save:hover{background:#2d2f31;transform:translateY(-1px)}
 .setup-demo-link{text-align:center;font-size:12px;color:var(--cinza-medio);margin-top:16px}
 .setup-demo-link a{color:var(--salvia);font-weight:600;cursor:pointer;text-decoration:underline}
-
-/* ── VIEW CONFIGURAÇÕES — botão editar empresa ── */
 .cfg-empresa-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:14px 0;border-bottom:1px solid var(--cinza-claro)}
 .cfg-empresa-name{font-size:18px;font-weight:700;color:var(--grafite);font-family:var(--display)}
 .cfg-vend-list{margin-top:14px;display:flex;flex-direction:column;gap:8px}
@@ -424,28 +343,28 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .cfg-vend-name{font-size:13px;font-weight:600;color:var(--grafite);flex:1}
 .cfg-vend-loja{font-size:11px;color:var(--cinza-medio)}
 .cfg-vend-meta{font-size:13px;font-weight:600;color:var(--grafite);font-variant-numeric:tabular-nums}
-
-/* landing */
 #landing{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#eef2fb 0%,#f5f7fc 55%,#eaf3f1 100%);overflow-y:auto;display:flex;align-items:center}
 #landing.hidden{display:none}
 .lp-wrap{max-width:1200px;margin:0 auto;padding:40px;display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center;width:100%}
 .lp-brand{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.7);border:1px solid rgba(203,213,225,.7);border-radius:30px;padding:8px 18px;margin-bottom:32px}
-.lp-brand .bdot{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#0f9d8a)}
+.lp-brand .bdot{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#1F2022,#7C846B)}
 .lp-brand span{font-size:11px;font-weight:700;letter-spacing:.14em;color:#475569}
 .lp-h1{font-size:60px;font-weight:800;line-height:1.02;letter-spacing:-.04em;color:#0b1220;margin-bottom:24px}
-.lp-h1 .grad{background:linear-gradient(100deg,#2563eb,#0f9d8a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lp-h1 .grad{background:linear-gradient(100deg,#1F2022,#7C846B);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .lp-sub{font-size:21px;line-height:1.5;color:#475569;margin-bottom:30px;max-width:520px}
 .lp-tag{display:flex;align-items:center;gap:14px;margin-bottom:38px}
-.lp-tag-ico{width:48px;height:48px;border-radius:14px;background:rgba(37,99,235,.1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.lp-tag-ico{width:48px;height:48px;border-radius:14px;background:rgba(124,132,107,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lp-tag-ico svg{width:24px;height:24px}
 .lp-tag-txt{font-size:17px;color:#475569}
 .lp-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:44px}
-.lp-btn-primary{background:#2563eb;color:#fff;border:none;border-radius:14px;padding:18px 34px;font-family:var(--sans);font-size:17px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .2s;box-shadow:0 8px 24px rgba(37,99,235,.3)}
-.lp-btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(37,99,235,.42)}
-.lp-btn-ghost{background:#fff;color:#0f9d8a;border:1px solid #e2e8f0;border-radius:14px;padding:18px 34px;font-family:var(--sans);font-size:17px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .2s;box-shadow:var(--shadow-sm)}
+.lp-btn-primary{background:#1F2022;color:#fff;border:none;border-radius:14px;padding:18px 34px;font-family:var(--sans);font-size:17px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .2s;box-shadow:0 8px 24px rgba(31,32,34,.25)}
+.lp-btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(31,32,34,.35)}
+.lp-btn-ghost{background:#fff;color:#1F2022;border:1px solid #d4d5d2;border-radius:14px;padding:18px 34px;font-family:var(--sans);font-size:17px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .2s;box-shadow:var(--shadow-sm)}
 .lp-btn-ghost:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
 .lp-feats{display:flex;gap:24px;flex-wrap:wrap}
 .lp-feat{display:flex;align-items:center;gap:11px}
-.lp-feat-ico{width:38px;height:38px;border-radius:11px;background:rgba(15,157,138,.1);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.lp-feat-ico{width:38px;height:38px;border-radius:11px;background:rgba(124,132,107,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lp-feat-ico svg{width:19px;height:19px}
 .lp-feat-t{font-size:13px;font-weight:700;color:#0b1220}
 .lp-feat-s{font-size:11px;color:#94a3b8}
 .lp-visual{position:relative}
@@ -455,13 +374,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .lp-mock-body{padding:22px}
 .lp-mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
 .lp-mh-t{font-size:15px;font-weight:800;color:#0b1220;letter-spacing:-.01em}
-.lp-mh-s{font-size:8px;color:#0f9d8a;letter-spacing:.1em;margin-top:2px}
+.lp-mh-s{font-size:8px;color:#7C846B;letter-spacing:.1em;margin-top:2px}
 .lp-mh-pill{font-size:10px;color:#64748b;background:#f1f5f9;border-radius:8px;padding:6px 12px}
 .lp-mkpi{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
 .lp-mkpi-c{background:#f8fafc;border:1px solid #eef2f7;border-radius:11px;padding:12px}
 .lp-mkpi-l{font-size:8px;font-weight:700;letter-spacing:.06em;color:#94a3b8;text-transform:uppercase;margin-bottom:5px}
 .lp-mkpi-v{font-size:16px;font-weight:800;color:#0b1220;letter-spacing:-.02em}
-.lp-mkpi-d{font-size:8px;color:#0f9d8a;margin-top:3px}
+.lp-mkpi-d{font-size:8px;color:#7C846B;margin-top:3px}
 .lp-mcols{display:grid;grid-template-columns:1.4fr 1fr;gap:12px}
 .lp-mcard{background:#f8fafc;border:1px solid #eef2f7;border-radius:11px;padding:14px}
 .lp-mcard-t{font-size:11px;font-weight:700;color:#475569;margin-bottom:12px}
@@ -476,13 +395,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .lp-float-proj{bottom:-26px;left:-26px;width:190px}
 .lp-float-rank{bottom:-50px;right:-20px;width:230px}
 .lp-fl-t{font-size:11px;color:#64748b;margin-bottom:6px}
-.lp-fl-v{font-size:22px;font-weight:800;color:#2563eb;letter-spacing:-.02em}
-.lp-fl-d{font-size:10px;color:#0f9d8a;margin-top:3px}
+.lp-fl-v{font-size:22px;font-weight:800;color:#1F2022;letter-spacing:-.02em}
+.lp-fl-d{font-size:10px;color:#7C846B;margin-top:3px}
 .lp-rk-row{display:flex;align-items:center;gap:10px;margin-top:10px}
 .lp-rk-pos{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
 .lp-rk-name{font-size:12px;font-weight:600;color:#0b1220;flex:1}
 .lp-rk-val{font-size:11px;color:#475569;font-variant-numeric:tabular-nums}
-
 @media(max-width:1100px){
   .app{grid-template-columns:1fr}
   .sidebar{display:none}
@@ -504,16 +422,16 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
     <div class="lp-left">
       <div class="lp-brand"><span class="bdot"></span><span>MR SOLUTIONS · DADOS PARA VAREJO</span></div>
       <h1 class="lp-h1">Dashboard de<br>Vendas <span class="grad">Inteligente</span></h1>
-      <p class="lp-sub">Visualize faturamento, metas, projeções e desempenho da equipe em um só lugar.</p>
-      <div class="lp-tag"><div class="lp-tag-ico">🏪</div><div class="lp-tag-txt">Ideal para varejo, lojas e operações comerciais.</div></div>
+      <p class="lp-sub">Pare de adivinhar. Veja faturamento, metas, projeção e quem está vendendo mais — num painel que você abre do celular em segundos.</p>
+      <div class="lp-tag"><div class="lp-tag-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#7C846B" stroke-width="1.8"><path d="M3 9l1-5h16l1 5M5 9v11h14V9M9 20v-6h6v6"/></svg></div><div class="lp-tag-txt">Feito para varejo: lojas, óticas, equipes comerciais.</div></div>
       <div class="lp-btns">
-        <button class="lp-btn-primary" onclick="enterDemo()">▶ Ver exemplo</button>
+        <button class="lp-btn-primary" onclick="enterDemo()">▶ Ver exemplo ao vivo</button>
         <button class="lp-btn-ghost" onclick="enterBlank()">Começar agora →</button>
       </div>
       <div class="lp-feats">
-        <div class="lp-feat"><div class="lp-feat-ico">📊</div><div><div class="lp-feat-t">Dados em tempo real</div><div class="lp-feat-s">Atualizações automáticas</div></div></div>
-        <div class="lp-feat"><div class="lp-feat-ico">🔒</div><div><div class="lp-feat-t">Confiável e seguro</div><div class="lp-feat-s">Seus dados protegidos</div></div></div>
-        <div class="lp-feat"><div class="lp-feat-ico">⚡</div><div><div class="lp-feat-t">Fácil de usar</div><div class="lp-feat-s">Intuitivo e completo</div></div></div>
+        <div class="lp-feat"><div class="lp-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#7C846B" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg></div><div><div class="lp-feat-t">Decisão na hora</div><div class="lp-feat-s">Faturamento, metas e ritmo</div></div></div>
+        <div class="lp-feat"><div class="lp-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#7C846B" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div><div class="lp-feat-t">Seus dados, só seus</div><div class="lp-feat-s">Tudo roda no seu navegador</div></div></div>
+        <div class="lp-feat"><div class="lp-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#7C846B" stroke-width="1.8"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></div><div><div class="lp-feat-t">Pronto em minutos</div><div class="lp-feat-s">Cole a planilha e use</div></div></div>
       </div>
     </div>
     <div class="lp-visual">
@@ -529,12 +447,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
           </div>
           <div class="lp-mcols">
             <div class="lp-mcard"><div class="lp-mcard-t">Faturamento ao longo do tempo</div>
-              <div class="lp-spark"><svg width="100%" height="90" viewBox="0 0 320 90" preserveAspectRatio="none"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2563eb" stop-opacity=".25"/><stop offset="1" stop-color="#2563eb" stop-opacity="0"/></linearGradient></defs><path d="M0,72 L24,60 L48,66 L72,48 L96,54 L120,38 L144,44 L168,30 L192,36 L216,22 L240,28 L264,16 L288,20 L320,10 L320,90 L0,90 Z" fill="url(#sg)"/><path d="M0,72 L24,60 L48,66 L72,48 L96,54 L120,38 L144,44 L168,30 L192,36 L216,22 L240,28 L264,16 L288,20 L320,10" fill="none" stroke="#0f9d8a" stroke-width="2.5"/></svg></div>
+              <div class="lp-spark"><svg width="100%" height="90" viewBox="0 0 320 90" preserveAspectRatio="none"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1F2022" stop-opacity=".25"/><stop offset="1" stop-color="#1F2022" stop-opacity="0"/></linearGradient></defs><path d="M0,72 L24,60 L48,66 L72,48 L96,54 L120,38 L144,44 L168,30 L192,36 L216,22 L240,28 L264,16 L288,20 L320,10 L320,90 L0,90 Z" fill="url(#sg)"/><path d="M0,72 L24,60 L48,66 L72,48 L96,54 L120,38 L144,44 L168,30 L192,36 L216,22 L240,28 L264,16 L288,20 L320,10" fill="none" stroke="#7C846B" stroke-width="2.5"/></svg></div>
             </div>
             <div class="lp-mcard"><div class="lp-mcard-t">Desempenho por Loja</div>
               <div class="lp-bars">
-                <div class="lp-bar-row"><span class="lp-bar-lbl">Loja Centro</span><span class="lp-bar-track"><span class="lp-bar-fill" style="width:100%;background:#2563eb"></span></span><span class="lp-bar-val">R$ 620 mil</span></div>
-                <div class="lp-bar-row"><span class="lp-bar-lbl">Loja Shopping</span><span class="lp-bar-track"><span class="lp-bar-fill" style="width:58%;background:#0f9d8a"></span></span><span class="lp-bar-val">R$ 360 mil</span></div>
+                <div class="lp-bar-row"><span class="lp-bar-lbl">Loja Centro</span><span class="lp-bar-track"><span class="lp-bar-fill" style="width:100%;background:#1F2022"></span></span><span class="lp-bar-val">R$ 620 mil</span></div>
+                <div class="lp-bar-row"><span class="lp-bar-lbl">Loja Shopping</span><span class="lp-bar-track"><span class="lp-bar-fill" style="width:58%;background:#7C846B"></span></span><span class="lp-bar-val">R$ 360 mil</span></div>
                 <div class="lp-bar-row"><span class="lp-bar-lbl">Loja Norte</span><span class="lp-bar-track"><span class="lp-bar-fill" style="width:29%;background:#ea7a3c"></span></span><span class="lp-bar-val">R$ 180 mil</span></div>
                 <div class="lp-bar-row"><span class="lp-bar-lbl">Loja Sul</span><span class="lp-bar-track"><span class="lp-bar-fill" style="width:15%;background:#e0584f"></span></span><span class="lp-bar-val">R$ 90 mil</span></div>
               </div>
@@ -545,13 +463,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
       <div class="lp-float lp-float-proj"><div class="lp-fl-t">Projeção do Mês</div><div class="lp-fl-v">R$ 1.580.000</div><div class="lp-fl-d">+18,7% vs meta</div></div>
       <div class="lp-float lp-float-rank"><div class="lp-fl-t">Ranking de Vendedores</div>
         <div class="lp-rk-row"><span class="lp-rk-pos" style="background:#f59e0b">1</span><span class="lp-rk-name">Ana Souza</span><span class="lp-rk-val">R$ 245.000</span></div>
-        <div class="lp-rk-row"><span class="lp-rk-pos" style="background:#0f9d8a">2</span><span class="lp-rk-name">João Lima</span><span class="lp-rk-val">R$ 198.000</span></div>
+        <div class="lp-rk-row"><span class="lp-rk-pos" style="background:#7C846B">2</span><span class="lp-rk-name">João Lima</span><span class="lp-rk-val">R$ 198.000</span></div>
         <div class="lp-rk-row"><span class="lp-rk-pos" style="background:#ea7a3c">3</span><span class="lp-rk-name">Carla Mendes</span><span class="lp-rk-val">R$ 176.000</span></div>
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- ══════════ SETUP SCREEN ══════════ -->
 <div id="setup">
@@ -561,46 +478,94 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
       </div>
       <div>
-        <div class="setup-head-t">Configurar Empresa</div>
-        <div class="setup-head-s">Preencha uma vez — o painel vai lembrar</div>
+        <div class="setup-head-t">Vamos configurar seu painel</div>
+        <div class="setup-head-s">3 passos rápidos — leva menos de 2 minutos</div>
       </div>
     </div>
     <div class="setup-body">
-      <!-- Nome da empresa -->
-      <div class="setup-section">
-        <div class="setup-section-title">Dados da Empresa</div>
-        <div class="setup-row">
-          <div class="setup-fgroup" style="grid-column:1/-1">
-            <label class="setup-lbl">Nome da empresa</label>
-            <input class="setup-input" id="cfg-empresa" placeholder="Ex: Ótica Central" maxlength="60">
+      <!-- Indicador de passos -->
+      <div class="wz-steps">
+        <div class="wz-step active" id="wz-s1"><span class="wz-step-num">1</span><span class="wz-step-lbl">Empresa</span></div>
+        <span class="wz-step-line"></span>
+        <div class="wz-step" id="wz-s2"><span class="wz-step-num">2</span><span class="wz-step-lbl">Vendedores</span></div>
+        <span class="wz-step-line"></span>
+        <div class="wz-step" id="wz-s3"><span class="wz-step-num">3</span><span class="wz-step-lbl">Dados</span></div>
+      </div>
+
+      <!-- PASSO 1 -->
+      <div class="wz-panel active" id="wz-p1">
+        <div class="setup-section">
+          <div class="setup-section-title">Qual o nome da sua empresa?</div>
+          <div class="wz-intro">É o nome que vai aparecer no painel e nos relatórios. Você só preenche uma vez.</div>
+          <div class="setup-row">
+            <div class="setup-fgroup" style="grid-column:1/-1">
+              <label class="setup-lbl">Nome da empresa</label>
+              <input class="setup-input" id="cfg-empresa" placeholder="Ex: Ótica Central" maxlength="60">
+            </div>
           </div>
         </div>
+        <div class="setup-actions">
+          <button class="setup-btn-cancel" id="setup-cancel-btn" onclick="wzExit()">← Voltar</button>
+          <button class="setup-btn-save" onclick="wzNext(2)">Continuar →</button>
+        </div>
+        <div class="setup-demo-link">Quer explorar antes? <a onclick="setupSkipToDemo()">Ver demonstração</a></div>
       </div>
-      <!-- Vendedores -->
-      <div class="setup-section">
-        <div class="setup-section-title">Vendedores e Metas Mensais</div>
-        <table class="vend-table">
-          <thead>
-            <tr>
-              <th style="width:28%">Nome</th>
-              <th style="width:28%">Loja / Setor</th>
-              <th style="width:28%">Meta Mensal (R$)</th>
-              <th style="width:16%"></th>
-            </tr>
-          </thead>
-          <tbody id="setup-vend-rows"></tbody>
-        </table>
-        <button class="btn-add-vend" onclick="setupAddRow()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-          Adicionar vendedor
-        </button>
+
+      <!-- PASSO 2 -->
+      <div class="wz-panel" id="wz-p2">
+        <div class="setup-section">
+          <div class="setup-section-title">Cadastre sua equipe e as metas</div>
+          <div class="wz-intro">Adicione cada vendedor, a loja onde trabalha e a meta mensal em reais. Pode editar depois quando quiser.</div>
+          <table class="vend-table">
+            <thead>
+              <tr>
+                <th style="width:28%">Nome</th>
+                <th style="width:28%">Loja / Setor</th>
+                <th style="width:28%">Meta Mensal (R$)</th>
+                <th style="width:16%"></th>
+              </tr>
+            </thead>
+            <tbody id="setup-vend-rows"></tbody>
+          </table>
+          <button class="btn-add-vend" onclick="setupAddRow()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Adicionar vendedor
+          </button>
+        </div>
+        <div class="setup-actions">
+          <button class="setup-btn-cancel" onclick="wzBack(1)">← Voltar</button>
+          <button class="setup-btn-save" onclick="wzNext(3)">Continuar →</button>
+        </div>
       </div>
-      <div class="setup-actions">
-        <button class="setup-btn-cancel" id="setup-cancel-btn" onclick="setupCancel()" style="display:none">Cancelar</button>
-        <button class="setup-btn-save" onclick="setupSave()">Salvar e abrir painel →</button>
-      </div>
-      <div class="setup-demo-link">
-        Quer explorar antes de configurar? <a onclick="setupSkipToDemo()">Ver demonstração</a>
+
+      <!-- PASSO 3 -->
+      <div class="wz-panel" id="wz-p3">
+        <div class="setup-section">
+          <div class="setup-section-title">Tudo pronto! Como quer inserir os dados?</div>
+          <div class="wz-intro">Sua empresa e equipe estão salvas. Agora escolha como carregar os números de vendas — ou veja um exemplo primeiro.</div>
+          <div class="wz-data-opts">
+            <button class="wz-data-opt" onclick="wzFinish('planilha')">
+              <span class="wz-data-opt-ico">↑</span>
+              <span><span class="wz-data-opt-t">Carregar planilha (.xlsx)</span><span class="wz-data-opt-s">Importar de uma planilha Excel pronta</span></span>
+            </button>
+            <button class="wz-data-opt" onclick="wzFinish('colar')">
+              <span class="wz-data-opt-ico">⌘</span>
+              <span><span class="wz-data-opt-t">Colar do Excel / Sheets</span><span class="wz-data-opt-s">Copiar e colar direto da sua planilha</span></span>
+            </button>
+            <button class="wz-data-opt" onclick="wzFinish('manual')">
+              <span class="wz-data-opt-ico">✏</span>
+              <span><span class="wz-data-opt-t">Digitar manualmente</span><span class="wz-data-opt-s">Preencher os valores na tela</span></span>
+            </button>
+            <button class="wz-data-opt" onclick="wzFinish('demo')">
+              <span class="wz-data-opt-ico">▶</span>
+              <span><span class="wz-data-opt-t">Ver exemplo primeiro</span><span class="wz-data-opt-s">Explorar com dados fictícios</span></span>
+            </button>
+          </div>
+        </div>
+        <div class="setup-actions">
+          <button class="setup-btn-cancel" onclick="wzBack(2)">← Voltar</button>
+          <button class="setup-btn-save" onclick="wzFinish('skip')">Concluir e abrir painel →</button>
+        </div>
       </div>
     </div>
   </div>
@@ -610,7 +575,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 
 <!-- ══════════ APP ══════════ -->
 <div class="app">
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="logo">
       <div class="logo-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M3 13h4v8H3zM10 8h4v13h-4zM17 3h4v18h-4z" fill="#fff"/></svg></div>
@@ -632,9 +596,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
     </div>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
-    <!-- HEADER -->
     <div class="head">
       <div class="greet">
         <h1>Olá, MR Solutions 👋</h1>
@@ -652,7 +614,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
       </div>
     </div>
 
-    <!-- EMPTY STATE -->
     <div id="empty-state">
       <div class="ribbon show" style="display:flex">
         <div class="ribbon-t">Escolha como inserir os dados — ou veja um exemplo completo.</div>
@@ -670,7 +631,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
       </div>
     </div>
 
-    <!-- DASHBOARD -->
     <div id="dashboard" style="display:none">
       <div class="ribbon" id="demo-ribbon">
         <div class="ribbon-t">▶ Você está vendo <b>dados de demonstração</b> — fictícios, apenas para ilustrar.</div>
@@ -683,7 +643,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
       </div>
 
       <div id="capture-zone">
-      <!-- TAB MENSAL -->
       <div class="tab-panel active" id="tab-mensal">
         <div class="kpis" id="kpis"></div>
         <div class="sec-title">Desempenho por Loja</div>
@@ -700,41 +659,35 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
         </div>
         <div class="totalbar" id="totalbar"></div>
       </div>
-      <!-- TAB SEMANAL -->
       <div class="tab-panel" id="tab-semanal">
         <div class="panel"><div class="rk" id="semanal"></div>
           <div id="sem-empty" style="display:none"><div class="empty" style="min-height:30vh"><div class="empty-ico">📅</div><div class="empty-t">Sem dados semanais</div><div class="empty-s">Insira manualmente ou carregue planilha com a aba META SEMANAL.</div></div></div>
         </div>
       </div>
-      </div><!-- /capture-zone -->
+      </div>
 
-      <!-- ── VIEW: VENDAS ── -->
       <div class="view" id="view-vendas">
         <div class="view-title">Vendas</div>
         <div class="view-sub">Desempenho de vendas no período</div>
         <div class="metrics-grid" id="v-metrics"></div>
         <div class="chart-bar-wrap"><div class="sec-title">Faturamento por loja</div><div id="v-bars"></div></div>
       </div>
-      <!-- ── VIEW: LOJAS ── -->
       <div class="view" id="view-lojas">
         <div class="view-title">Lojas</div>
         <div class="view-sub">Detalhamento completo por unidade</div>
         <div id="v-lojas-detail"></div>
       </div>
-      <!-- ── VIEW: VENDEDORES ── -->
       <div class="view" id="view-vendedores">
         <div class="view-title">Vendedores</div>
         <div class="view-sub">Desempenho individual de cada vendedor</div>
         <div class="vend-grid" id="v-vend-grid"></div>
       </div>
-      <!-- ── VIEW: METAS ── -->
       <div class="view" id="view-metas">
         <div class="view-title">Metas</div>
         <div class="view-sub">Progresso em relação à meta mensal</div>
         <div class="meta-summary" id="v-meta-summary"></div>
         <div id="v-meta-list"></div>
       </div>
-      <!-- ── VIEW: RELATÓRIOS ── -->
       <div class="view" id="view-relatorios">
         <div class="view-title">Relatórios</div>
         <div class="view-sub">Resumo executivo e exportação</div>
@@ -746,7 +699,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
           Exportar Relatório Completo em PDF
         </button>
       </div>
-      <!-- ── VIEW: CONFIGURAÇÕES ── -->
       <div class="view" id="view-config">
         <div class="view-title">Configurações</div>
         <div class="view-sub">Parâmetros do período atual</div>
@@ -777,7 +729,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
         </div>
       </div>
 
-    </div><!-- /dashboard -->
+    </div>
 </div>
 
 <!-- MODAL MANUAL -->
@@ -826,32 +778,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 <script>
 
 // ═══════════════════════════════════════════════════════════════════
-//  DASHBOARD DE VENDAS · MR Solutions
-//  Lógica de processamento, demo e exportação
+//  DASHBOARD DE VENDAS · MR Solutions v2.1
+//  Modificação: demo carrega em background no initApp()
 // ═══════════════════════════════════════════════════════════════════
-
-// ─── CONFIG VENDEDORES (modelo em branco p/ entrada manual) ──────────
-
-// ═══════════════════════════════════════════════════════════════
-//  CONFIGURAÇÃO DA EMPRESA (localStorage)
-// ═══════════════════════════════════════════════════════════════
 
 const STORAGE_KEY = 'mr_solutions_config';
 
-// Carrega configuração salva
 function cfgLoad(){
   try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); }
   catch(e){ return null; }
 }
-
-// Salva configuração
 function cfgSave(cfg){
   try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg)); }
   catch(e){ console.warn('localStorage indisponível'); }
 }
-
-// Limpa configuração
-// ── Exportar configuração como JSON ──────────────────────────────
 function cfgExport(){
   const cfg = cfgLoad();
   if(!cfg || !cfg.empresa){
@@ -862,10 +802,8 @@ function cfgExport(){
   a.href = URL.createObjectURL(blob);
   a.download = `config-${(cfg.empresa||'empresa').replace(/\s+/g,'-').toLowerCase()}.json`;
   a.click(); URL.revokeObjectURL(a.href);
-  toast('Configuração exportada', 'Arquivo JSON salvo. Guarde junto com a planilha.','ok');
+  toast('Configuração exportada', 'Arquivo JSON salvo.','ok');
 }
-
-// ── Importar configuração de JSON ────────────────────────────────
 function cfgImport(){
   const input = document.createElement('input');
   input.type='file'; input.accept='.json';
@@ -879,7 +817,6 @@ function cfgImport(){
         cfgSave(cfg);
         applyEmpresaNome(cfg.empresa);
         toast('Configuração restaurada', `Empresa "${cfg.empresa}" e ${(cfg.vendedores||[]).length} vendedor(es) importados.`,'ok',5000);
-        // atualiza view de config se estiver aberta
         if(_lastData) renderConfig(_lastData);
       }catch(e){ toast('Erro ao importar', String(e.message||e), 'err', 6000); }
     };
@@ -888,29 +825,19 @@ function cfgImport(){
   input.click();
 }
 
-function cfgClear(){
-  try{ localStorage.removeItem(STORAGE_KEY); }
-  catch(e){}
-}
-
-// Retorna vendedores salvos (ou o default)
 function getVendedores(){
   const cfg = cfgLoad();
   return (cfg && cfg.vendedores && cfg.vendedores.length > 0) ? cfg.vendedores : VENDEDORES_DEFAULT;
 }
-
-// Retorna nome da empresa salvo
 function getEmpresaNome(){
   const cfg = cfgLoad();
   return (cfg && cfg.empresa) ? cfg.empresa : 'MR Solutions';
 }
-
-// Aplica nome da empresa na interface
 function applyEmpresaNome(nome){
   const targets = [
-    { sel: '.greet h1',     val: `Olá, ${nome} 👋` },
-    { sel: '.sb-foot-t',    val: nome.toUpperCase() },
-    { sel: '.logo-txt',     html: `${nome.toUpperCase()}<span class="logo-sub">DADOS · AUTOMAÇÃO · VENDAS</span>` },
+    { sel: '.greet h1',  val: `Olá, ${nome} 👋` },
+    { sel: '.sb-foot-t', val: nome.toUpperCase() },
+    { sel: '.logo-txt',  html: `${nome.toUpperCase()}<span class="logo-sub">DADOS · AUTOMAÇÃO · VENDAS</span>` },
   ];
   targets.forEach(t=>{
     const el = document.querySelector(t.sel);
@@ -918,50 +845,120 @@ function applyEmpresaNome(nome){
     if(t.html) el.innerHTML = t.html;
     else el.textContent = t.val;
   });
-  // title da aba
   document.title = `Painel Inteligente · ${nome}`;
 }
 
-// ── TELA DE SETUP ─────────────────────────────────────────────
-
-let _setupEditMode = false; // true = edição, false = primeiro acesso
-
+// ── SETUP ────────────────────────────────────────────────────────────
+let _setupEditMode = false;
+let _wzStep = 1;
 function openSetup(editMode=false){
   _setupEditMode = editMode;
   const el = document.getElementById('setup');
   el.classList.add('show');
-  // botão cancelar só aparece em modo edição
-  const cancelBtn = document.getElementById('setup-cancel-btn');
-  if(cancelBtn) cancelBtn.style.display = editMode ? 'block' : 'none';
-  // preenche com dados existentes
   const cfg = cfgLoad();
   const nomeInput = document.getElementById('cfg-empresa');
   if(nomeInput) nomeInput.value = cfg ? (cfg.empresa||'') : '';
-  // preenche tabela de vendedores
   const vends = cfg ? (cfg.vendedores||[]) : [];
   const tbody = document.getElementById('setup-vend-rows');
   tbody.innerHTML = '';
   if(vends.length > 0){
     vends.forEach(v => setupAddRow(v.nome, v.loja, v.meta));
   } else {
-    // começa com 3 linhas vazias
     setupAddRow(); setupAddRow(); setupAddRow();
+  }
+  // Em modo edição, mostra botão Cancelar no passo 1
+  const cancelBtn = document.getElementById('setup-cancel-btn');
+  if(cancelBtn) cancelBtn.style.display = editMode ? 'block' : 'none';
+  // sempre começa no passo 1
+  wzGoto(1);
+}
+
+// ── NAVEGAÇÃO DO WIZARD ──────────────────────────────────────────────
+function wzGoto(step){
+  _wzStep = step;
+  // painéis
+  [1,2,3].forEach(n=>{
+    const p=document.getElementById('wz-p'+n);
+    if(p) p.classList.toggle('active', n===step);
+  });
+  // indicador de passos
+  [1,2,3].forEach(n=>{
+    const s=document.getElementById('wz-s'+n);
+    if(!s) return;
+    s.classList.toggle('active', n===step);
+    s.classList.toggle('done', n<step);
+  });
+}
+// Avança validando o passo atual
+function wzNext(target){
+  if(_wzStep===1){
+    const empresa=(document.getElementById('cfg-empresa').value||'').trim();
+    if(!empresa){ toast('Nome obrigatório','Digite o nome da empresa para continuar.','warn'); document.getElementById('cfg-empresa').focus(); return; }
+  }
+  if(_wzStep===2){
+    // valida ao menos 1 vendedor com nome
+    const rows=document.querySelectorAll('#setup-vend-rows tr');
+    let ok=false;
+    rows.forEach(tr=>{ if(tr.querySelectorAll('input')[0].value.trim()) ok=true; });
+    if(!ok){ toast('Sem vendedores','Cadastre pelo menos um vendedor para continuar.','warn'); return; }
+    // salva config já ao sair do passo 2 (empresa + vendedores)
+    _persistSetup();
+  }
+  wzGoto(target);
+}
+function wzBack(target){ wzGoto(target); }
+
+// Sai do wizard no passo 1. Em modo edição fecha e fica no painel;
+// em primeiro acesso, reabre a landing.
+function wzExit(){
+  closeSetup();
+  if(!_setupEditMode){
+    const l=document.getElementById('landing');
+    if(l) l.classList.remove('hidden');
   }
 }
 
-function closeSetup(){
-  document.getElementById('setup').classList.remove('show');
+// Salva empresa + vendedores no localStorage (sem fechar)
+function _persistSetup(){
+  const empresa=(document.getElementById('cfg-empresa').value||'').trim();
+  const rows=document.querySelectorAll('#setup-vend-rows tr');
+  const vendedores=[];
+  rows.forEach(tr=>{
+    const inputs=tr.querySelectorAll('input');
+    const nome=inputs[0].value.trim(); const loja=inputs[1].value.trim(); const meta=Number(inputs[2].value)||0;
+    if(nome) vendedores.push({nome, loja:loja||'Loja', meta});
+  });
+  if(empresa && vendedores.length){ cfgSave({empresa, vendedores}); applyEmpresaNome(empresa); }
 }
 
-function setupCancel(){
-  closeSetup();
-}
-
-function setupSkipToDemo(){
+// Conclui o wizard — escolha de como inserir dados
+function wzFinish(modo){
+  _persistSetup();
   closeSetup();
   document.getElementById('landing').classList.add('hidden');
-  loadDemo();
+  const cfg=cfgLoad();
+  const n=(cfg&&cfg.vendedores)?cfg.vendedores.length:0;
+  if(modo==='demo'){
+    loadDemo();
+    return;
+  }
+  // skip/planilha/colar/manual → garante empty-state visível primeiro
+  IS_DEMO=false;
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('empty-state').style.display='block';
+  document.getElementById('demo-ribbon').classList.remove('show');
+  document.getElementById('pdf-btn').disabled=true;
+  toast('Configuração salva', `${n} vendedor(es) cadastrado(s).`, 'ok', 4000);
+  // abre o método escolhido
+  if(modo==='planilha'){ document.getElementById('file-input-empty').click(); }
+  else if(modo==='colar'){ openPasteModal(); }
+  else if(modo==='manual'){ openModal(); }
+  // 'skip' → fica no empty-state
 }
+
+function closeSetup(){ document.getElementById('setup').classList.remove('show'); }
+function setupCancel(){ closeSetup(); }
+function setupSkipToDemo(){ closeSetup(); document.getElementById('landing').classList.add('hidden'); loadDemo(); }
 
 let _rowId = 0;
 function setupAddRow(nome='', loja='', meta=''){
@@ -975,27 +972,18 @@ function setupAddRow(nome='', loja='', meta=''){
     <td><button class="vend-del" onclick="setupDelRow('svr-${id}')" title="Remover">×</button></td>`;
   document.getElementById('setup-vend-rows').appendChild(tr);
 }
-
 function setupDelRow(id){
   const el = document.getElementById(id);
   if(el){
     const tbody = document.getElementById('setup-vend-rows');
-    if(tbody.rows.length <= 1){
-      toast('Mínimo 1 vendedor','Mantenha pelo menos um vendedor cadastrado.','warn');
-      return;
-    }
+    if(tbody.rows.length <= 1){ toast('Mínimo 1 vendedor','Mantenha pelo menos um vendedor cadastrado.','warn'); return; }
     el.remove();
   }
 }
-
+// Mantida para compatibilidade (botão de edição em Config usa o wizard agora)
 function setupSave(){
   const empresa = (document.getElementById('cfg-empresa').value||'').trim();
-  if(!empresa){
-    toast('Nome obrigatório','Digite o nome da empresa para continuar.','warn');
-    document.getElementById('cfg-empresa').focus();
-    return;
-  }
-  // coleta vendedores
+  if(!empresa){ toast('Nome obrigatório','Digite o nome da empresa para continuar.','warn'); document.getElementById('cfg-empresa').focus(); return; }
   const rows = document.querySelectorAll('#setup-vend-rows tr');
   const vendedores = [];
   rows.forEach(tr=>{
@@ -1005,42 +993,101 @@ function setupSave(){
     const meta = Number(inputs[2].value)||0;
     if(nome) vendedores.push({nome, loja:loja||'Loja', meta});
   });
-  if(vendedores.length === 0){
-    toast('Sem vendedores','Cadastre pelo menos um vendedor.','warn');
-    return;
-  }
-  // salva
+  if(vendedores.length === 0){ toast('Sem vendedores','Cadastre pelo menos um vendedor.','warn'); return; }
   cfgSave({empresa, vendedores});
   applyEmpresaNome(empresa);
   closeSetup();
-  // se for edição, apenas atualiza — se for primeiro acesso, fecha a landing
-  if(!_setupEditMode){
-    document.getElementById('landing').classList.add('hidden');
-  }
-  toast('Configuração salva', `${vendedores.length} vendedor(es) cadastrado(s). Insira os dados para visualizar o painel.`, 'ok', 5000);
+  if(!_setupEditMode){ document.getElementById('landing').classList.add('hidden'); }
+  toast('Configuração salva', `${vendedores.length} vendedor(es) cadastrado(s).`, 'ok', 5000);
 }
 
-// ── INICIALIZAÇÃO ─────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════
+//  INICIALIZAÇÃO — MODIFICAÇÃO PRINCIPAL (v2.1)
+//  initApp agora chama _silentDemo() para pré-carregar os dados
+//  antes de qualquer interação do usuário.
+// ══════════════════════════════════════════════════════════════
 
 function initApp(){
   const cfg = cfgLoad();
   if(cfg && cfg.empresa){
-    // já configurado — aplica nome e vai pra landing normal
     applyEmpresaNome(cfg.empresa);
   }
-  // landing sempre aparece primeiro (usuário escolhe demo ou começar)
+  // PRÉ-CARREGA a demo em background enquanto a landing está visível.
+  // Quando o usuário clicar em "Ver exemplo ao vivo", o painel
+  // já estará renderizado — transição instantânea.
+  _silentDemo();
 }
 
-// Sobrescreve enterBlank para abrir setup se não configurado
-function enterBlank(){
+// Carrega a demo silenciosamente (sem fechar landing, sem toast, sem ribbon)
+function _silentDemo(){
+  IS_DEMO = true;
+  const cfg = cfgLoad();
+  if(cfg && cfg.empresa) applyEmpresaNome(cfg.empresa);
+  const vendedores = DEMO.vendedores.map(v => {
+    const proj = DEMO.diasCorridos > 0 ? (v.vendido / DEMO.diasCorridos) * DEMO.diasMes : 0;
+    const pct  = v.meta > 0 ? v.vendido / v.meta : null;
+    return {
+      ...v, proj,
+      ticket: v.nVendas > 0 ? v.vendido / v.nVendas : 0,
+      pct,
+      status: pct == null ? 'SEM META' : pct >= .85 ? 'BOM' : pct >= .6 ? 'ATENÇÃO' : 'CRÍTICO'
+    };
+  });
+  const sv = DEMO.semanal.rows.map(r => {
+    const ms = r.metas[DEMO.semanal.semAtual - 1] || 0;
+    const ps = ms > 0 ? r.vendidoSem / ms : null;
+    return {
+      loja: r.loja, nome: r.nome, metaMensal: r.metaMensal, metas: r.metas,
+      metaSem: ms, vendidoSem: r.vendidoSem, pctSem: ps,
+      status: ps == null ? 'AGUARDANDO' : ps >= .85 ? 'BOM' : ps >= .6 ? 'ATENÇÃO' : 'CRÍTICO'
+    };
+  });
+  // Renderiza sem mostrar ribbon (IS_DEMO=true mas landing ainda está por cima)
+  renderDashboard({
+    diasCorridos: DEMO.diasCorridos,
+    diasMes: DEMO.diasMes,
+    vendedores,
+    semanalData: { semAtual: DEMO.semanal.semAtual, semTotal: DEMO.semanal.semTotal, vendedores: sv }
+  });
+  // Esconde o ribbon — ele só aparece quando o usuário clicar "Ver exemplo ao vivo"
+  const rib = document.getElementById('demo-ribbon');
+  if(rib) rib.classList.remove('show');
+}
+
+// ── LANDING → DASHBOARD ──────────────────────────────────────────────
+function closeLanding(){
+  const l = document.getElementById('landing');
+  if(l) l.classList.add('hidden');
+}
+
+// MODIFICAÇÃO: enterDemo agora apenas fecha a landing e exibe o ribbon.
+// Os dados já foram carregados pelo _silentDemo() — transição instantânea.
+function enterDemo(){
   closeLanding();
+  // Exibe ribbon "dados de demonstração"
+  const rib = document.getElementById('demo-ribbon');
+  if(rib) rib.classList.add('show');
+  toast('Exemplo carregado', 'Dados fictícios para você explorar a ferramenta.', 'ok');
+}
+
+function enterBlank(){
   const cfg = cfgLoad();
   if(!cfg || !cfg.empresa){
+    // primeiro acesso: abre o wizard POR CIMA da landing
+    // (se cancelar, volta pra landing intacta)
     openSetup(false);
+  } else {
+    // já configurado: vai direto ao painel em branco pra inserir dados
+    closeLanding();
+    IS_DEMO=false;
+    document.getElementById('dashboard').style.display='none';
+    document.getElementById('empty-state').style.display='block';
+    document.getElementById('demo-ribbon').classList.remove('show');
+    document.getElementById('pdf-btn').disabled=true;
   }
-  // se já configurado, vai pro empty-state direto
 }
 
+// ── DADOS DE DEMONSTRAÇÃO ─────────────────────────────────────────────
 const VENDEDORES_DEFAULT = [
   {loja:'Centro',  nome:'Ana',     meta:75000},
   {loja:'Centro',  nome:'Bruno',   meta:75000},
@@ -1052,9 +1099,6 @@ const VENDEDORES_DEFAULT = [
   {loja:'Bairro',  nome:'Heitor',  meta:21700},
 ];
 
-// ─── DADOS DE DEMONSTRAÇÃO (100% fictícios) ──────────────────────────
-// Servem para mostrar a ferramenta cheia em 1 clique, sem expor
-// nenhum dado real de cliente ou empregador.
 const DEMO = {
   diasCorridos: 18,
   diasMes: 24,
@@ -1070,7 +1114,6 @@ const DEMO = {
   ],
   semanal: {
     semAtual: 3, semTotal: 4,
-    // metas semanais [S1,S2,S3,S4] e vendido na semana atual
     rows: [
       {loja:'Centro',  nome:'Ana Martins',   metaMensal:75000, metas:[18750,18750,18750,18750], vendidoSem:17900},
       {loja:'Centro',  nome:'Bruno Costa',   metaMensal:75000, metas:[18750,18750,18750,18750], vendidoSem:12400},
@@ -1084,29 +1127,20 @@ const DEMO = {
   }
 };
 
-let IS_DEMO = false; // controla a faixa "dados de demonstração"
+let IS_DEMO = false;
 
-// ─── UTILS ───────────────────────────────────────────────────────────
-// Formatação independente de locale (garante padrão brasileiro em qualquer navegador)
+// ── UTILS ─────────────────────────────────────────────────────────────
 function fmtInt(n){
   n = Math.round(Number(n)||0);
   const neg = n < 0; n = Math.abs(n);
-  let s = String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  return (neg?'-':'') + s;
+  return (neg?'-':'') + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
-// Valor monetário com centavos: 400500 -> "400.500,00"
 function fmtMoney(n){
-  const num = Number(n)||0;
-  const neg = num < 0;
-  const abs = Math.abs(num);
-  const inteiro = Math.floor(abs);
-  const cent = Math.round((abs - inteiro) * 100);
-  // corrige arredondamento que estoura para 100 centavos
+  const num = Number(n)||0; const neg = num < 0; const abs = Math.abs(num);
+  const inteiro = Math.floor(abs); const cent = Math.round((abs - inteiro) * 100);
   let parteInt = inteiro, parteCent = cent;
   if(parteCent === 100){ parteInt += 1; parteCent = 0; }
-  const intStr = String(parteInt).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  const centStr = String(parteCent).padStart(2,'0');
-  return (neg?'-':'') + intStr + ',' + centStr;
+  return (neg?'-':'') + String(parteInt).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + String(parteCent).padStart(2,'0');
 }
 const R = v => (v==null||isNaN(Number(v)))?'—':'R$ '+fmtMoney(v);
 const P = v => (Number(v)*100).toFixed(1).replace('.',',')+'%';
@@ -1115,11 +1149,11 @@ function sc(p){ return p>=.85?'ok':p>=.6?'at':'cr'; }
 function sl(p){ return p>=.85?'BOM':p>=.6?'ATENÇÃO':'CRÍTICO'; }
 function bclass(s){
   const m={BOM:'bom','ATENÇÃO':'at',ATENCAO:'at','CRÍTICO':'cr',CRITICO:'cr',
-    FÉRIAS:'fer',FERIAS:'fer',ATESTADO:'ates',AGUARDANDO:'agu','SEM META':'agu'};
+    'FÉRIAS':'fer',FERIAS:'fer',ATESTADO:'ates',AGUARDANDO:'agu','SEM META':'agu'};
   return m[(s||'').toUpperCase().trim()]||'agu';
 }
 
-// ─── TOAST (substitui alert) ─────────────────────────────────────────
+// ── TOAST ─────────────────────────────────────────────────────────────
 function toast(title, msg, type='ok', ms=4000){
   const w=document.getElementById('toast-wrap');
   const el=document.createElement('div');
@@ -1129,21 +1163,11 @@ function toast(title, msg, type='ok', ms=4000){
   setTimeout(()=>{ el.style.animation='slideOut .25s ease forwards'; setTimeout(()=>el.remove(),250); }, ms);
 }
 
-// ─── INIT ────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function(){ initApp(); });
 
-// ─── LANDING → DASHBOARD ─────────────────────────────────────────────
-function closeLanding(){
-  const l=document.getElementById('landing');
-  if(l) l.classList.add('hidden');
-}
-function enterDemo(){ closeLanding(); loadDemo(); }
-// enterBlank definida acima no bloco de setup
-
-// ─── CARREGAR DEMO ───────────────────────────────────────────────────
+// loadDemo mantido para o botão dentro do empty-state
 function loadDemo(){
   IS_DEMO=true;
-  // aplica nome da empresa salvo (se tiver)
   const cfg = cfgLoad();
   if(cfg && cfg.empresa) applyEmpresaNome(cfg.empresa);
   const vendedores=DEMO.vendedores.map(v=>{
@@ -1176,53 +1200,35 @@ function clearAll(){
   const ps=document.getElementById('period-s'); if(ps) ps.textContent='aguardando dados';
 }
 
-// ─── ARMAZENA ÚLTIMO DADO CARREGADO ──────────────────────────────────
 let _lastData = null;
 
-// ─── SWITCH VIEW (menu lateral) ──────────────────────────────────────
+// ── SWITCH VIEW ───────────────────────────────────────────────────────
 const VIEW_LABELS = {
   geral:'Visão Geral', vendas:'Vendas', lojas:'Lojas',
   vendedores:'Vendedores', metas:'Metas', relatorios:'Relatórios', config:'Configurações'
 };
 function switchView(v){
-  // atualiza botões do menu
   document.querySelectorAll('.nav-item').forEach(btn=>{
-    const lbl = btn.textContent.trim();
-    btn.classList.toggle('active', lbl === VIEW_LABELS[v]);
+    btn.classList.toggle('active', btn.textContent.trim() === VIEW_LABELS[v]);
   });
-  // header title
   const h1 = document.querySelector('.greet h1');
-  if(h1) h1.textContent = v==='geral' ? 'Olá, MR Solutions 👋' : VIEW_LABELS[v];
+  if(h1) h1.textContent = v==='geral' ? `Olá, ${getEmpresaNome()} 👋` : VIEW_LABELS[v];
   const sub = document.querySelector('.greet p');
   if(sub){
-    const subs = {
-      geral:'Aqui está o resumo das suas vendas',
-      vendas:'Análise de vendas no período',
-      lojas:'Desempenho detalhado por unidade',
-      vendedores:'Ficha individual de cada vendedor',
-      metas:'Progresso em relação às metas mensais',
-      relatorios:'Resumo executivo e exportação',
-      config:'Parâmetros e configurações'
-    };
+    const subs={geral:'Aqui está o resumo das suas vendas',vendas:'Análise de vendas no período',lojas:'Desempenho detalhado por unidade',vendedores:'Ficha individual de cada vendedor',metas:'Progresso em relação às metas mensais',relatorios:'Resumo executivo e exportação',config:'Parâmetros e configurações'};
     sub.textContent = subs[v]||'';
   }
-  // esconde tabs mensal/semanal (só mostram em geral)
   const tabs = document.querySelector('.tabs');
   if(tabs) tabs.style.display = v==='geral'?'flex':'none';
-  // mostra/esconde capture-zone (visão geral)
   const cz = document.getElementById('capture-zone');
   if(cz) cz.style.display = v==='geral'?'block':'none';
-  // esconde todas as views extras
   document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
-  // mostra a view certa
   if(v!=='geral'){
     const el = document.getElementById('view-'+v);
     if(el) el.classList.add('active');
   }
-  // ribbon demo só em visão geral
   const rib = document.getElementById('demo-ribbon');
   if(rib) rib.classList.toggle('show', v==='geral' && IS_DEMO);
-  // popula a view se tiver dados
   if(_lastData){
     if(v==='vendas')     renderVendas(_lastData);
     if(v==='lojas')      renderLojas(_lastData);
@@ -1234,16 +1240,14 @@ function switchView(v){
   window.scrollTo(0,0);
 }
 
-// ─── VIEW: VENDAS ────────────────────────────────────────────────────
+// ── VIEWS ─────────────────────────────────────────────────────────────
 function renderVendas(d){
   const tv=d.vendedores.reduce((s,v)=>s+v.vendido,0);
   const tm=d.vendedores.reduce((s,v)=>s+v.meta,0);
   const tn=d.vendedores.reduce((s,v)=>s+v.nVendas,0);
   const tp=d.vendedores.reduce((s,v)=>s+(v.proj||0),0);
-  const tick=tn>0?tv/tn:0;
-  const pg=tm>0?tv/tm:0;
-  // métricas
-  const m = document.getElementById('v-metrics');
+  const tick=tn>0?tv/tn:0; const pg=tm>0?tv/tm:0;
+  const m=document.getElementById('v-metrics');
   if(m) m.innerHTML=`
     <div class="metric-card"><div class="metric-lbl">Faturamento</div><div class="metric-val num">${R(tv)}</div><div class="metric-sub">Meta ${R(tm)}</div></div>
     <div class="metric-card"><div class="metric-lbl">Total de Vendas</div><div class="metric-val num">${N(tn)}</div><div class="metric-sub">Pedidos no período</div></div>
@@ -1251,179 +1255,92 @@ function renderVendas(d){
     <div class="metric-card"><div class="metric-lbl">Projeção</div><div class="metric-val num">${R(tp)}</div><div class="metric-sub txt-ok">${P(pg)} da meta</div></div>
     <div class="metric-card"><div class="metric-lbl">% da Meta</div><div class="metric-val num txt-${sc(pg)}">${P(pg)}</div><div class="metric-sub">Atingido até hoje</div></div>
     <div class="metric-card"><div class="metric-lbl">Gap para Meta</div><div class="metric-val num">${R(Math.max(tm-tv,0))}</div><div class="metric-sub">Falta para bater</div></div>`;
-  // barras por loja
   const lojas={};
   d.vendedores.forEach(v=>{ if(!lojas[v.loja])lojas[v.loja]={vendido:0,meta:0}; lojas[v.loja].vendido+=v.vendido; lojas[v.loja].meta+=v.meta; });
-  const maxV = Math.max(...Object.values(lojas).map(l=>l.vendido),1);
+  const maxV=Math.max(...Object.values(lojas).map(l=>l.vendido),1);
   const palette=['#1F2022','#7C846B','#6B6F72','#a0a894','#2d2f31','#9aaa90'];
-  const bars = document.getElementById('v-bars');
-  if(bars) bars.innerHTML = Object.entries(lojas).sort((a,b)=>b[1].vendido-a[1].vendido).map(([loja,info],i)=>{
+  const bars=document.getElementById('v-bars');
+  if(bars) bars.innerHTML=Object.entries(lojas).sort((a,b)=>b[1].vendido-a[1].vendido).map(([loja,info],i)=>{
     const w=(info.vendido/maxV*100).toFixed(1);
-    return `<div class="bar-row">
-      <span class="bar-lbl">Loja ${loja}</span>
-      <span class="bar-track"><span class="bar-fill" style="width:${w}%;background:${palette[i%palette.length]}"><span>${P(info.meta>0?info.vendido/info.meta:0)}</span></span></span>
-      <span class="bar-val">${R(info.vendido)}</span>
-    </div>`;
+    return `<div class="bar-row"><span class="bar-lbl">Loja ${loja}</span><span class="bar-track"><span class="bar-fill" style="width:${w}%;background:${palette[i%palette.length]}"><span>${P(info.meta>0?info.vendido/info.meta:0)}</span></span></span><span class="bar-val">${R(info.vendido)}</span></div>`;
   }).join('');
 }
-
-// ─── VIEW: LOJAS ─────────────────────────────────────────────────────
 function renderLojas(d){
   const lojas={};
   d.vendedores.forEach(v=>{ if(!lojas[v.loja])lojas[v.loja]={vendido:0,meta:0,proj:0,nVendas:0,vends:[]};
     lojas[v.loja].vendido+=v.vendido; lojas[v.loja].meta+=v.meta; lojas[v.loja].proj+=(v.proj||0); lojas[v.loja].nVendas+=v.nVendas; lojas[v.loja].vends.push(v); });
-  const palette=['#2563eb','#0f9d8a','#ea7a3c','#7c3aed'];
-  const el = document.getElementById('v-lojas-detail');
+  const el=document.getElementById('v-lojas-detail');
   if(!el) return;
-  el.innerHTML = Object.entries(lojas).map(([loja,info],li)=>{
+  el.innerHTML=Object.entries(lojas).map(([loja,info])=>{
     const p=info.meta>0?info.vendido/info.meta:0;
     const tick=info.nVendas>0?info.vendido/info.nVendas:0;
-    const vendsHTML = info.vends.sort((a,b)=>b.vendido-a.vendido).map(v=>{
+    const vendsHTML=info.vends.sort((a,b)=>b.vendido-a.vendido).map(v=>{
       const vp=v.pct!=null?sc(v.pct):'nt';
-      return `<div class="loja-vend-row">
-        <span class="loja-vend-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span>
-        <span class="loja-vend-name">${v.nome}</span>
-        <span class="rk-sb rk-sb-${bclass(v.status)}">${v.status}</span>
-        <span class="loja-vend-val">${R(v.vendido)}</span>
-        <span class="loja-vend-pct txt-${vp}">${v.pct!=null?P(v.pct):'-'}</span>
-      </div>`;
+      return `<div class="loja-vend-row"><span class="loja-vend-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span><span class="loja-vend-name">${v.nome}</span><span class="rk-sb rk-sb-${bclass(v.status)}">${v.status}</span><span class="loja-vend-val">${R(v.vendido)}</span><span class="loja-vend-pct txt-${vp}">${v.pct!=null?P(v.pct):'-'}</span></div>`;
     }).join('');
-    return `<div class="loja-detail">
-      <div class="loja-detail-head">
-        <div class="loja-detail-ico">🏪</div>
-        <div class="loja-detail-info"><div class="loja-detail-name">Loja ${loja}</div></div>
-        <span class="badge badge-${sc(p)}">${sl(p)}</span>
-      </div>
-      <div class="loja-detail-stats">
-        <div class="loja-stat"><div class="loja-stat-l">Faturado</div><div class="loja-stat-v num">${R(info.vendido)}</div></div>
-        <div class="loja-stat"><div class="loja-stat-l">Meta</div><div class="loja-stat-v num">${R(info.meta)}</div></div>
-        <div class="loja-stat"><div class="loja-stat-l">Projeção</div><div class="loja-stat-v num">${R(info.proj)}</div></div>
-        <div class="loja-stat"><div class="loja-stat-l">Ticket</div><div class="loja-stat-v num">${R(tick)}</div></div>
-      </div>
+    return `<div class="loja-detail"><div class="loja-detail-head"><div class="loja-detail-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#7C846B" stroke-width="1.8" style="width:26px;height:26px"><path d="M3 9l1-5h16l1 5M5 9v11h14V9M9 20v-6h6v6"/></svg></div><div class="loja-detail-info"><div class="loja-detail-name">Loja ${loja}</div></div><span class="badge badge-${sc(p)}">${sl(p)}</span></div>
+      <div class="loja-detail-stats"><div class="loja-stat"><div class="loja-stat-l">Faturado</div><div class="loja-stat-v num">${R(info.vendido)}</div></div><div class="loja-stat"><div class="loja-stat-l">Meta</div><div class="loja-stat-v num">${R(info.meta)}</div></div><div class="loja-stat"><div class="loja-stat-l">Projeção</div><div class="loja-stat-v num">${R(info.proj)}</div></div><div class="loja-stat"><div class="loja-stat-l">Ticket</div><div class="loja-stat-v num">${R(tick)}</div></div></div>
       <div class="loja-bar" style="margin-bottom:14px"><div class="loja-bar-fill fill-${sc(p)}" style="width:${Math.min(p*100,100).toFixed(1)}%"></div></div>
-      <div class="sec-title" style="margin-bottom:8px">Vendedores desta loja</div>
-      <div class="loja-vends">${vendsHTML}</div>
-    </div>`;
+      <div class="sec-title" style="margin-bottom:8px">Vendedores desta loja</div><div class="loja-vends">${vendsHTML}</div></div>`;
   }).join('');
 }
-
-// ─── VIEW: VENDEDORES ────────────────────────────────────────────────
 function renderVendedores(d){
-  const el = document.getElementById('v-vend-grid');
+  const el=document.getElementById('v-vend-grid');
   if(!el) return;
-  const sorted=[...d.vendedores].sort((a,b)=>b.vendido-a.vendido);
-  el.innerHTML = sorted.map(v=>{
-    const s=v.pct!=null?sc(v.pct):'nt';
-    const bw=v.pct!=null?Math.min(v.pct*100,100).toFixed(1):'0';
+  el.innerHTML=[...d.vendedores].sort((a,b)=>b.vendido-a.vendido).map(v=>{
+    const s=v.pct!=null?sc(v.pct):'nt'; const bw=v.pct!=null?Math.min(v.pct*100,100).toFixed(1):'0';
     const ds=v.desconto!=null&&v.desconto!==''?(isNaN(Number(v.desconto))?v.desconto:(Number(v.desconto)*100).toFixed(1).replace('.',',')+'%'):'—';
-    return `<div class="vend-card">
-      <div class="vend-head">
-        <span class="vend-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span>
-        <div><div class="vend-name">${v.nome}</div><div class="vend-store">Loja ${v.loja}</div></div>
-        <span class="rk-sb rk-sb-${bclass(v.status)}" style="margin-left:auto">${v.status}</span>
-      </div>
-      <div class="vend-stats">
-        <div class="vend-stat"><div class="vend-stat-l">Vendido</div><div class="vend-stat-v num">${R(v.vendido)}</div></div>
-        <div class="vend-stat"><div class="vend-stat-l">Meta</div><div class="vend-stat-v num">${R(v.meta)}</div></div>
-        <div class="vend-stat"><div class="vend-stat-l">Ticket</div><div class="vend-stat-v num">${R(v.ticket)}</div></div>
-        <div class="vend-stat"><div class="vend-stat-l">Projeção</div><div class="vend-stat-v num">${R(v.proj||0)}</div></div>
-        <div class="vend-stat"><div class="vend-stat-l">Nº Vendas</div><div class="vend-stat-v num">${v.nVendas}</div></div>
-        <div class="vend-stat"><div class="vend-stat-l">Desconto</div><div class="vend-stat-v num">${ds}</div></div>
-      </div>
+    return `<div class="vend-card"><div class="vend-head"><span class="vend-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span><div><div class="vend-name">${v.nome}</div><div class="vend-store">Loja ${v.loja}</div></div><span class="rk-sb rk-sb-${bclass(v.status)}" style="margin-left:auto">${v.status}</span></div>
+      <div class="vend-stats"><div class="vend-stat"><div class="vend-stat-l">Vendido</div><div class="vend-stat-v num">${R(v.vendido)}</div></div><div class="vend-stat"><div class="vend-stat-l">Meta</div><div class="vend-stat-v num">${R(v.meta)}</div></div><div class="vend-stat"><div class="vend-stat-l">Ticket</div><div class="vend-stat-v num">${R(v.ticket)}</div></div><div class="vend-stat"><div class="vend-stat-l">Projeção</div><div class="vend-stat-v num">${R(v.proj||0)}</div></div><div class="vend-stat"><div class="vend-stat-l">Nº Vendas</div><div class="vend-stat-v num">${v.nVendas}</div></div><div class="vend-stat"><div class="vend-stat-l">Desconto</div><div class="vend-stat-v num">${ds}</div></div></div>
       <div class="vend-prog"><div class="vend-prog-fill fill-${s}" style="width:${bw}%"></div></div>
-      <div class="vend-foot"><span class="txt-${s}" style="font-weight:600">${v.pct!=null?P(v.pct)+' da meta':'sem meta'}</span><span style="color:var(--text2)">Gap ${R(Math.max((v.meta||0)-v.vendido,0))}</span></div>
-    </div>`;
+      <div class="vend-foot"><span class="txt-${s}" style="font-weight:600">${v.pct!=null?P(v.pct)+' da meta':'sem meta'}</span><span style="color:var(--text2)">Gap ${R(Math.max((v.meta||0)-v.vendido,0))}</span></div></div>`;
   }).join('');
 }
-
-// ─── VIEW: METAS ─────────────────────────────────────────────────────
 function renderMetas(d){
   const bom=d.vendedores.filter(v=>v.pct!=null&&v.pct>=.85).length;
   const at=d.vendedores.filter(v=>v.pct!=null&&v.pct>=.6&&v.pct<.85).length;
   const cr=d.vendedores.filter(v=>v.pct!=null&&v.pct<.6).length;
   const sm=document.getElementById('v-meta-summary');
-  if(sm) sm.innerHTML=`
-    <div class="meta-sum-card"><div class="meta-sum-n txt-ok">${bom}</div><div class="meta-sum-l">✅ BOM (≥85%)</div></div>
-    <div class="meta-sum-card"><div class="meta-sum-n txt-at">${at}</div><div class="meta-sum-l">⚠️ ATENÇÃO (60–84%)</div></div>
-    <div class="meta-sum-card"><div class="meta-sum-n txt-cr">${cr}</div><div class="meta-sum-l">🔴 CRÍTICO (&lt;60%)</div></div>`;
+  if(sm) sm.innerHTML=`<div class="meta-sum-card"><div class="meta-sum-n txt-ok">${bom}</div><div class="meta-sum-l">✅ BOM (≥85%)</div></div><div class="meta-sum-card"><div class="meta-sum-n txt-at">${at}</div><div class="meta-sum-l">⚠️ ATENÇÃO (60–84%)</div></div><div class="meta-sum-card"><div class="meta-sum-n txt-cr">${cr}</div><div class="meta-sum-l">🔴 CRÍTICO (&lt;60%)</div></div>`;
   const ml=document.getElementById('v-meta-list');
   if(!ml) return;
-  const sorted=[...d.vendedores].sort((a,b)=>(b.pct||0)-(a.pct||0));
-  ml.innerHTML = sorted.map(v=>{
-    const s=v.pct!=null?sc(v.pct):'nt';
-    const bw=v.pct!=null?Math.min(v.pct*100,100).toFixed(1):'0';
+  ml.innerHTML=[...d.vendedores].sort((a,b)=>(b.pct||0)-(a.pct||0)).map(v=>{
+    const s=v.pct!=null?sc(v.pct):'nt'; const bw=v.pct!=null?Math.min(v.pct*100,100).toFixed(1):'0';
     const falta=Math.max((v.meta||0)-v.vendido,0);
     const diasR=d.diasCorridos&&d.diasMes?(d.diasMes-d.diasCorridos):0;
     const ritmoDia=d.diasCorridos>0?v.vendido/d.diasCorridos:0;
     const projetado=ritmoDia*(d.diasMes||d.diasCorridos||1);
-    return `<div class="meta-card">
-      <div class="meta-head">
-        <span class="meta-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span>
-        <div><div class="meta-name">${v.nome}</div><div class="meta-store">Loja ${v.loja}</div></div>
-        <span class="rk-sb rk-sb-${bclass(v.status)}" style="margin-left:auto">${v.status}</span>
-      </div>
-      <div class="meta-vals">
-        <div class="meta-v"><div class="meta-v-l">Vendido</div><div class="meta-v-n num">${R(v.vendido)}</div></div>
-        <div class="meta-v"><div class="meta-v-l">Meta</div><div class="meta-v-n num">${R(v.meta)}</div></div>
-        <div class="meta-v"><div class="meta-v-l">Falta</div><div class="meta-v-n num txt-${s}">${R(falta)}</div></div>
-        <div class="meta-v"><div class="meta-v-l">Projeção</div><div class="meta-v-n num">${R(projetado)}</div></div>
-      </div>
+    return `<div class="meta-card"><div class="meta-head"><span class="meta-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span><div><div class="meta-name">${v.nome}</div><div class="meta-store">Loja ${v.loja}</div></div><span class="rk-sb rk-sb-${bclass(v.status)}" style="margin-left:auto">${v.status}</span></div>
+      <div class="meta-vals"><div class="meta-v"><div class="meta-v-l">Vendido</div><div class="meta-v-n num">${R(v.vendido)}</div></div><div class="meta-v"><div class="meta-v-l">Meta</div><div class="meta-v-n num">${R(v.meta)}</div></div><div class="meta-v"><div class="meta-v-l">Falta</div><div class="meta-v-n num txt-${s}">${R(falta)}</div></div><div class="meta-v"><div class="meta-v-l">Projeção</div><div class="meta-v-n num">${R(projetado)}</div></div></div>
       <div class="meta-track"><div class="meta-fill fill-${s}" style="width:${bw}%"></div></div>
-      <div class="meta-foot"><span class="txt-${s}" style="font-weight:700">${v.pct!=null?P(v.pct)+' atingido':'sem meta'}</span>${diasR>0?`<span style="color:var(--text2)">${diasR} dias úteis restantes</span>`:''}</div>
-    </div>`;
+      <div class="meta-foot"><span class="txt-${s}" style="font-weight:700">${v.pct!=null?P(v.pct)+' atingido':'sem meta'}</span>${diasR>0?`<span style="color:var(--text2)">${diasR} dias úteis restantes</span>`:''}</div></div>`;
   }).join('');
 }
-
-// ─── VIEW: RELATÓRIOS ────────────────────────────────────────────────
 function renderRelatorios(d){
-  const tv=d.vendedores.reduce((s,v)=>s+v.vendido,0);
-  const tm=d.vendedores.reduce((s,v)=>s+v.meta,0);
-  const tp=d.vendedores.reduce((s,v)=>s+(v.proj||0),0);
-  const tn=d.vendedores.reduce((s,v)=>s+v.nVendas,0);
-  const tick=tn>0?tv/tn:0;
-  const pg=tm>0?tv/tm:0;
-  const now=new Date();
+  const tv=d.vendedores.reduce((s,v)=>s+v.vendido,0); const tm=d.vendedores.reduce((s,v)=>s+v.meta,0);
+  const tp=d.vendedores.reduce((s,v)=>s+(v.proj||0),0); const tn=d.vendedores.reduce((s,v)=>s+v.nVendas,0);
+  const tick=tn>0?tv/tn:0; const pg=tm>0?tv/tm:0; const now=new Date();
   const g=document.getElementById('v-report-geral');
-  if(g) g.innerHTML=`<div class="report-title">📊 Resumo Geral — ${now.toLocaleDateString('pt-BR')}</div>
-    ${[['Faturamento Total',R(tv)],['Meta Mensal',R(tm)],['% Atingido',P(pg)],['Projeção do Mês',R(tp)],['Total de Vendas',N(tn)+' pedidos'],['Ticket Médio',R(tick)],['Período',`${d.diasCorridos||'—'} de ${d.diasMes||'—'} dias úteis`]]
-    .map(([l,v])=>`<div class="report-row"><span class="report-row-l">${l}</span><span class="report-row-v">${v}</span></div>`).join('')}`;
+  if(g) g.innerHTML=`<div class="report-title">📊 Resumo Geral — ${now.toLocaleDateString('pt-BR')}</div>${[['Faturamento Total',R(tv)],['Meta Mensal',R(tm)],['% Atingido',P(pg)],['Projeção do Mês',R(tp)],['Total de Vendas',N(tn)+' pedidos'],['Ticket Médio',R(tick)],['Período',`${d.diasCorridos||'—'} de ${d.diasMes||'—'} dias úteis`]].map(([l,v])=>`<div class="report-row"><span class="report-row-l">${l}</span><span class="report-row-v">${v}</span></div>`).join('')}`;
   const lojas={};
   d.vendedores.forEach(v=>{ if(!lojas[v.loja])lojas[v.loja]={vendido:0,meta:0}; lojas[v.loja].vendido+=v.vendido; lojas[v.loja].meta+=v.meta; });
   const rl=document.getElementById('v-report-lojas');
-  if(rl) rl.innerHTML=`<div class="report-title">🏪 Desempenho por Loja</div>`+
-    Object.entries(lojas).map(([l,i])=>`<div class="report-row"><span class="report-row-l">Loja ${l}</span><span class="report-row-v">${R(i.vendido)} <span class="txt-${sc(i.meta>0?i.vendido/i.meta:0)}" style="font-size:12px;margin-left:8px">${P(i.meta>0?i.vendido/i.meta:0)}</span></span></div>`).join('');
-  const sorted=[...d.vendedores].sort((a,b)=>b.vendido-a.vendido);
+  if(rl) rl.innerHTML=`<div class="report-title">🏪 Desempenho por Loja</div>`+Object.entries(lojas).map(([l,i])=>`<div class="report-row"><span class="report-row-l">Loja ${l}</span><span class="report-row-v">${R(i.vendido)} <span class="txt-${sc(i.meta>0?i.vendido/i.meta:0)}" style="font-size:12px;margin-left:8px">${P(i.meta>0?i.vendido/i.meta:0)}</span></span></div>`).join('');
   const rt=document.getElementById('v-report-top');
-  if(rt) rt.innerHTML=`<div class="report-title">🏆 Top Vendedores</div>`+
-    sorted.slice(0,5).map((v,i)=>`<div class="report-row"><span class="report-row-l">${i+1}° ${v.nome} · Loja ${v.loja}</span><span class="report-row-v">${R(v.vendido)} <span class="txt-${sc(v.pct||0)}" style="font-size:12px;margin-left:8px">${v.pct!=null?P(v.pct):'-'}</span></span></div>`).join('');
+  if(rt) rt.innerHTML=`<div class="report-title">🏆 Top Vendedores</div>`+[...d.vendedores].sort((a,b)=>b.vendido-a.vendido).slice(0,5).map((v,i)=>`<div class="report-row"><span class="report-row-l">${i+1}° ${v.nome} · Loja ${v.loja}</span><span class="report-row-v">${R(v.vendido)} <span class="txt-${sc(v.pct||0)}" style="font-size:12px;margin-left:8px">${v.pct!=null?P(v.pct):'-'}</span></span></div>`).join('');
 }
-
-// ─── VIEW: CONFIGURAÇÕES ─────────────────────────────────────────────
 function renderConfig(d){
   const dc=document.getElementById('cfg-dias-cor'); if(dc) dc.value=d.diasCorridos||20;
   const dm=document.getElementById('cfg-dias-mes'); if(dm) dm.value=d.diasMes||24;
   const inf=document.getElementById('cfg-info');
   if(inf) inf.innerHTML=`Período atual: <b>${d.diasCorridos||'—'} dias corridos</b> de <b>${d.diasMes||'—'} dias úteis</b>. Atualizado em ${new Date().toLocaleDateString('pt-BR')}.`;
-  // exibe empresa e lista de vendedores visualmente
-  const cfg = cfgLoad();
-  const ei = document.getElementById('cfg-empresa-info');
+  const cfg=cfgLoad(); const ei=document.getElementById('cfg-empresa-info');
   if(ei){
     if(cfg && cfg.empresa){
-      const vends = (cfg.vendedores||[]);
-      const vendsHTML = vends.map(v=>`
-        <div class="cfg-vend-item">
-          <span class="cfg-vend-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span>
-          <div style="flex:1"><div class="cfg-vend-name">${v.nome}</div><div class="cfg-vend-loja">Loja ${v.loja||'—'}</div></div>
-          <div class="cfg-vend-meta">${R(v.meta)}/mês</div>
-        </div>`).join('');
-      ei.innerHTML=`
-        <div class="cfg-empresa-row">
-          <div class="cfg-empresa-name">${cfg.empresa}</div>
-          <span style="font-size:12px;color:var(--cinza-medio)">${vends.length} vendedor(es)</span>
-        </div>
-        <div class="cfg-vend-list">${vendsHTML}</div>`;
+      const vends=(cfg.vendedores||[]);
+      ei.innerHTML=`<div class="cfg-empresa-row"><div class="cfg-empresa-name">${cfg.empresa}</div><span style="font-size:12px;color:var(--cinza-medio)">${vends.length} vendedor(es)</span></div><div class="cfg-vend-list">${vends.map(v=>`<div class="cfg-vend-item"><span class="cfg-vend-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span><div style="flex:1"><div class="cfg-vend-name">${v.nome}</div><div class="cfg-vend-loja">Loja ${v.loja||'—'}</div></div><div class="cfg-vend-meta">${R(v.meta)}/mês</div></div>`).join('')}</div>`;
     } else {
-      ei.innerHTML=`<div style="color:var(--cinza-medio);font-size:13px">Nenhuma empresa configurada. Clique em "Configurar empresa" para começar.</div>`;
+      ei.innerHTML=`<div style="color:var(--cinza-medio);font-size:13px">Nenhuma empresa configurada.</div>`;
     }
   }
 }
@@ -1438,11 +1355,10 @@ function applyConfig(){
   switchView('geral');
 }
 
-// ─── EXPORTAR PDF ────────────────────────────────────────────────────
+// ── EXPORTAR PDF ──────────────────────────────────────────────────────
 async function exportPDF(){
-  const btn=document.getElementById('pdf-btn');
-  const zone=document.getElementById('capture-zone');
-  if(!zone){ return; }
+  const btn=document.getElementById('pdf-btn'); const zone=document.getElementById('capture-zone');
+  if(!zone) return;
   btn.disabled=true; const orig=btn.textContent; btn.textContent='⏳ Gerando…';
   toast('Gerando PDF','Capturando o relatório, aguarde…','warn',6000);
   try{
@@ -1450,12 +1366,8 @@ async function exportPDF(){
     const img=canvas.toDataURL('image/png');
     const {jsPDF}=window.jspdf;
     const pdf=new jsPDF('p','mm','a4');
-    const pw=pdf.internal.pageSize.getWidth();
-    const ph=pdf.internal.pageSize.getHeight();
-    const margin=8;
-    const usableW=pw-margin*2;
-    const imgH=canvas.height*usableW/canvas.width;
-    // cabeçalho
+    const pw=pdf.internal.pageSize.getWidth(); const ph=pdf.internal.pageSize.getHeight();
+    const margin=8; const usableW=pw-margin*2; const imgH=canvas.height*usableW/canvas.width;
     pdf.setFillColor(10,12,16); pdf.rect(0,0,pw,ph,'F');
     pdf.setTextColor(232,234,240); pdf.setFontSize(13); pdf.setFont(undefined,'bold');
     pdf.text('Relatório de Vendas',margin,12);
@@ -1463,17 +1375,11 @@ async function exportPDF(){
     pdf.text('MR Solutions · Dados para Varejo',margin,17);
     pdf.setTextColor(107,114,128);
     pdf.text(new Date().toLocaleString('pt-BR'),pw-margin,12,{align:'right'});
-    // imagem (paginação se passar de 1 página)
-    let y=22, remaining=imgH, sy=0;
-    const pageImgH=ph-y-margin;
-    if(imgH<=pageImgH){
-      pdf.addImage(img,'PNG',margin,y,usableW,imgH);
-    } else {
-      // fatiar verticalmente em múltiplas páginas
-      const sliceCanvas=document.createElement('canvas');
-      const ctx=sliceCanvas.getContext('2d');
-      const pxPerMM=canvas.width/usableW;
-      const slicePxH=pageImgH*pxPerMM;
+    let y=22; const pageImgH=ph-y-margin;
+    if(imgH<=pageImgH){ pdf.addImage(img,'PNG',margin,y,usableW,imgH); }
+    else {
+      const sliceCanvas=document.createElement('canvas'); const ctx=sliceCanvas.getContext('2d');
+      const pxPerMM=canvas.width/usableW; const slicePxH=pageImgH*pxPerMM;
       let srcY=0, first=true;
       while(srcY<canvas.height){
         const h=Math.min(slicePxH,canvas.height-srcY);
@@ -1482,22 +1388,17 @@ async function exportPDF(){
         ctx.drawImage(canvas,0,srcY,canvas.width,h,0,0,canvas.width,h);
         const sImg=sliceCanvas.toDataURL('image/png');
         if(!first){ pdf.addPage(); pdf.setFillColor(10,12,16); pdf.rect(0,0,pw,ph,'F'); }
-        const drawY=first?y:margin;
-        pdf.addImage(sImg,'PNG',margin,drawY,usableW,h/pxPerMM);
+        pdf.addImage(sImg,'PNG',margin,first?y:margin,usableW,h/pxPerMM);
         srcY+=h; first=false;
       }
     }
     pdf.save(`relatorio-vendas-${new Date().toISOString().slice(0,10)}.pdf`);
     toast('PDF pronto','O download foi iniciado.','ok');
-  }catch(err){
-    console.error(err);
-    toast('Erro ao gerar PDF',String(err.message||err),'err',6000);
-  }finally{
-    btn.disabled=false; btn.textContent=orig;
-  }
+  }catch(err){ console.error(err); toast('Erro ao gerar PDF',String(err.message||err),'err',6000); }
+  finally{ btn.disabled=false; btn.textContent=orig; }
 }
 
-// ─── MODAL COLAR PLANILHA ────────────────────────────────────────────
+// ── MODAL COLAR ───────────────────────────────────────────────────────
 let _parsedDados=null, _parsedSemanal=null;
 function openPasteModal(){ document.getElementById('paste-modal').style.display='flex'; document.body.style.overflow='hidden'; }
 function closePasteModal(){ document.getElementById('paste-modal').style.display='none'; document.body.style.overflow=''; }
@@ -1531,10 +1432,10 @@ function previewPaste(type){
     const r=rows[i].join('|').toUpperCase();
     if(r.includes('LOJA')&&r.includes('VENDEDOR')){ hdrIdx=i; break; }
   }
-  if(hdrIdx<0){ statusEl.innerHTML='<span class="ps-warn">⚠ Cabeçalho não encontrado (inclua LOJA e VENDEDOR).</span>'; previewEl.innerHTML=''; return; }
+  if(hdrIdx<0){ statusEl.innerHTML='<span class="ps-warn">⚠ Cabeçalho não encontrado.</span>'; previewEl.innerHTML=''; return; }
   const headers=rows[hdrIdx];
   const dataRows=rows.slice(hdrIdx+1).filter(r=>r[0]&&!r[0].toUpperCase().includes('TOTAL')&&r.join('').trim()!='');
-  if(dataRows.length===0){ statusEl.innerHTML='<span class="ps-err">✕ Nenhuma linha de dado após o cabeçalho.</span>'; previewEl.innerHTML=''; return; }
+  if(dataRows.length===0){ statusEl.innerHTML='<span class="ps-err">✕ Nenhuma linha após cabeçalho.</span>'; previewEl.innerHTML=''; return; }
   const showCols=Math.min(headers.length,7);
   let tbl=`<table class="preview-table"><thead><tr>${headers.slice(0,showCols).map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`;
   dataRows.slice(0,8).forEach(r=>{ tbl+=`<tr>${r.slice(0,showCols).map(c=>`<td>${c}</td>`).join('')}</tr>`; });
@@ -1557,22 +1458,18 @@ function applyPaste(){
   const semAtual=Number(document.getElementById('p-sem-atual').value)||4;
   const semTotal=Number(document.getElementById('p-sem-total').value)||4;
   const h=_parsedDados.headers;
-  const iLoja=findCol(h,'LOJA'), iVend=findCol(h,'VENDEDOR','NOME');
+  const iLoja=findCol(h,'LOJA'),iVend=findCol(h,'VENDEDOR','NOME');
   const iVendido=findCol(h,'VALOR VENDIDO','VENDIDO','VENDA');
   const iNV=findCol(h,'Nº VENDAS','N VENDAS','NUM VENDAS','VENDAS');
-  const iDesc=findCol(h,'DESCONTO','DESC'), iMeta=findCol(h,'META MENSAL','META');
-  const iProj=findCol(h,'PROJEÇÃO','PROJEC'), iTicket=findCol(h,'TICKET');
+  const iDesc=findCol(h,'DESCONTO','DESC'),iMeta=findCol(h,'META MENSAL','META');
+  const iProj=findCol(h,'PROJEÇÃO','PROJEC'),iTicket=findCol(h,'TICKET');
   const vendedores=_parsedDados.dataRows.map(r=>{
-    const vendido=iVendido>=0?cleanNum(r[iVendido]):0;
-    const meta=iMeta>=0?cleanNum(r[iMeta]):0;
-    const nVendas=iNV>=0?cleanNum(r[iNV]):0;
-    const desc=iDesc>=0?cleanPct(r[iDesc]):0;
+    const vendido=iVendido>=0?cleanNum(r[iVendido]):0; const meta=iMeta>=0?cleanNum(r[iMeta]):0;
+    const nVendas=iNV>=0?cleanNum(r[iNV]):0; const desc=iDesc>=0?cleanPct(r[iDesc]):0;
     const proj=iProj>=0?cleanNum(r[iProj]):(diasCor>0?vendido/diasCor*diasMes:0);
     const ticket=iTicket>=0?cleanNum(r[iTicket]):(nVendas>0?vendido/nVendas:0);
     const pct=meta>0?vendido/meta:null;
-    return {loja:iLoja>=0?String(r[iLoja]):'?',nome:iVend>=0?String(r[iVend]):'?',
-      vendido,meta,nVendas,desconto:desc,proj,ticket,pct,
-      status:pct==null?'SEM META':pct>=.85?'BOM':pct>=.6?'ATENÇÃO':'CRÍTICO'};
+    return {loja:iLoja>=0?String(r[iLoja]):'?',nome:iVend>=0?String(r[iVend]):'?',vendido,meta,nVendas,desconto:desc,proj,ticket,pct,status:pct==null?'SEM META':pct>=.85?'BOM':pct>=.6?'ATENÇÃO':'CRÍTICO'};
   });
   let semanalData=null;
   if(_parsedSemanal){
@@ -1585,23 +1482,17 @@ function applyPaste(){
     const isVS=findCol(hs,'VENDIDO SEMANA','VENDIDO SEM','VENDIDO');
     const sv=_parsedSemanal.dataRows.map(r=>{
       const metas=[isS1,isS2,isS3,isS4].map(i=>i>=0?cleanNum(r[i]):0);
-      const ms=metas[semAtual-1]||0, vs=isVS>=0?cleanNum(r[isVS]):0, ps=ms>0?vs/ms:null;
-      return {loja:isLoja>=0?String(r[isLoja]):'?',nome:isVend>=0?String(r[isVend]):'?',
-        metaMensal:isMetaM>=0?cleanNum(r[isMetaM]):0,metas,metaSem:ms,vendidoSem:vs,pctSem:ps,
-        status:ps==null?'AGUARDANDO':ps>=.85?'BOM':ps>=.6?'ATENÇÃO':'CRÍTICO'};
+      const ms=metas[semAtual-1]||0,vs=isVS>=0?cleanNum(r[isVS]):0,ps=ms>0?vs/ms:null;
+      return {loja:isLoja>=0?String(r[isLoja]):'?',nome:isVend>=0?String(r[isVend]):'?',metaMensal:isMetaM>=0?cleanNum(r[isMetaM]):0,metas,metaSem:ms,vendidoSem:vs,pctSem:ps,status:ps==null?'AGUARDANDO':ps>=.85?'BOM':ps>=.6?'ATENÇÃO':'CRÍTICO'};
     });
     semanalData={semAtual,semTotal,vendedores:sv};
   }
-  IS_DEMO=false;
-  closePasteModal();
+  IS_DEMO=false; closePasteModal();
   renderDashboard({diasCorridos:diasCor,diasMes,vendedores,semanalData});
   toast('Dados aplicados',`${vendedores.length} vendedor(es) carregado(s).`,'ok');
 }
 
-function sbadge(s){ return `<span class="sb sb-${bclass(s)}">${s||'—'}</span>`; }
-
-
-// ─── MODAL MANUAL ────────────────────────────────────────────────────
+// ── MODAL MANUAL ──────────────────────────────────────────────────────
 function openModal(){ buildVRows(); document.getElementById('modal').style.display='flex'; document.body.style.overflow='hidden'; }
 function closeModal(){ document.getElementById('modal').style.display='none'; document.body.style.overflow=''; }
 function overlayClick(e){ if(e.target===document.getElementById('modal'))closeModal(); }
@@ -1609,8 +1500,7 @@ function buildVRows(){
   const cont=document.getElementById('vrows');
   cont.innerHTML=getVendedores().map((v,i)=>`
     <div class="vrow">
-      <div class="floja">${v.loja}</div>
-      <div class="fnome">${v.nome}</div>
+      <div class="floja">${v.loja}</div><div class="fnome">${v.nome}</div>
       <input class="finput" id="mv-ven-${i}" type="number" min="0" placeholder="0" value="">
       <input class="finput" id="mv-met-${i}" type="number" min="0" value="${v.meta}">
       <input class="finput" id="mv-nv-${i}"  type="number" min="0" placeholder="0" value="">
@@ -1638,22 +1528,18 @@ function applyManual(){
     const pct=meta>0?vendido/meta:null;
     const autoSt=pct==null?'SEM META':pct>=.85?'BOM':pct>=.6?'ATENÇÃO':'CRÍTICO';
     totalVendido+=vendido;
-    return {loja:v.loja,nome:v.nome,vendido,meta,nVendas,desconto:desc/100,proj,pct,
-      status:stSel==='AUTO'?autoSt:stSel,ticket:nVendas>0?vendido/nVendas:0};
+    return {loja:v.loja,nome:v.nome,vendido,meta,nVendas,desconto:desc/100,proj,pct,status:stSel==='AUTO'?autoSt:stSel,ticket:nVendas>0?vendido/nVendas:0};
   });
   if(totalVendido===0){ toast('Sem valores','Preencha ao menos um valor vendido.','warn'); return; }
   const semVendedores=vendedores.map(v=>({...v,metaSem:v.meta>0?Math.round(v.meta/semTotal):0,vendidoSem:0,pctSem:null}));
-  IS_DEMO=false;
-  closeModal();
+  IS_DEMO=false; closeModal();
   renderDashboard({diasCorridos:diasCor,diasMes,vendedores,semanalData:{semAtual,semTotal,vendedores:semVendedores},fromManual:true});
   toast('Dados aplicados','Dashboard atualizado.','ok');
 }
 
-// ─── FILE INPUT ──────────────────────────────────────────────────────
-// upload tratado via onchange inline no input
+// ── FILE INPUT ────────────────────────────────────────────────────────
 function handleFileInput(input){
   const f=input.files[0]; if(!f)return;
-  /* nome do arquivo */ void f.name;
   const r=new FileReader();
   r.onload=ev=>processXLSX(ev.target.result);
   r.onerror=()=>toast('Erro ao ler arquivo','Não foi possível abrir a planilha.','err');
@@ -1663,18 +1549,12 @@ document.body.addEventListener('dragover',e=>e.preventDefault());
 document.body.addEventListener('drop',e=>{
   e.preventDefault();
   const f=e.dataTransfer.files[0]; if(!f)return;
-  /* nome do arquivo */ void f.name;
-  const r=new FileReader();
-  r.onload=ev=>processXLSX(ev.target.result);
-  r.readAsArrayBuffer(f);
+  const r=new FileReader(); r.onload=ev=>processXLSX(ev.target.result); r.readAsArrayBuffer(f);
 });
 
-// ─── PROCESS XLSX ────────────────────────────────────────────────────
+// ── PROCESS XLSX ──────────────────────────────────────────────────────
 function processXLSX(buffer){
-  if(typeof XLSX==='undefined'){
-    toast('Sem conexão','A biblioteca de leitura de planilha não carregou. Verifique sua internet e recarregue a página.','err',7000);
-    return;
-  }
+  if(typeof XLSX==='undefined'){ toast('Sem conexão','A biblioteca não carregou. Recarregue a página.','err',7000); return; }
   try{
     const wb=XLSX.read(buffer,{type:'array'});
     const wsD=wb.Sheets['DADOS'];
@@ -1693,11 +1573,9 @@ function processXLSX(buffer){
       if(!row[0]||String(row[0]).toUpperCase().includes('TOTAL'))continue;
       const meta=Number(row[5])||0, vendido=Number(row[2])||0;
       const p=meta>0?vendido/meta:null;
-      vendedores.push({loja:String(row[0]),nome:String(row[1]),vendido,nVendas:Number(row[3])||0,
-        desconto:row[4],meta,ticket:Number(row[6])||0,proj:Number(row[7])||0,pct:p,
-        status:p==null?'SEM META':p>=.85?'BOM':p>=.6?'ATENÇÃO':'CRÍTICO'});
+      vendedores.push({loja:String(row[0]),nome:String(row[1]),vendido,nVendas:Number(row[3])||0,desconto:row[4],meta,ticket:Number(row[6])||0,proj:Number(row[7])||0,pct:p,status:p==null?'SEM META':p>=.85?'BOM':p>=.6?'ATENÇÃO':'CRÍTICO'});
     }
-    if(vendedores.length===0){ toast('Nenhum vendedor','Não encontrei linhas de dados na aba DADOS.','warn',6000); return; }
+    if(vendedores.length===0){ toast('Nenhum vendedor','Não encontrei linhas de dados.','warn',6000); return; }
     const wsS=wb.Sheets['META SEMANAL'];
     let semanalData=null;
     if(wsS){
@@ -1717,79 +1595,56 @@ function processXLSX(buffer){
         if(!row[0]||String(row[0]).toUpperCase().includes('TOTAL'))continue;
         const metas=[Number(row[3])||0,Number(row[4])||0,Number(row[5])||0,Number(row[6])||0];
         const ms=metas[semAtual-1]||0,vs=Number(row[7])||0,ps=ms>0?vs/ms:null;
-        sv.push({loja:String(row[0]),nome:String(row[1]),metaMensal:Number(row[2])||0,
-          metas,metaSem:ms,vendidoSem:vs,pctSem:ps,
-          status:row[9]?String(row[9]):(ps==null?'AGUARDANDO':ps>=.85?'BOM':ps>=.6?'ATENÇÃO':'CRÍTICO')});
+        sv.push({loja:String(row[0]),nome:String(row[1]),metaMensal:Number(row[2])||0,metas,metaSem:ms,vendidoSem:vs,pctSem:ps,status:row[9]?String(row[9]):(ps==null?'AGUARDANDO':ps>=.85?'BOM':ps>=.6?'ATENÇÃO':'CRÍTICO')});
       }
       semanalData={semAtual,semTotal,vendedores:sv};
     }
-    // ── Lê aba CONFIGURACAO (restaura empresa e vendedores) ──
-    const wsC = wb.Sheets['CONFIGURACAO'];
+    const wsC=wb.Sheets['CONFIGURACAO'];
     if(wsC){
       try{
-        const rawC = XLSX.utils.sheet_to_json(wsC,{header:1,defval:''});
-        // empresa: linha 2 (índice 1), coluna B (índice 1)
-        const empresa = String(rawC[1]?.[1]||'').trim();
-        // vendedores: a partir da linha 6 (índice 5), cols A/B/C = nome/loja/meta
-        const vendsC = [];
-        for(let r=5; r<rawC.length; r++){
-          const n=String(rawC[r][0]||'').trim();
-          const l=String(rawC[r][1]||'').trim();
-          const m=Number(rawC[r][2])||0;
-          if(n) vendsC.push({nome:n, loja:l||'Loja', meta:m});
+        const rawC=XLSX.utils.sheet_to_json(wsC,{header:1,defval:''});
+        const empresa=String(rawC[1]?.[1]||'').trim();
+        const vendsC=[];
+        for(let r=5;r<rawC.length;r++){
+          const n=String(rawC[r][0]||'').trim(); const l=String(rawC[r][1]||'').trim(); const m=Number(rawC[r][2])||0;
+          if(n) vendsC.push({nome:n,loja:l||'Loja',meta:m});
         }
-        if(empresa || vendsC.length>0){
-          const cfgAtual = cfgLoad()||{};
-          cfgSave({...cfgAtual, empresa:empresa||cfgAtual.empresa, vendedores:vendsC.length>0?vendsC:(cfgAtual.vendedores||[])});
+        if(empresa||vendsC.length>0){
+          const cfgAtual=cfgLoad()||{};
+          cfgSave({...cfgAtual,empresa:empresa||cfgAtual.empresa,vendedores:vendsC.length>0?vendsC:(cfgAtual.vendedores||[])});
           if(empresa) applyEmpresaNome(empresa);
-          toast('Configuração restaurada', `Empresa e ${vendsC.length} vendedor(es) carregados da planilha.`, 'ok', 4000);
+          toast('Configuração restaurada',`Empresa e ${vendsC.length} vendedor(es) carregados.`,'ok',4000);
         }
-      }catch(e){ console.warn('Erro ao ler aba CONFIGURACAO:', e); }
+      }catch(e){ console.warn('Erro aba CONFIGURACAO:',e); }
     }
     IS_DEMO=false;
     renderDashboard({diasCorridos,diasMes,vendedores,semanalData});
     toast('Planilha carregada',`${vendedores.length} vendedor(es) importado(s).`,'ok');
-  }catch(err){
-    console.error(err);
-    toast('Erro ao processar','Verifique se o arquivo é uma planilha válida.','err',6000);
-  }
+  }catch(err){ console.error(err); toast('Erro ao processar','Verifique se o arquivo é válido.','err',6000); }
 }
 
-
-
-// ═══════════════════════════════════════════════════════════
-//  RENDER (layout v2 — sidebar + Inter)
-// ═══════════════════════════════════════════════════════════
-
-// inicial de avatar a partir do nome
+// ── RENDER ────────────────────────────────────────────────────────────
 function initials(nome){
-  const p = String(nome||'').trim().split(/\s+/);
-  if(p.length===0) return '?';
-  if(p.length===1) return p[0].slice(0,2).toUpperCase();
+  const p=String(nome||'').trim().split(/\s+/);
+  if(p.length===0)return '?'; if(p.length===1)return p[0].slice(0,2).toUpperCase();
   return (p[0][0]+p[p.length-1][0]).toUpperCase();
 }
-const AV_COLORS = ['#1F2022','#7C846B','#6B6F72','#3d4040','#8a9080','#4a4c3a','#5c5e50','#2a2b22'];
-function avColor(nome){
-  let h=0; for(const c of String(nome)) h=(h*31+c.charCodeAt(0))>>>0;
-  return AV_COLORS[h%AV_COLORS.length];
-}
+const AV_COLORS=['#1F2022','#7C846B','#6B6F72','#3d4040','#8a9080','#4a4c3a','#5c5e50','#2a2b22'];
+function avColor(nome){ let h=0; for(const c of String(nome))h=(h*31+c.charCodeAt(0))>>>0; return AV_COLORS[h%AV_COLORS.length]; }
 
-// ─── GRÁFICO DE PIZZA (donut SVG) ─────────────────────────
 function renderPie(lojas, total){
-  const wrap=document.getElementById('pie-wrap');
-  if(!wrap)return;
+  const wrap=document.getElementById('pie-wrap'); if(!wrap)return;
   const palette=['#1F2022','#7C846B','#6B6F72','#a0a894','#2d2f31','#9aaa90'];
   const entries=Object.entries(lojas).filter(([,i])=>i.vendido>0).sort((a,b)=>b[1].vendido-a[1].vendido);
   if(entries.length===0||total<=0){ wrap.innerHTML=''; return; }
-  const size=210, cx=size/2, cy=size/2, r=94, inner=68;
-  let angle=-Math.PI/2, paths='';
+  const size=210,cx=size/2,cy=size/2,r=94,inner=68;
+  let angle=-Math.PI/2,paths='';
   entries.forEach(([loja,info],idx)=>{
-    const frac=info.vendido/total;
-    const a2=angle+frac*Math.PI*2;
-    const x1=cx+r*Math.cos(angle), y1=cy+r*Math.sin(angle);
-    const x2=cx+r*Math.cos(a2),   y2=cy+r*Math.sin(a2);
-    const xi1=cx+inner*Math.cos(a2), yi1=cy+inner*Math.sin(a2);
-    const xi2=cx+inner*Math.cos(angle), yi2=cy+inner*Math.sin(angle);
+    const frac=info.vendido/total; const a2=angle+frac*Math.PI*2;
+    const x1=cx+r*Math.cos(angle),y1=cy+r*Math.sin(angle);
+    const x2=cx+r*Math.cos(a2),y2=cy+r*Math.sin(a2);
+    const xi1=cx+inner*Math.cos(a2),yi1=cy+inner*Math.sin(a2);
+    const xi2=cx+inner*Math.cos(angle),yi2=cy+inner*Math.sin(angle);
     const large=frac>.5?1:0;
     paths+=`<path d="M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} L ${xi1} ${yi1} A ${inner} ${inner} 0 ${large} 0 ${xi2} ${yi2} Z" fill="${palette[idx%palette.length]}" stroke="#fff" stroke-width="2.5"/>`;
     angle=a2;
@@ -1800,106 +1655,83 @@ function renderPie(lojas, total){
   let leg='<div class="pie-leg">';
   entries.forEach(([loja,info],idx)=>{
     const pct=(info.vendido/total*100).toFixed(1).replace('.',',');
-    leg+=`<div class="pie-leg-item"><span class="pie-dot" style="background:${palette[idx%palette.length]}"></span>
-      <div><div class="pie-leg-name">Loja ${loja}</div><div class="pie-leg-val">${R(info.vendido)} (${pct}%)</div></div></div>`;
+    leg+=`<div class="pie-leg-item"><span class="pie-dot" style="background:${palette[idx%palette.length]}"></span><div><div class="pie-leg-name">Loja ${loja}</div><div class="pie-leg-val">${R(info.vendido)} (${pct}%)</div></div></div>`;
   });
-  leg+='</div>';
-  wrap.innerHTML=svg+leg;
+  leg+='</div>'; wrap.innerHTML=svg+leg;
 }
 
 function rkSb(s){
   const m={BOM:'bom','ATENÇÃO':'at',ATENCAO:'at','CRÍTICO':'cr',CRITICO:'cr','FÉRIAS':'fer',FERIAS:'fer',ATESTADO:'ates',AGUARDANDO:'agu','SEM META':'agu'};
-  const cls=m[(s||'').toUpperCase().trim()]||'agu';
-  return `<span class="rk-sb rk-sb-${cls}">${s||'—'}</span>`;
+  return `<span class="rk-sb rk-sb-${m[(s||'').toUpperCase().trim()]||'agu'}">${s||'—'}</span>`;
 }
 
-// ─── RENDER PRINCIPAL ─────────────────────────────────────
 function renderDashboard(d){
-  _lastData = d; // salva para as views usarem
+  _lastData=d;
   document.getElementById('empty-state').style.display='none';
   document.getElementById('dashboard').style.display='block';
   document.getElementById('pdf-btn').disabled=false;
-  // garante que a view geral fica ativa
   document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
-  const cz=document.getElementById('capture-zone'); if(cz) cz.style.display='block';
-  const tabs=document.querySelector('.tabs'); if(tabs) tabs.style.display='flex';
+  const cz=document.getElementById('capture-zone'); if(cz)cz.style.display='block';
+  const tabs=document.querySelector('.tabs'); if(tabs)tabs.style.display='flex';
   document.querySelectorAll('.nav-item').forEach(btn=>btn.classList.toggle('active',btn.textContent.trim()==='Visão Geral'));
   const rib=document.getElementById('demo-ribbon');
-  if(rib) rib.classList.toggle('show', !!IS_DEMO);
+  if(rib) rib.classList.toggle('show', !!IS_DEMO && !document.getElementById('landing').classList.contains('hidden') === false);
 
   const tv=d.vendedores.reduce((s,v)=>s+v.vendido,0);
   const tm=d.vendedores.reduce((s,v)=>s+v.meta,0);
   const tp=d.vendedores.reduce((s,v)=>s+(v.proj||0),0);
   const tn=d.vendedores.reduce((s,v)=>s+v.nVendas,0);
-  const pg=tm>0?tv/tm:0;
-  const tick=tn>0?tv/tn:0;
-
+  const pg=tm>0?tv/tm:0; const tick=tn>0?tv/tn:0;
+  // ── RITMO DE META ──
+  // Projeção final no ritmo atual vs meta. Responde: "vai bater?"
+  const ritmoPct = tm>0 ? tp/tm : 0;              // % da meta que o ritmo atual projeta atingir
+  const diasRest = (d.diasMes && d.diasCorridos) ? Math.max(d.diasMes - d.diasCorridos, 0) : 0;
+  const faltaMeta = Math.max(tm - tv, 0);          // quanto falta em R$ para a meta
+  const precisaDia = diasRest > 0 ? faltaMeta / diasRest : 0; // R$/dia necessário p/ bater
+  const ritmoCls = ritmoPct>=1 ? 'ok' : ritmoPct>=.9 ? 'at' : 'cr';
+  const ritmoTxt = ritmoPct>=1
+    ? 'No ritmo de bater a meta ✓'
+    : (diasRest>0 ? `Precisa de ${R(precisaDia)}/dia nos ${diasRest} dias restantes` : 'Período encerrado');
   const now=new Date();
-  const pt=document.getElementById('period-t'); if(pt) pt.textContent=`${d.diasCorridos||'—'} dias corridos`;
-  const ps=document.getElementById('period-s'); if(ps) ps.textContent=`${d.diasMes||'—'} dias úteis · ${now.toLocaleDateString('pt-BR')}`;
+  const pt=document.getElementById('period-t'); if(pt)pt.textContent=`${d.diasCorridos||'—'} dias corridos`;
+  const ps=document.getElementById('period-s'); if(ps)ps.textContent=`${d.diasMes||'—'} dias úteis · ${now.toLocaleDateString('pt-BR')}`;
 
-  // ── KPIs ──
-  const icoFat='<svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>';
-  const icoProj='<svg viewBox="0 0 24 24" fill="none" stroke="#0f9d8a" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>';
+  const icoFat='<svg viewBox="0 0 24 24" fill="none" stroke="#1F2022" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>';
+  const icoProj='<svg viewBox="0 0 24 24" fill="none" stroke="#7C846B" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>';
   const icoVend='<svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg>';
   const icoTick='<svg viewBox="0 0 24 24" fill="none" stroke="#ea7a3c" stroke-width="2"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12a2 2 0 002 2h14v-4"/><path d="M18 12a2 2 0 000 4h4v-4z"/></svg>';
+  const icoRitmo='<svg viewBox="0 0 24 24" fill="none" stroke="#7C846B" stroke-width="2"><path d="M12 20v-6M12 14a8 8 0 108-8"/><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>';
+  const ritmoBg = ritmoCls==='ok'?'#e3efe3':ritmoCls==='at'?'#f5f0df':'#f6e6e6';
   document.getElementById('kpis').innerHTML=`
-    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#e8ebe2">${icoFat}</div><div class="kpi-lbl">Faturamento Total</div></div>
-      <div class="kpi-val num">${R(tv)}</div><div class="kpi-foot">Meta: ${R(tm)}</div>
-      <span class="kpi-pct txt-${sc(pg)}">${P(pg)} da meta</span>
-      <div class="kpi-bar"><div class="kpi-bar-fill fill-${sc(pg)}" style="width:${Math.min(pg*100,100).toFixed(1)}%"></div></div></div>
-    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#eaeae7">${icoProj}</div><div class="kpi-lbl">Projeção do Mês</div></div>
-      <div class="kpi-val num">${R(tp)}</div><div class="kpi-foot txt-ok">${P(pg)} da meta</div></div>
-    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#e9e9e6">${icoVend}</div><div class="kpi-lbl">Total de Vendas</div></div>
-      <div class="kpi-val num">${N(tn)}</div><div class="kpi-foot">Pedidos no período</div></div>
-    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#ebe9e3">${icoTick}</div><div class="kpi-lbl">Ticket Médio</div></div>
-      <div class="kpi-val num">${R(tick)}</div><div class="kpi-foot">Por venda</div></div>`;
+    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#e8ebe2">${icoFat}</div><div class="kpi-lbl">Faturamento Total</div></div><div class="kpi-val num">${R(tv)}</div><div class="kpi-foot">Meta: ${R(tm)}</div><span class="kpi-pct txt-${sc(pg)}">${P(pg)} da meta</span><div class="kpi-bar"><div class="kpi-bar-fill fill-${sc(pg)}" style="width:${Math.min(pg*100,100).toFixed(1)}%"></div></div></div>
+    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#eaeae7">${icoProj}</div><div class="kpi-lbl">Projeção do Mês</div></div><div class="kpi-val num">${R(tp)}</div><div class="kpi-foot txt-ok">${P(pg)} da meta</div></div>
+    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#e9e9e6">${icoVend}</div><div class="kpi-lbl">Total de Vendas</div></div><div class="kpi-val num">${N(tn)}</div><div class="kpi-foot">Pedidos no período</div></div>
+    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:#ebe9e3">${icoTick}</div><div class="kpi-lbl">Ticket Médio</div></div><div class="kpi-val num">${R(tick)}</div><div class="kpi-foot">Por venda</div></div>
+    <div class="kpi"><div class="kpi-head"><div class="kpi-ico" style="background:${ritmoBg}">${icoRitmo}</div><div class="kpi-lbl">Ritmo de Meta</div></div><div class="kpi-val num txt-${ritmoCls}">${P(ritmoPct)}</div><div class="kpi-bar"><div class="kpi-bar-fill fill-${ritmoCls}" style="width:${Math.min(ritmoPct*100,100).toFixed(1)}%"></div></div><div class="kpi-ritmo-txt txt-${ritmoCls}">${ritmoTxt}</div></div>`;
 
-  // ── LOJAS ──
   const lojas={};
   d.vendedores.forEach(v=>{ if(!lojas[v.loja])lojas[v.loja]={vendido:0,meta:0,proj:0};
     lojas[v.loja].vendido+=v.vendido; lojas[v.loja].meta+=v.meta; lojas[v.loja].proj+=(v.proj||0); });
   const icoStore='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l1-5h16l1 5M5 9v11h14V9M9 20v-6h6v6"/></svg>';
   let lH='';
   for(const [loja,info] of Object.entries(lojas)){
-    const p=info.meta>0?info.vendido/info.meta:0;
-    const gap=Math.max(info.meta-info.vendido,0);
-    lH+=`<div class="loja">
-      <div class="loja-top"><div class="loja-ico">${icoStore}</div><div class="loja-name">Loja ${loja}</div><span class="badge badge-${sc(p)}">${sl(p)}</span></div>
-      <div class="loja-val num">${R(info.vendido)}</div>
-      <div class="loja-meta">Meta: ${R(info.meta)} · Proj.: ${R(info.proj)}</div>
-      <div class="loja-bar"><div class="loja-bar-fill fill-${sc(p)}" style="width:${Math.min(p*100,100).toFixed(1)}%"></div></div>
-      <div class="loja-foot"><span class="at txt-${sc(p)}">${P(p)} atingido</span><span class="gap">Gap ${R(gap)}</span></div>
-    </div>`;
+    const p=info.meta>0?info.vendido/info.meta:0; const gap=Math.max(info.meta-info.vendido,0);
+    lH+=`<div class="loja"><div class="loja-top"><div class="loja-ico">${icoStore}</div><div class="loja-name">Loja ${loja}</div><span class="badge badge-${sc(p)}">${sl(p)}</span></div><div class="loja-val num">${R(info.vendido)}</div><div class="loja-meta">Meta: ${R(info.meta)} · Proj.: ${R(info.proj)}</div><div class="loja-bar"><div class="loja-bar-fill fill-${sc(p)}" style="width:${Math.min(p*100,100).toFixed(1)}%"></div></div><div class="loja-foot"><span class="at txt-${sc(p)}">${P(p)} atingido</span><span class="gap">Gap ${R(gap)}</span></div></div>`;
   }
   document.getElementById('lojas').innerHTML=lH;
+  renderPie(lojas,tv);
 
-  // ── PIZZA ──
-  renderPie(lojas, tv);
-
-  // ── RANKING ──
   const sorted=[...d.vendedores].sort((a,b)=>b.vendido-a.vendido);
   let rH='';
   sorted.forEach((v,i)=>{
-    const pos=i+1, pc=pos===1?'p1':pos===2?'p2':pos===3?'p3':'po';
-    const s=v.pct!=null?sc(v.pct):'nt';
-    const ps=v.pct!=null?P(v.pct)+' da meta':'sem meta';
+    const pos=i+1,pc=pos===1?'p1':pos===2?'p2':pos===3?'p3':'po';
+    const s=v.pct!=null?sc(v.pct):'nt'; const ps=v.pct!=null?P(v.pct)+' da meta':'sem meta';
     const bw=v.pct!=null?Math.min(v.pct*100,100).toFixed(1):'0';
     const ds=v.desconto!=null&&v.desconto!==''?(isNaN(Number(v.desconto))?v.desconto:(Number(v.desconto)*100).toFixed(1).replace('.',',')+'%'):'—';
-    rH+=`<div class="rk-row">
-      <span class="rk-pos ${pc}">${pos}</span>
-      <span class="rk-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span>
-      <div class="rk-mid">
-        <div class="rk-name-row"><span class="rk-name">${v.nome}</span>${rkSb(v.status)}<span class="rk-store">Loja ${v.loja}</span></div>
-        <div class="rk-kpis">Ticket <b>${R(v.ticket)}</b> · Vendas <b>${v.nVendas}</b> · Desc. <b>${ds}</b></div>
-        <div class="rk-prog"><div class="rk-prog-fill fill-${s}" style="width:${bw}%"></div></div>
-      </div>
-      <div class="rk-right"><div class="rk-val num">${R(v.vendido)}</div><div class="rk-pct txt-${s}">${ps}</div></div>
-    </div>`;
+    rH+=`<div class="rk-row"><span class="rk-pos ${pc}">${pos}</span><span class="rk-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span><div class="rk-mid"><div class="rk-name-row"><span class="rk-name">${v.nome}</span>${rkSb(v.status)}<span class="rk-store">Loja ${v.loja}</span></div><div class="rk-kpis">Ticket <b>${R(v.ticket)}</b> · Vendas <b>${v.nVendas}</b> · Desc. <b>${ds}</b></div><div class="rk-prog"><div class="rk-prog-fill fill-${s}" style="width:${bw}%"></div></div></div><div class="rk-right"><div class="rk-val num">${R(v.vendido)}</div><div class="rk-pct txt-${s}">${ps}</div></div></div>`;
   });
   document.getElementById('ranking').innerHTML=rH;
 
-  // ── TOTAL BAR ──
   document.getElementById('totalbar').innerHTML=`
     <div><div class="tb-lbl">Total Geral</div></div>
     <div><div class="tb-val num">${N(tn)} vendas</div><div class="tb-sub">no período</div></div>
@@ -1907,7 +1739,6 @@ function renderDashboard(d){
     <div><div class="tb-val num" style="color:${pg>=.85?'#16a34a':pg>=.6?'#ca8a04':'#dc2626'}">${P(pg)}</div><div class="tb-sub">da meta</div></div>
     <div><div class="tb-val num">${R(tp)}</div><div class="tb-sub">projeção final</div></div>`;
 
-  // ── SEMANAL ──
   if(!d.semanalData){
     document.getElementById('semanal').style.display='none';
     document.getElementById('sem-empty').style.display='block';
@@ -1917,26 +1748,15 @@ function renderDashboard(d){
     const sd=d.semanalData;
     let sH=`<div class="sec-title" style="margin-bottom:6px">Semana ${sd.semAtual} de ${sd.semTotal} · Desempenho individual</div>`;
     [...sd.vendedores].sort((a,b)=>b.vendidoSem-a.vendidoSem).forEach((v,i)=>{
-      const pos=i+1, pc=pos===1?'p1':pos===2?'p2':pos===3?'p3':'po';
-      const s=v.pctSem!=null?sc(v.pctSem):'nt';
-      const ps=v.pctSem!=null?P(v.pctSem)+' da meta':'sem dado';
+      const pos=i+1,pc=pos===1?'p1':pos===2?'p2':pos===3?'p3':'po';
+      const s=v.pctSem!=null?sc(v.pctSem):'nt'; const ps=v.pctSem!=null?P(v.pctSem)+' da meta':'sem dado';
       const bw=v.pctSem!=null?Math.min(v.pctSem*100,100).toFixed(1):'0';
-      sH+=`<div class="rk-row">
-        <span class="rk-pos ${pc}">${pos}</span>
-        <span class="rk-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span>
-        <div class="rk-mid">
-          <div class="rk-name-row"><span class="rk-name">${v.nome}</span>${rkSb(v.status)}<span class="rk-store">Loja ${v.loja}</span></div>
-          <div class="rk-kpis">Meta sem. <b>${R(v.metaSem)}</b> · Meta mês <b>${R(v.metaMensal||v.meta||0)}</b></div>
-          <div class="rk-prog"><div class="rk-prog-fill fill-${s}" style="width:${bw}%"></div></div>
-        </div>
-        <div class="rk-right"><div class="rk-val num">${R(v.vendidoSem)}</div><div class="rk-pct txt-${s}">${ps}</div></div>
-      </div>`;
+      sH+=`<div class="rk-row"><span class="rk-pos ${pc}">${pos}</span><span class="rk-av" style="background:${avColor(v.nome)}">${initials(v.nome)}</span><div class="rk-mid"><div class="rk-name-row"><span class="rk-name">${v.nome}</span>${rkSb(v.status)}<span class="rk-store">Loja ${v.loja}</span></div><div class="rk-kpis">Meta sem. <b>${R(v.metaSem)}</b> · Meta mês <b>${R(v.metaMensal||v.meta||0)}</b></div><div class="rk-prog"><div class="rk-prog-fill fill-${s}" style="width:${bw}%"></div></div></div><div class="rk-right"><div class="rk-val num">${R(v.vendidoSem)}</div><div class="rk-pct txt-${s}">${ps}</div></div></div>`;
     });
     document.getElementById('semanal').innerHTML=sH;
   }
 }
 
-// switchTab adaptado (2 tabs)
 function switchTab(t){
   document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('active',['mensal','semanal'][i]===t));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));

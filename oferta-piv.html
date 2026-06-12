@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seção de Oferta · PIV</title>
+<!-- Se sua página já carrega Poppins e Inter, ignore a linha abaixo -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;background:#f6f6f4;">
+
+<!-- ============================================================
+     COPIE DAQUI ATÉ O MARCADOR FINAL E COLE NO SEU index.html,
+     logo depois da seção do demo / mockup do dashboard.
+     Estilos com prefixo .pvo- para não conflitar com seu CSS.
+     ============================================================ -->
+
+<style>
+  .pvo-section{
+    background:#1F2022;
+    color:#ECECEA;
+    font-family:'Inter',sans-serif;
+    padding:88px 24px;
+  }
+  .pvo-wrap{max-width:1040px;margin:0 auto;}
+  .pvo-eyebrow{
+    font-family:'Poppins',sans-serif;
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:#7C846B;font-weight:600;margin:0 0 14px;text-align:center;
+  }
+  .pvo-title{
+    font-family:'Poppins',sans-serif;
+    font-size:clamp(28px,4vw,40px);font-weight:700;
+    line-height:1.15;margin:0 0 10px;text-align:center;color:#fff;
+  }
+  .pvo-sub{
+    text-align:center;color:#B9BBB4;font-size:17px;
+    max-width:560px;margin:0 auto 48px;line-height:1.6;
+  }
+  .pvo-card{
+    background:#26282B;
+    border:1px solid #34373B;
+    border-radius:18px;
+    max-width:760px;margin:0 auto;
+    padding:40px 36px;
+    position:relative;
+  }
+  .pvo-badge{
+    position:absolute;top:-16px;left:50%;transform:translateX(-50%);
+    background:#7C846B;color:#1F2022;
+    font-family:'Poppins',sans-serif;font-weight:600;font-size:12.5px;
+    letter-spacing:.08em;text-transform:uppercase;
+    padding:8px 18px;border-radius:999px;white-space:nowrap;
+  }
+  .pvo-price-row{
+    display:flex;align-items:baseline;justify-content:center;
+    gap:14px;flex-wrap:wrap;margin:14px 0 4px;
+  }
+  .pvo-price-old{
+    color:#7d7f7a;text-decoration:line-through;
+    font-size:20px;font-weight:500;
+  }
+  .pvo-price{
+    font-family:'Poppins',sans-serif;font-weight:700;
+    font-size:clamp(44px,6vw,58px);color:#fff;line-height:1;
+  }
+  .pvo-price small{font-size:22px;font-weight:600;color:#B9BBB4;}
+  .pvo-parcel{
+    text-align:center;color:#B9BBB4;font-size:15px;margin:6px 0 0;
+  }
+  .pvo-once{
+    text-align:center;font-family:'Poppins',sans-serif;
+    color:#9aa388;font-weight:600;font-size:15px;margin:18px 0 28px;
+  }
+  .pvo-list{
+    list-style:none;padding:0;margin:0 0 30px;
+    display:grid;grid-template-columns:1fr 1fr;gap:13px 28px;
+  }
+  .pvo-list li{
+    font-size:15.5px;line-height:1.5;color:#ECECEA;
+    padding-left:28px;position:relative;
+  }
+  .pvo-list li::before{
+    content:"✓";position:absolute;left:0;top:0;
+    color:#7C846B;font-weight:700;
+  }
+  .pvo-cta{
+    display:block;text-align:center;text-decoration:none;
+    background:#7C846B;color:#1F2022;
+    font-family:'Poppins',sans-serif;font-weight:600;font-size:17px;
+    padding:17px 28px;border-radius:12px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .pvo-cta:hover{background:#8d9579;transform:translateY(-2px);}
+  .pvo-cta:focus-visible{outline:3px solid #fff;outline-offset:3px;}
+  .pvo-guarantee{
+    text-align:center;color:#9b9d97;font-size:13.5px;margin:16px 0 0;
+  }
+  .pvo-anchor{
+    text-align:center;color:#B9BBB4;font-size:15px;
+    max-width:520px;margin:34px auto 0;line-height:1.6;
+  }
+  .pvo-anchor strong{color:#fff;}
+
+  /* ---------- FAQ ---------- */
+  .pvo-faq{max-width:760px;margin:64px auto 0;}
+  .pvo-faq h3{
+    font-family:'Poppins',sans-serif;font-size:22px;font-weight:600;
+    color:#fff;text-align:center;margin:0 0 26px;
+  }
+  .pvo-faq details{
+    background:#26282B;border:1px solid #34373B;border-radius:12px;
+    margin-bottom:10px;overflow:hidden;
+  }
+  .pvo-faq summary{
+    cursor:pointer;padding:16px 20px;
+    font-family:'Poppins',sans-serif;font-weight:500;font-size:15.5px;
+    color:#ECECEA;list-style:none;position:relative;
+  }
+  .pvo-faq summary::-webkit-details-marker{display:none;}
+  .pvo-faq summary::after{
+    content:"+";position:absolute;right:20px;top:14px;
+    color:#7C846B;font-size:20px;font-weight:600;
+  }
+  .pvo-faq details[open] summary::after{content:"–";}
+  .pvo-faq p{
+    margin:0;padding:0 20px 18px;color:#B9BBB4;
+    font-size:14.5px;line-height:1.65;
+  }
+
+  @media (max-width:640px){
+    .pvo-section{padding:64px 18px;}
+    .pvo-card{padding:36px 22px;}
+    .pvo-list{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .pvo-cta{transition:none;}
+  }
+
+  /* ---------- Botão WhatsApp flutuante ---------- */
+  .pvo-whats{
+    position:fixed;right:20px;bottom:20px;z-index:9999;
+    width:58px;height:58px;border-radius:50%;
+    background:#25D366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 18px rgba(0,0,0,.3);
+    transition:transform .15s ease;
+  }
+  .pvo-whats:hover{transform:scale(1.07);}
+  .pvo-whats svg{width:30px;height:30px;fill:#fff;}
+</style>
+
+<section class="pvo-section" id="oferta">
+  <div class="pvo-wrap">
+
+    <p class="pvo-eyebrow">Oferta de lançamento</p>
+    <h2 class="pvo-title">Seu painel de vendas.<br>Pago uma vez. Seu para sempre.</h2>
+    <p class="pvo-sub">Sem mensalidade, sem assinatura, sem surpresa no cartão. Você paga uma única vez e o painel é seu.</p>
+
+    <div class="pvo-card">
+      <span class="pvo-badge">Condição válida para as primeiras 10 empresas</span>
+
+      <div class="pvo-price-row">
+        <span class="pvo-price-old">R$ 497,00</span>
+        <span class="pvo-price"><small>R$</small> 297<small>,00</small></span>
+      </div>
+      <p class="pvo-parcel">à vista no Pix &nbsp;·&nbsp; ou 3x de R$ 99,00 no cartão</p>
+      <p class="pvo-once">Pagamento único — nada de mensalidade</p>
+
+      <ul class="pvo-list">
+        <li><strong>Setup completo feito para você:</strong> logo, cores da sua marca e equipe já cadastrada</li>
+        <li><strong>Vendedores e lojas ilimitados</strong> — cresceu, o painel cresce junto</li>
+        <li><strong>Template de planilha pronto</strong> (Excel / Google Sheets): cole os dados e use</li>
+        <li><strong>Relatório executivo em PDF</strong> com um clique, pronto para enviar ao dono</li>
+        <li><strong>Manual em PDF + vídeo de uso</strong> para você e sua equipe</li>
+        <li><strong>30 dias de suporte direto no WhatsApp</strong> após a entrega</li>
+      </ul>
+
+      <!-- TROQUE o número abaixo se o WhatsApp comercial do PIV for outro -->
+      <a class="pvo-cta"
+         href="https://wa.me/5584986329566?text=Ol%C3%A1!%20Quero%20o%20painel%20PIV%20para%20minha%20empresa%20na%20condi%C3%A7%C3%A3o%20de%20lan%C3%A7amento%20de%20R%24%20297%2C00."
+         target="_blank" rel="noopener">
+        Quero meu painel por R$ 297,00 →
+      </a>
+      <p class="pvo-guarantee">Entrega em até 48h úteis · Painel personalizado e pronto para usar</p>
+    </div>
+
+    <p class="pvo-anchor">
+      Faça a conta: <strong>uma única venda a mais no mês já paga o painel.</strong>
+      O resto é lucro de decidir com dados em vez de adivinhar.
+    </p>
+
+    <div class="pvo-faq">
+      <h3>Perguntas frequentes</h3>
+
+      <details>
+        <summary>Meus dados de vendas ficam seguros?</summary>
+        <p>Ficam — e mais do que você imagina. O painel roda 100% no seu navegador: os números da sua empresa não são enviados para nenhum servidor e ninguém além de você tem acesso. Você ainda pode exportar um backup com um clique sempre que quiser.</p>
+      </details>
+
+      <details>
+        <summary>Preciso instalar alguma coisa?</summary>
+        <p>Não. O painel abre direto no navegador do computador ou do celular, como um site. Sem instalação, sem TI, sem complicação.</p>
+      </details>
+
+      <details>
+        <summary>Funciona com a planilha que eu já uso?</summary>
+        <p>Sim. Você recebe um template pronto e pode simplesmente copiar e colar os dados do seu Excel ou Google Sheets. Se preferir, também dá para carregar o arquivo .xlsx ou digitar os valores na tela.</p>
+      </details>
+
+      <details>
+        <summary>E depois dos 30 dias de suporte?</summary>
+        <p>O painel continua funcionando normalmente — ele é seu para sempre. Os 30 dias cobrem dúvidas de uso e ajustes finos da entrega. Depois disso, novas personalizações podem ser contratadas avulsas, sem nenhuma obrigação.</p>
+      </details>
+
+      <details>
+        <summary>Por que esse preço é "de lançamento"?</summary>
+        <p>As 10 primeiras empresas entram com condição especial em troca de feedback e depoimento. Depois disso, o valor passa a R$ 497,00 — quem entrar agora garante o preço de fundador.</p>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- Botão WhatsApp flutuante — cole antes do </body>. TROQUE o número se necessário. -->
+<a class="pvo-whats" aria-label="Falar no WhatsApp"
+   href="https://wa.me/5584986329566?text=Ol%C3%A1!%20Vi%20o%20site%20do%20PIV%20e%20quero%20saber%20mais."
+   target="_blank" rel="noopener">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 .8C7.6.8.8 7.6.8 16c0 2.7.7 5.3 2 7.6L.8 31.2l7.8-2c2.2 1.2 4.7 1.9 7.4 1.9 8.4 0 15.2-6.8 15.2-15.1S24.4.8 16 .8zm0 27.6c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.6 1.2 1.2-4.5-.3-.5c-1.3-2-2-4.4-2-6.8C3.1 8.9 8.9 3.1 16 3.1S28.9 8.9 28.9 16 23.1 28.4 16 28.4zm7.1-9.3c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.3 1.5-.2.3-.5.3-.9.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.8c-.3 0-.7.1-1 .5-.4.4-1.4 1.3-1.4 3.2s1.4 3.7 1.6 4c.2.3 2.8 4.2 6.7 5.9.9.4 1.7.6 2.2.8.9.3 1.8.3 2.5.2.8-.1 2.3-.9 2.6-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.8-.5z"/></svg>
+</a>
+
+<!-- ============================ FIM DO TRECHO PARA COPIAR ============================ -->
+
+</body>
+</html>
